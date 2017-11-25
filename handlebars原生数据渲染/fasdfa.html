@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Handlebars</title>
+    	<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.11/handlebars.min.js"></script>
+  </head>
+  <body>
+    <!--基础html框架-->
+<!--     <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>年龄</th>
+        </tr>
+      </thead>
+      <tbody id="tableList">
+        
+      </tbody>
+    </table> -->
+    
+    <!--Handlebars.js模版-->
+    <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
+    <!--id可以用来唯一确定一个模版,type是模版固定的写法-->
+    <script id="table-template" type="text/x-handlebars-template">
+<!--       {{#each this}}
+        <tr>
+          <td>{{addOne @index}}</td>
+          <td>{{name}}</td>
+          <td>{{sex}}</td>
+          <td>{{age}}</td>
+        </tr>
+        {{#each family}}
+          <tr>
+            <td>{{../_index}}.{{@index}}</td>
+            <td>{{name}}</td>
+            <td>{{sex}}</td>
+            <td>{{age}}</td>
+          </tr>
+        {{/each}}
+      {{/each}} -->
+      {{#each num}}
+      {{#if_even num}}
+     		 {{this.num}}是偶数
+		{{else}}
+			<div>{{this}}</div>
+		      {{this.num}}是奇数
+		{{/if_even}}
+		
+			
+		{{/each}}
+    </script>
+    
+    <!--进行数据处理、html构造-->
+    <script type="text/javascript">
+    	var data3 = {
+	    num : 2
+	}
+      var data = [{
+	        name: "张三",
+        sex: "男",
+        age: 35,
+        family: [{
+          name: "张三儿子",
+          sex: "男",
+          age: 10,
+        },{
+          name: "张三妻子",
+          sex: "女",
+          age: 33,
+        }]
+      },{
+        name: "李四",
+        sex: "男",
+        age: 23,
+        family: [{
+          name: "李四妻子",
+          sex: "女",
+          age: 23,
+        }]
+      },{
+        name: "甜妞",
+        sex: "女",
+        age: 18,
+        family: [{
+          name: "甜妞妈妈",
+          sex: "女",
+          age: 40,
+        },{
+          name: "甜妞爸爸",
+          sex: "男",
+          age: 43,
+        },{
+          name: "甜妞姥爷",
+          sex: "男",
+          age: 73,
+        }]
+      }];
+      
+      //注册索引+1的helper
+      var handleHelper = Handlebars.registerHelper("addOne",function(index){
+        //利用+1的时机，在父级循环对象中添加一个_index属性，用来保存父级每次循环的索引
+        this._index = index+1;
+        //返回+1之后的结果
+        return this._index;
+      });
+      //判断是否是偶数
+	Handlebars.registerHelper('if_even', function(value, options) {
+    console.log('value:', value); // value: 2
+    console.log('this:', this); // this: Object {num: 2}
+    console.log('fn(this):', options.fn(this)); // fn(this): 2是偶数
+    if((value % 2) == 0) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+      //解析模版
+      var handle = Handlebars.compile($("#table-template").html());
+      //生成html
+      var html = handle(data3);
+      //插入到页面
+      $("#tableList").append(html);
+      
+    </script>
+  </body>
+</html>

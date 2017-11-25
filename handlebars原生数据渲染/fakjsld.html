@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.11/handlebars.min.js"></script>
+</head>
+<body>
+<script id="tpl" type="text/x-handlebars-template">
+	<!-- 强化判断语句 -->
+		{{#each people.num}}
+		 {{#compare this '>=' '12'}}
+		     {{this}}
+		     {{else}}
+		     值太小
+		 {{/compare}}
+		 {{/each}}
+		 <!-- 设置class -->
+
+<!-- 		{{#list people class="green"}}
+			{{firstName}}-----{{lastName}}
+		{{/list}}
+		{{#list people class="red"}}
+			{{firstName}}-----{{lastName}}
+		{{/list}} -->
+</script>
+</body>
+<script type="text/javascript">
+	//预编译模板
+    var template = Handlebars.compile($("#tpl").html());
+    		var nams={
+			people:{
+				num:[10,11,12,13,14,15,16]
+			}
+		}
+		var data = {
+    people: [
+        {firstName: "Yehuda", lastName: "Katz"},
+        {firstName: "Carl", lastName: "Lerche"},
+        {firstName: "Alan", lastName: "Johnson"}
+    ]
+}
+		// 强化if语句
+	Handlebars.registerHelper('compare', function(left, operator, right, options) {
+         if (arguments.length < 3) {
+           throw new Error('Handlerbars Helper "compare" needs 2 parameters');
+         }
+         var operators = {
+           '==':     function(l, r) {return l == r; },
+           '===':    function(l, r) {return l === r; },
+           '!=':     function(l, r) {return l != r; },
+           '!==':    function(l, r) {return l !== r; },
+           '<':      function(l, r) {return l < r; },
+           '>':      function(l, r) {return l > r; },
+           '<=':     function(l, r) {return l <= r; },
+           '>=':     function(l, r) {return l >= r; },
+           'typeof': function(l, r) {return typeof l == r; }
+         };
+
+         if (!operators[operator]) {
+           throw new Error('Handlerbars Helper "compare" doesn\'t know the operator ' + operator);
+         }
+
+         var result = operators[operator](left, right);
+
+         if (result) {
+           return options.fn(this);
+         } else {
+           return options.inverse(this);
+         }
+     });
+	// 设置class
+	Handlebars.registerHelper('list', function(items, options) {
+    var out = '<ul>';
+    for(var i=0, l=items.length; i<l; i++) {
+        var item = options.fn(items[i]);
+        out = out + '<li class="'+options.hash.class+'">' + item + '</li>';
+    }
+    return out + '</ul>';
+	});	
+	Handlebars.registerHelper('list', function(items, options) {
+    var out = '<ul>';
+    for(var i=0, l=items.length; i<l; i++) {
+        var item = options.fn(items[i]);
+        out = out + '<li class="'+options.hash.class+'">' + item + '</li>';
+    }
+    return out + '</ul>';
+	});	
+
+		    //匹配json内容
+    var html = template(nams);
+    //输入模板
+    $("body").html(html);
+</script>
+</html>
