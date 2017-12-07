@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.11/handlebars.min.js"></script>
+</head>
+<body>
+</body>
+<script id="tpl" type="text/x-handlebars-template">
+	<div class="demo">
+		<!-- 渲染 -->
+	  <h1>{{name}}</h1>
+	  <p>{{{content}}}</p>
+	  <!-- 遍历属性 -->
+	  <ul>
+	  	{{#each programme}}
+	  	<li>{{language}}</li>
+	  	{{/each}}
+	  </ul>
+	  <!-- 遍历数组 -->
+<!-- 	  <ul>
+	  	{{#each name}}
+	  	<li>{{this}}</li>
+	  	 {{/each}}
+	  </ul> -->
+	  <!-- 判断语句 -->
+	  <!-- 判断是否有list -->
+	  {{#if info}}	
+		<ul id="list">  
+		    {{#each info}}
+		        <li>{{this}}</li>
+		    {{/each}}
+		</ul>  
+		{{else}}
+		    <p>{{error}}</p>
+		{{/if}}
+		<!-- 反向的判断语句 -->
+<!-- 		{{#unless data}}
+		<ul id="list">  
+		    {{#each info}}
+		        <li>{{this}}</li>
+		    {{/each}}
+		</ul>  
+		{{else}}
+		    <p>{{error}}</p>
+		{{/unless}} -->
+		<!-- 渲染多个-->
+<!-- 		<div class="entry">  
+		  <h1>{{title}}</h1>
+		  {{#with author}}
+		  <h2>By {{firstName}} {{lastName}}</h2>
+		  {{/with}}
+		</div>   -->
+		<!-- 直接获取属性值 -->
+		<h1>{{author.id}}</h1>  
+		<!-- 可以返回路径获取值-->
+<!-- 		{{#with person}}
+		    <h1>{{../company.name}}</h1>
+		{{/with}}
+
+
+		<ul>
+	  	{{#each programme}}
+		  	{{#showType @index}}
+		  		<li>{{language}}</li>
+		  	{{/showType}}
+	  	{{/each}} -->
+
+	  	{{#showType list}}
+	  		<li>{{this}}</li>
+	  	{{/showType}}
+
+	  	{{#compare people.name '==' 'peter'}}
+		     他的名字是peter
+		     {{else}}
+		     他的名字不是peter
+		 {{/compare}}
+	  </ul>
+	</div>
+</script>
+<script type="text/javascript">
+    //预编译模板
+    var template = Handlebars.compile($("#tpl").html());
+    //模拟json数据
+    var context = { name: "zhaoshuai", content: "learn Handlebars"};
+    var list={
+		  programme: [
+		    {language: "JavaScript"},
+		    {language: "HTML"},
+		    {language: "CSS"}
+		  ]
+		};
+	var names={
+    	name: ["html","css","javascript"]
+	};
+	var data = {  
+    info:['HTML5','CSS3',"WebGL"],
+    "error":"数据取出错误"
+	}
+	var jsons={
+		  title: "My first post!",
+		  author: {
+		    firstName: "Charles",
+		    lastName: "Jolley"
+		  }
+		}
+	var ids={
+	  title: "My First Blog Post!",
+	  author: {
+	    id: 47,
+	    name: "Yehuda Katz"
+	  },
+	  body: "My first post. Wheeeee!"
+	  };
+	  var path={
+		    "person":
+		    { "name": "Alan" },
+		        company:
+		    {"name": "Rad, Inc." }
+		};
+		// 格式化数据
+		Handlebars.registerHelper('formatnumber', function(num, options){
+          num = num + '';
+          return num.replace(/(?=(?!^)(?:\d{3})+(?:\.|$))(\d{3}(\.\d+$)?)/g,',$1');
+     });
+		Handlebars.registerHelper("showType",function(val,obj){
+			console.log(val,obj,this)
+			if(val>1){
+				return false
+			}
+		})
+		Handlebars.registerHelper('compare', function(left, operator, right, options) {
+         if (arguments.length < 3) {
+           throw new Error('Handlerbars Helper "compare" needs 2 parameters');
+         }
+         var operators = {
+           '==':     function(l, r) {return l == r; },
+           '===':    function(l, r) {return l === r; },
+           '!=':     function(l, r) {return l != r; },
+           '!==':    function(l, r) {return l !== r; },
+           '<':      function(l, r) {return l < r; },
+           '>':      function(l, r) {return l > r; },
+           '<=':     function(l, r) {return l <= r; },
+           '>=':     function(l, r) {return l >= r; },
+           'typeof': function(l, r) {return typeof l == r; }
+         };
+
+         if (!operators[operator]) {
+           throw new Error('Handlerbars Helper "compare" doesn\'t know the operator ' + operator);
+         }
+
+         var result = operators[operator](left, right);
+
+         if (result) {
+           return options.fn(this);
+         } else {
+           return options.inverse(this);
+         }
+     });
+		var nams={
+			people:"dou"
+		}
+/*　　然后就可以在模板中使用：{{formatnumber num}}*/
+// 也可通过该方法更改数据内容
+
+    //匹配json内容
+    var html = template(nams);
+    //输入模板
+    $("body").html(html);
+</script>
+</html>
