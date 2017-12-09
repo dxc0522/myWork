@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+		<script src="jquery-1.9.1.min.js"></script>
+<body>
+<button onclick="javascript:onPngFileChange()">点击</button>
+<img src="./img.png">
+<canvas id="png">
+</body>
+<script type="text/javascript">
+	console.log($("button"))
+	//读取显示图片至canvas
+function onPngFileChange(source){
+	var file = source;
+	if(window.FileReader) {  
+		var fr = new FileReader();  
+		fr.onloadend = function(e) {
+			var img = new Image();
+			img.src = e.target.result;
+			img.onload = function(){				
+				var canvas  = document.getElementById("png");
+				var context = canvas.getContext("2d");
+				$("#png").attr("width",this.width).attr("height",this.height);
+				$("#png").width(this.width).height(this.height);
+				context.drawImage(this,0,0);
+			}
+			//$("#pngImg").attr("src",e.target.result);
+		};  
+		fr.readAsDataURL(file);  
+	}  
+}
+//解析图片为js代码
+function tojs(canvasId){
+	var canvas  = document.getElementById(canvasId);
+	var context = canvas.getContext("2d");
+	var width  = $("#"+canvasId).width();
+	var height = $("#"+canvasId).height();
+	var imageData = context.getImageData(0, 0, width, height);
+//console.log(imageData.data);
+	var str = "";
+	for(var i = 0;i<imageData.data.length;i++){
+		if((i+1)%4==0)
+			continue;
+		str += imageData.data[i]!=0?hexToString(imageData.data[i]):'';
+	}
+	console.log(str);
+}
+//十六进制转换为字符串
+function hexToString(str){
+	return String.fromCharCode(parseInt(str,10));
+}
+onPngFileChange("./img.png")
+</script>
+</html>
