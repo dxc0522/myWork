@@ -1,0 +1,6 @@
+/* pages/_modal/modal.wxss */
+.inner {
+  color: red;
+    font-size: 60rpx;
+line-height: 200rpx;
+}

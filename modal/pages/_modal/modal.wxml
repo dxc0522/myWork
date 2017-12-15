@@ -1,0 +1,6 @@
+<navigator open-type='navigate' url='/pages/logs/logs'>
+<view class="inner" bindtap='_click'>
+  {{innerText}}
+</view>
+<slot name="after"></slot>
+</navigator>
