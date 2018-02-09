@@ -9,8 +9,15 @@
   </view>
   <view>
   <!-- 以下是对一个自定义组件的引用 -->
-  <component-tag-name inner-text="{{motto}}"></component-tag-name>
+<view>
+  <!-- 以下是对一个自定义组件的引用 -->
+  <component-tag-name inner-text="Some text"></component-tag-name>
+</view>
   <input bindconfirm="_input" bindinput='_input' type='text'></input>
   <button type='warn' bindtap='_change'>提交</button>
+  <button type='warn' bindtap='addMode'>测试</button>
+  <view wx:for="{{demo}}" wx:key="{{item.id}}" id='{{item.id}}'>
+    {{item.txt}}
+  </view>
 </view>
 </view>
