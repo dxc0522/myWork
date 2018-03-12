@@ -1,0 +1,127 @@
+h2 {
+    font-size: 22px;
+    color: #333333;
+    margin: 62px 0 80px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ma-floor1 {
+    padding-bottom: 85px;
+}
+
+.ma-floor1 .why-img {
+    width: 60%;
+    position: relative;
+    height: 380px;
+}
+
+.ma-floor1 .why-box {
+    width: 40%;
+}
+
+.ma-floor1 .why-box h6 {
+    font-size: 20px;
+    color: #333333;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.ma-floor1 .why-box p {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/*我们能提供什么*/
+.ma-floor2 {
+    background: #f6f6f6;
+}
+
+.ma-floor2 ul {
+    padding-bottom: 95px;
+}
+
+.ma-floor2 ul li {
+    float: left;
+    width: 355px;
+    height: 190px;
+    margin-right: 60px;
+}
+
+.ma-floor2 ul li:last-of-type {
+    margin-right: 0;
+}
+
+.ma-floor2 ul li .give-img {
+    width: 100%;
+    height: 160px;
+    position: relative;
+}
+
+.ma-floor2 ul li p {
+    font-size: 18px;
+    text-align: center;
+    color: #333333;
+
+}
+
+/*定制开发留言*/
+.ma-floor3{
+    padding-bottom: 100px;
+}
+.fl3-msg {
+}
+
+.fl3-msg ul {
+}
+
+.fl3-msg ul li {
+    position: relative;
+}
+.fl3-msg ul li p{
+    position: absolute;
+    bottom:0;
+    left: 100px;
+    line-height: 20px;
+    font-size: 14px;
+    color: red;
+    display: none;
+}
+
+.fl3-msg ul li span {
+    display: inline-block;
+    width: 100px;
+    font-size: 16px;
+    color: #333333;
+    line-height: 50px;
+    text-align: right;
+    vertical-align: top;
+}
+.fl3-msg ul li input,.fl3-msg ul li textarea,.fl3-msg ul li select{
+    width: 500px;
+    height: 50px;
+    border: 1px solid #dddddd;
+    font-size: 14px;
+    color: #333;
+    padding-left: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.fl3-msg ul li textarea{
+    height:150px ;
+    padding-top:20px;
+}
+.ma-floor3 button.sub{
+    width: 160px;
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid #00a0e2;
+    text-align: center;
+    line-height: 50px;
+    color: #00a0e2;
+    margin-left: 100px;
+    font-size: 16px;
+    border-radius: 50px;
+    background: none;
+}

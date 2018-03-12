@@ -1,0 +1,190 @@
+<#escape x as x?html>
+
+<SCRIPT type="text/javascript">
+<!--
+
+jQuery(document).ready(function(){
+	//回选 下拉框
+	//jQuery("#search_state option[value='是']").prop("selected",true);
+	
+	/*
+	$('.date-picker').datepicker({
+		    autoclose: true,
+		    format: 'yyyy-mm-dd',
+		    language: 'zh-CN'
+		    //,todayBtn: 'linked',
+		    //startDate:new Date(2014,10,27),
+			//endDate:'+60d',
+		    //startDate: '+1d',
+		}).next().on(ace.click_event, function(){
+			$(this).prev().focus();
+		});
+	*/
+	
+	imageUtil.initImage("imageDiv","icon","${(returnDatas.data.icon)!''}") ;
+	
+	
+	
+				jQuery.ajax({
+                url : ctx+"/system/newsCategory/list/json",
+                type : "post",
+                dataType : "json",
+                success : function(_json) {
+                	
+                    if(_json.status=="error"){
+                        return;
+                    }
+                    
+                    //先清除原来的数据
+                    $("#categoryId").empty();
+                    jQuery(_json.data).each(function(i,_obj){
+                        if(_obj.name){
+                            jQuery("#categoryId").append("<option value='"+_obj.id+"'>"+_obj.name+"</option>");
+						}
+                    });
+
+                    jQuery("#categoryId").select2();
+                    jQuery("#categoryId").select2();
+					console.log($('#categoryId').attr("code"));
+					//$('#itemId').select2('val',$('#itemId').attr("code")) ;
+					$('#categoryId').select2().val($('#categoryId').attr("code"));
+					$('#categoryId').select2().val($('#categoryId').attr("code"));
+                }
+            });
+	
+	
+	
+	
+		//富文本编辑框的对象
+	    var ueditor ;
+	    
+	    //销毁ueditor
+		if (ueditor != undefined){
+	        UE.delEditor('ueditor') ;
+			$('#ueditor').remove() ;
+	        $('#descrDiv').append('<script id="ueditor"  type="text/plain" ><'+'/script>') ;
+		}
+		$('#ueditor').html($('#descr').val()) ;
+	    ueditor = UE.getEditor('ueditor');
+		
+	    //每改动一次富文本编辑器就相应的把内容赋值给input
+	    ueditor.addListener( 'contentChange', function(  ) {
+	    	$('#descr').val(ueditor.getContent()) ;
+	    });
+	
+	});
+	
+	
+//-->
+</SCRIPT>
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<form class="form-horizontal" id="validation-form" method="POST" novalidate="novalidate" action="${ctx}/system/news/update/json" > 
+			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+<!--input  hidden  End-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="title" >标题</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="title" class="col-xs-12 col-sm-6" id="title" value="${(returnDatas.data.title)!''}"  type="text" />
+					</div><div class="help-block" for="title"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+					<!--日期型-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="createTime" >创建时间</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+					 <div class="input-group col-xs-12 col-sm-6">
+						<input name="createTime"  class="form-control date-picker"  id="createTime" readonly="readonly" value="${(returnDatas.data.createTime)!''}"  type="text" />
+					        <span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
+							</span>
+					   </div>
+					
+					</div><div class="help-block" for="createTime"></div>
+				</div>
+			</div>
+			<div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isRecommend" >推荐到首页</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<select name="isRecommend" id="isRecommend">
+							<option <#if (((returnDatas.data.isRecommend)!0) == 0)>selected</#if> value="0">否</option>
+							<option <#if (((returnDatas.data.isRecommend)!0) == 1)>selected</#if> value="1">是</option>
+						</select>
+					</div><div class="help-block" for="type"></div>
+				</div>
+			</div>
+			<div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isGeneralize" >推荐到推广运营</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<select name="isGeneralize" id="isGeneralize">
+							<option <#if (((returnDatas.data.isGeneralize)!0) == 0)>selected</#if> value="0">否</option>
+							<option <#if (((returnDatas.data.isGeneralize)!0) == 1)>selected</#if> value="1">是</option>
+						</select>
+					</div><div class="help-block" for="type"></div>
+				</div>
+			</div>
+	       <div class="space-2"></div>
+			<div class="form-group">
+					<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="icon" >图片</label>
+					<div class="col-xs-12 col-sm-9" id="imageDiv">
+					</div>
+				</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isuser" >发布人</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="isuser" class="col-xs-12 col-sm-6" id="isuser" value="${(returnDatas.data.isuser)!''}"  type="text" />
+					</div><div class="help-block" for="isuser"></div>
+				</div>
+			</div>
+			<div class="form-group">
+					<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="categoryId">分类</label>
+					<div class="col-xs-12 col-sm-2">
+						<select  id="categoryId" name="categoryId" code="${(returnDatas.data.categoryId)!''}"   class="form-control">
+						</select>
+					</div>
+			</div>
+			<div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="type" >新闻类型</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<select name="type" id="type">
+							<option <#if (((returnDatas.data.type)!0) == 1)>selected</#if> value="1">行业新闻</option>
+							<option <#if (((returnDatas.data.type)!0) == 2)>selected</#if> value="2">云企汇新闻</option>
+						</select>
+					</div><div class="help-block" for="type"></div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="descr" >新闻内容</label>
+				<div class="col-sm-9" id="descrDiv">
+					<!--富文本编辑框-->
+					<script id="ueditor"  type="text/plain" ></script>
+					<input style="display: none;" name="descr" class="col-xs-12 col-sm-6" id="descr" value="${(returnDatas.data.descr)!''}"  type="text" />
+				</div>
+			</div>
+			
+		</form>
+		<div class="wizard-actions">
+			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/system/news/list');" style="float:left;margin-left:25.4%;">
+				保存
+			</button>
+		</div>
+	</div>
+</div>
+
+
+</#escape>

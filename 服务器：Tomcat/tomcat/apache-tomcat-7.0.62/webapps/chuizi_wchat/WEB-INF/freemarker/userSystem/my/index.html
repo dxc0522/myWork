@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_h6pef9jvhuns714i.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft" style="padding:0 3%">
+    <h3 style="font-size:16px;color: #333333;line-height: 50px;">数据显示</h3>
+    <div class="data-num">
+        <ul class="clearfix">
+            <li>
+                <h4>1234</h4>
+                <h6>转发次数</h6>
+            </li>
+            <li>
+                <h4>1234</h4>
+                <h6>转发次数</h6>
+            </li>
+            <li>
+                <h4>1234</h4>
+                <h6>转发次数</h6>
+            </li>
+            <li>
+                <h4>1234</h4>
+                <h6>转发次数</h6>
+            </li>
+        </ul>
+    </div>
+    <!--最近一周的数据-->
+    <div class="user-data">
+        <h3 style="font-size:16px;color: #333333;line-height: 50px;">最近一周数据</h3>
+        <div class="data-type clearfix">
+            <div class="type-num type-man" style="margin-right:3%">
+                <div class="data-top clearfix">
+                    <i class="iconfont icon-81"></i><span>启动人数(人/次)</span>
+                    <!--时间选择-->
+                    <div class="time-chg fr"  onclick="javascript:$(this).find('ul').toggle()" onblur="javascript:$(this).find('ul').toggle()">
+                        <div class="time-s"><span>05.12-06.24</span><i
+                                class="iconfont icon-xiala1"></i>
+                        </div>
+                        <ul>
+                            <li>05.12-06.21</li>
+                            <li>05.12-06.22</li>
+                            <li>05.12-06.23</li>
+                            <li>05.12-06.24</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="dataMan"></div>
+            </div>
+            <div class="type-num type-man">
+                <div class="data-top clearfix">
+                    <i class="iconfont icon-shuju"></i><span>启动人数(人/次)</span>
+                    <!--时间选择-->
+                    <div class="time-chg fr"   onclick="javascript:$(this).find('ul').toggle()">
+                        <div class="time-s"><span>05.12-06.24</span><i
+                                class="iconfont icon-xiala1"></i>
+                        </div>
+                        <ul>
+                            <li>05.12-06.21</li>
+                            <li>05.12-06.22</li>
+                            <li>05.12-06.23</li>
+                            <li>05.12-06.24</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="dataNum"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--购买过的应用-->
+    <div class="buyed">
+        <h3 style="font-size:16px;color: #333333;line-height: 50px;">购买过的应用</h3>
+        <div class="buyed-box">
+            <div class="hd">
+                <ul></ul>
+            </div>
+            <div class="bd">
+                <ul>
+                    <li>
+                        <div class="buyed-each clearfix">
+                            <div class="buy-img fl">
+                                <img src="${ctx}/js/userSystem/img/ingl.png" alt="">
+                            </div>
+                            <div class="ul-txt fl">
+                                <h3>企业展示</h3>
+                                <p class="txo">小程序企业展示，增加品牌推广，有效的将企业形象提升到一个新的档次。</p>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>购买时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>到期时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="over-btn active fr">
+                                即将到期
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buyed-each clearfix">
+                            <div class="buy-img fl">
+                                <img src="${ctx}/js/userSystem/img/ingl.png" alt="">
+                            </div>
+                            <div class="ul-txt fl">
+                                <h3>企业展示</h3>
+                                <p class="txo">小程序企业展示，增加品牌推广，有效的将企业形象提升到一个新的档次。</p>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>购买时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>到期时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="over-btn active fr">
+                                即将到期
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buyed-each clearfix">
+                            <div class="buy-img fl">
+                                <img src="${ctx}/js/userSystem/img/ingl.png" alt="">
+                            </div>
+                            <div class="ul-txt fl">
+                                <h3>企业展示</h3>
+                                <p class="txo">小程序企业展示，增加品牌推广，有效的将企业形象提升到一个新的档次。</p>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>购买时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>到期时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="over-btn active fr">
+                                即将到期
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buyed-each clearfix">
+                            <div class="buy-img fl">
+                                <img src="${ctx}/js/userSystem/img/ingl.png" alt="">
+                            </div>
+                            <div class="ul-txt fl">
+                                <h3>企业展示</h3>
+                                <p class="txo">小程序企业展示，增加品牌推广，有效的将企业形象提升到一个新的档次。</p>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>购买时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>到期时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="over-btn active fr">
+                                即将到期
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buyed-each clearfix">
+                            <div class="buy-img fl">
+                                <img src="${ctx}/js/userSystem/img/ingl.png" alt="">
+                            </div>
+                            <div class="ul-txt fl">
+                                <h3>企业展示</h3>
+                                <p class="txo">小程序企业展示，增加品牌推广，有效的将企业形象提升到一个新的档次。</p>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>购买时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>到期时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="over-btn active fr">
+                                即将到期
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buyed-each clearfix">
+                            <div class="buy-img fl">
+                                <img src="${ctx}/js/userSystem/img/ingl.png" alt="">
+                            </div>
+                            <div class="ul-txt fl">
+                                <h3>企业展示</h3>
+                                <p class="txo">小程序企业展示，增加品牌推广，有效的将企业形象提升到一个新的档次。</p>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>购买时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>到期时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="over-btn active fr">
+                                即将到期
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buyed-each clearfix">
+                            <div class="buy-img fl">
+                                <img src="../img/ingl.png" alt="">
+                            </div>
+                            <div class="ul-txt fl">
+                                <h3>企业展示</h3>
+                                <p class="txo">小程序企业展示，增加品牌推广，有效的将企业形象提升到一个新的档次。</p>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>购买时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="time-txt fl">
+                                <span>到期时间：</span><em>2017-05-28 15:56:02</em>
+                            </div>
+                            <div class="over-btn active fr">
+                                即将到期
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.SuperSlide.2.1.1.js"></script>
+<script src="${ctx}/js/userSystem/lib/echarts.js"></script>
+<script>
+    $(function () {
+        jQuery(".buyed").slide({
+            titCell: ".hd ul",
+            mainCell: ".bd ul",
+            autoPage: true,
+            effect: "top",
+            vis: 4,
+            scroll:4,
+            trigger:"click"
+        });
+//        折线图
+        var dom1 = document.getElementById("dataMan");
+        var myChart1 = echarts.init(dom1);
+        var app1 = {};
+        option = null;
+        option = {
+            color: ["#34c0e3"],
+            title: {},
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#34c0e3'
+                    }
+                }
+            },
+
+            grid: {
+                left: '3%',
+                right: '3%',
+                bottom: '3%',
+                top: "8%",
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value}/人'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '日期',
+                    type: 'line',
+//                    stack: '总量',
+                    /*                    label: {
+                     normal: {
+                     show: true,
+                     position: 'top'
+                     }
+                     },*/
+                    areaStyle: {normal: {}},
+                    data: [100, 123, 214, 24, 342, 234, 432, 435, 546, 656]
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart1.setOption(option, true);
+        }
+//        折线图
+        var dom2 = document.getElementById("dataNum");
+        var myChart2 = echarts.init(dom2);
+        var app2 = {};
+        option = null;
+        option = {
+            color: ["#ffd091"],
+            title: {},
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#34c0e3'
+                    }
+                }
+            },
+
+            grid: {
+                left: '3%',
+                right: '3%',
+                bottom: '3%',
+                top: "8%",
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value}/次'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '日期',
+                    type: 'line',
+                    areaStyle: {normal: {}},
+                    data: [100, 123, 214, 24, 342, 234, 432, 435, 546, 656]
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart2.setOption(option, true);
+        }
+        $(window).resize(function () {
+            myChart1.resize();
+            myChart2.resize();
+        })
+//        选择时间段
+        $(".time-chg ul li").click(function () {
+            $(this).parents(".time-chg").find("span").html($(this).html())
+        })
+    });
+
+</script>
+</html>

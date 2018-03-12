@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/ueditor.all.min.js"></script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/zh-cn.js"></script>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft fenx">
+    <form >
+        <!--菜单选择-->
+        <div id="menus">
+            <ul class="menus-tab clearfix">
+                <li id="distributionLookHtml">
+                    分销开关
+                </li>
+                <li id="distributionListHtml">
+                    分销记录
+                </li>
+                <li id="whthdrawListHtml">
+                    提现列表
+                </li>
+                 <li id="whthdrawListHtmlSucc">
+                   提现成功列表
+                </li>
+                <li id="whthdrawListHtmlFail">
+                   提现失败列表
+                </li>
+            </ul>
+            
+            <div class="fn-box clearfix">
+	            <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/userSystem/qwithdraw/list/pre" role="form"> 
+	            <input type="hidden" name="miniBinId" id="miniBinId" value="${(returnDatas.queryBean.miniBinId)!'1'}"/>
+	            <input type="hidden" name="status" id="status" value="${(returnDatas.queryBean.status)!'1'}"/>
+          		<input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+	                <div class="fl">
+	                    <span>手机号</span>
+	                    <input type="text" name="phone" value="${(returnDatas.queryBean.phone)!''}" placeholder="请输入手机号">
+	                </div>
+	                <button onclick="$('#pageIndex').val(1)"  class="btnH" href="javascript:mySubmitForm('searchForm');" id="search">查询</button>
+	                <button class="btnH" href="javascript:mySubmitForm('searchForm');" id="searchPage" style="display: none;">分页查询</button>
+	                <button class="btnD">重置</button>
+	            </form>
+            </div>
+            
+        </div>
+        <div style="height: 12px"></div>
+        <!--主要内容-->
+        <ul class="mainS">
+            <li>
+                <table>
+                	
+                    <tr>
+                        <th>ID</th>
+                        <th>会员昵称</th>
+                        <th>开户行</th>
+                        <th>开户人</th>
+                        <th>所属银行</th>
+                        <th>手机号</th>
+                        <th>银行卡号</th>
+                        <th>提现金额</th>
+                        <th>提现状态</th>
+                        <th>审核编辑</th>
+                    </tr>
+                    <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					  	<#list returnDatas.data as _data>
+	                    <tr>
+	                        <td>${(_data.id)!''}</td>
+	                        <td>${(_data.userName)!''}</td>
+	                        <td><#if _data.quserBank??>${(_data.quserBank.branchBank)!''}</#if></td>
+	                        <td><#if _data.quserBank??>${(_data.quserBank.name)!''}</#if></td>
+	                        <td><#if _data.quserBank??>${(_data.quserBank.bankName)!''}</#if></td>
+	                        <td>${(_data.phone)!''}</td>
+	                        <td><#if _data.quserBank??>${(_data.quserBank.card)!''}</#if></td>
+	                        <td>${(_data.money)!''}</td>
+	                        <td><#if _data.status==0>申请提现<#elseif _data.status==1>提现成功<#elseif _data.status==2>提现失败</#if></td>
+	                        <td><!-- <span class="msg">查看详情</span> --><#if _data.status==0><span class="btn btn-danger btn-xs"  itemId="${_data.id}" status="1">成功</span><span itemId="${_data.id}" class="btn_failTmpl" status="2">失败</span></#if></td>
+	                    </tr>
+					 	</#list>
+					</#if>
+                </table>
+                <div class="pages clearfix">
+                    <div id="pagination1" class="pages-list">
+                    </div>
+                </div>
+                <div class="alert-warn-box add-txt cash-alert">
+                    <!--查看状态-->
+                    <div class="type-main cen" style="width:500px;padding: 0 5%">
+                        <h3>提现记录详情</h3>
+                        <table style="width: 100%">
+                            <tr>
+                                <td>ID</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>会员昵称</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>审核时间</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>订单编号</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>手机号</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>开户人</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>所属银行</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>开户行</td>
+                                <td>1235644789564321654</td>
+                            </tr>
+                            <tr>
+                                <td>提现金额</td>
+                                <td>张峰</td>
+                            </tr>
+                            <tr>
+                                <td>提现状态</td>
+                                <td>张峰</td>
+                            </tr>
+                        </table>
+                        <div class="sub" style="background: #fff;border:1px solid #00a0e2;color:#00a0e2;margin:30px auto;" onclick="javascript:$(this).parents('.add-txt').hide()">
+                            关闭
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="alert-warn-box fail" id="failTmpl">
+                        <div class="cue cen" style="height: auto;padding-bottom: 20px">
+                            <h3 style="border:none">提现失败原因</h3>
+                            <textarea style="resize:none;width: 80%;background-color: #f6f6f6;height: 148px;padding:10px;" placeholder="请输入提现失败原因" id="failReason"></textarea>
+                            <div class="btn-box clearfix" style="margin:0;margin-left: 56px;">
+                                <div class="oks fl" onclick="checkInfo(2);">
+                                    确定
+                                </div>
+                                <div class="cancel fl"  onclick="javascript:$('.fail').toggle()">
+                                    取消
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+                
+                
+                <!--是否成功弹窗-->
+			    <div class="alert-warn-box succ" id="rem">
+			        <div class="alert-warn cen">
+			            <h4>是否确认进行确认？成功后不可进行恢复。</h4>
+			            <div class="btn-box clearfix" style="margin-left: 0;">
+			                <div class="oks fl" onclick="checkInfo(1);">
+			                    确定
+			                </div>
+			                <div class="cancel fr" onclick="javascript:$('.succ').toggle()">
+			                    取消
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+    
+    
+    
+    
+                
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script >
+    $("ul.menus-tab li").on("click",function () {
+        $(this).addClass("active-top").siblings().removeClass("active-top");
+        $("ul.mainS li").eq($(this).index()).show().siblings().hide();
+        $("form").each(function (item) {
+            this.reset()
+        });
+        $(".add-txt").hide();
+    });
+     //        页码
+	$("#pagination").pagination({
+	    currentPage:${(returnDatas.page.pageIndex)!1},// 当前页数
+	    totalPage:${(returnDatas.page.pageCount)!1},// 总页数
+	    count: 5,// 显示个数
+	    callback: function (num) {
+	     $("#pageIndex").val(num);
+	     $("#searchPage").click();
+	    }
+	});
+    $(".rela").on("click",function () {
+        $(".rela-alert").toggle()
+    });
+    $(".msg").on("click",function () {
+        $(".cash-alert").toggle()
+    });
+    $(".edt").on("click",function () {
+        $("#edit-box").toggle()
+    })
+    
+     $(".btn-danger").on("click",function(){
+    	$("#rem").toggle();
+    	$("#rem").attr("itemId",$(this).attr("itemId"));
+    	$("#rem").attr("status",$(this).attr("status"));
+    });
+    
+    $(".btn_failTmpl").on("click",function(){
+    	$("#failTmpl").toggle();
+    	$("#failTmpl").attr("itemId",$(this).attr("itemId"));
+    	$("#failTmpl").attr("status",$(this).attr("status"));
+    });
+    
+    var sta=${(returnDatas.queryBean.status)!'1'};
+    
+    if(sta==0){
+    	$("#whthdrawListHtml").attr("class","active-top")
+    }else if(sta==1){
+    	$("#whthdrawListHtmlSucc").attr("class","active-top")
+    }else if(sta==2){
+    	$("#whthdrawListHtmlFail").attr("class","active-top")
+    }
+    
+    
+    //删除按钮
+        function checkInfo(status){
+        
+        	if(status==1){
+	        	$.ajax({
+					url : '/chuizi_wchat/userSystem/qwithdraw/check/cru?id='+$("#rem").attr("itemId")+'&status=1',
+					type : "get",
+					success : function(result){
+						$("#searchPage").click();
+					},
+					error:function(XMLHttpRequest,textStatus,errorThrown){
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+					}
+				});
+        	}else if(status==2){
+        		$.ajax({
+					url : '/chuizi_wchat/userSystem/qwithdraw/check/cru?id='+$("#failTmpl").attr("itemId")+'&status=2&failReason='+$("#failReason").val(),
+					type : "get",
+					success : function(result){
+						$("#searchPage").click();
+					},
+					error:function(XMLHttpRequest,textStatus,errorThrown){
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+					}
+				});
+        	}
+        
+        
+        }
+    
+</script>
+</html>

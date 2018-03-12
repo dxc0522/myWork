@@ -1,0 +1,125 @@
+.news-list {
+    width: 100%;
+    height: 90px;
+    background: #f6f6f6;
+    border-bottom: 1px solid #eeeeee;
+    position: relative;
+}
+.news-list ul {
+   width: 100%;
+    text-align: center;
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.news-list ul > li {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 30px;
+    line-height: 50px;
+    color: #1f1f1f;
+    font-size: 16px;
+    border-radius: 30px;
+}
+
+.news-list ul li.on {
+    background: #00a0e2;
+    color: #fff;
+    box-shadow: 3px 3px 3px #bcc7cb;
+}
+h2 {
+    font-size: 24px;
+    color: #333333;
+    text-align: center;
+    margin: 40px 0 50px;
+    font-weight: bold;
+}
+.show-msg-each:first-of-type{
+    border-top: 1px solid #dddddd;
+}
+.show-msg-each {
+    padding-top: 20px;
+    height: 226px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.msg-each-l {
+    width: 780px;
+    cursor: pointer;
+}
+
+.msg-each-l h4 {
+    font-size: 16px;
+    color: #333333;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+.msg-each-l h4 b {
+    font-size: 14px;
+    color: #999999;
+    float: right;
+    line-height: 60px;
+}
+
+.msg-each-l p {
+    font-size: 14px;
+    color: #666666;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis; /*超出文本出现省略号*/
+    display: -webkit-box; /*设置成一个弹性的盒子*/
+    -webkit-line-clamp: 2; /*只显示三行*/
+    -webkit-box-orient: vertical; /*垂直方向 竖向显示*/
+    width: 100%;
+}
+
+.msg-each-l i {
+    display: inline-block;
+    padding: 2px 20px;
+    border-radius: 15px;
+    vertical-align: bottom;
+    margin-top: 30px;
+    border: 1px solid #e4ebf0;
+    background: #fff;
+    color: #9f9f9f;
+    cursor: pointer;
+}
+
+.msg-each-l i:hover {
+    color: #fff;
+    background: #00a0e2;
+    border-color: #00a0e2;
+
+}
+
+.msg-each-l i b {
+    font-size: 20px;
+}
+
+.show-msg-each {
+    border-bottom: 1px solid #dddddd;
+}
+
+.msg-each-r {
+    margin-top:7px;
+    width: 362px;
+    height: 170px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.pages{
+    padding-top:60px;
+    padding-bottom:100px;
+}
+.pages ul{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.pages .pages-list a{
+    color: #999999;
+}

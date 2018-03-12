@@ -1,0 +1,214 @@
+<#escape x as x?html>
+
+<script type="text/javascript" src="${ctx}/js/system/province/province.js"></script>
+
+<script type="text/javascript">
+
+function deleteProvince(){
+	var id=jQuery("#id").val();
+	if(!id||id==""){
+		myalert("请选择你要删除的记录");
+		return;
+	}else{
+		var _url="${ctx}/province/delete?id="+id;
+		var listurl="${ctx}/province/list";
+		mydelete(_url,listurl);
+	}
+}
+
+
+	
+
+	
+	function trClick(id) {
+	
+		var provinceClass="province"+id;
+		
+		if($('#'+id+'').next().hasClass(provinceClass)){
+			$('.'+provinceClass+'').remove();
+		}else{
+			 $.ajax({
+		        url : '${ctx}/system/city/getAreaAdmin/json?level=2&fatherId='+id,
+		        secureuri : false,
+		        dataType : 'json',
+		        data : {},
+		        success : function(data, status) {
+		        	var obj1 = eval(data.data);
+		        	
+		        	for (var int = 0; int < obj1.length; int++) {
+		        	
+		        		var open="";
+		        		
+		        		if(obj1[int].open=="1"){
+		        			open="已开通";
+		        			$($('#'+id+'')).after("<tr class=\"province"+id+"\"><td><div class=\"hidden-sm hidden-xs btn-group\"><button class=\"btn btn-xs btn-danger\" onclick=\"mydelete('${ctx}/system/city/open/json?id="+obj1[int].id+"','${ctx}/system/province/list',null,'确定关闭此城市？');\"><i class=\"ace-icon fa fa-pencil bigger-120\"></i></button></div><div class=\"hidden-md hidden-lg\"><div class=\"inline position-relative\"><button class=\"btn btn-xs btn-primary dropdown-toggle\"  data-toggle=\"dropdown\" data-position=\"auto\"><i class=\"ace-icon fa fa-cog icon-only bigger-110\"></i></button><ul class=\"dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close\"><li><a data-original-title=\"Delete\" href=\"javascript:mydelete('${ctx}/city/open/json?id=${(_data.id)!''}','${ctx}/province/list');\" class=\"tooltip-error\" data-rel=\"tooltip\" title=\"\"><span class=\"red\"><i class=\"ace-icon fa fa-trash-o bigger-120\"></i></span></a></li></ul></div></div></td><td ></td><td >"+obj1[int].name+"</td><td >   "+open+"       </td><td >"+obj1[int].capital+"</td></tr>");
+		        		}else{
+		        			open="未开通";
+		        			$($('#'+id+'')).after("<tr class=\"province"+id+"\"><td><div class=\"hidden-sm hidden-xs btn-group\"><button class=\"btn btn-xs btn-danger\" onclick=\"mydelete('${ctx}/system/city/open/json?id="+obj1[int].id+"','${ctx}/system/province/list',null,'确定开通此城市？');\"><i class=\"ace-icon fa fa-pencil bigger-120\"></i></button></div><div class=\"hidden-md hidden-lg\"><div class=\"inline position-relative\"><button class=\"btn btn-xs btn-primary dropdown-toggle\"  data-toggle=\"dropdown\" data-position=\"auto\"><i class=\"ace-icon fa fa-cog icon-only bigger-110\"></i></button><ul class=\"dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close\"><li><a data-original-title=\"Delete\" href=\"javascript:mydelete('${ctx}/city/open/json?id=${(_data.id)!''}','${ctx}/province/list');\" class=\"tooltip-error\" data-rel=\"tooltip\" title=\"\"><span class=\"red\"><i class=\"ace-icon fa fa-trash-o bigger-120\"></i></span></a></li></ul></div></div></td><td ></td><td >"+obj1[int].name+"</td><td >   "+open+"       </td><td >"+obj1[int].capital+"</td></tr>");
+		        		}
+					}
+		        	
+		        }
+		    })
+		
+		
+		}
+	
+	}
+
+
+</script>
+
+	
+
+<!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+  <!--  
+<div class="operate panel panel-default" style="height:65px;">
+	<div class="panel-body">
+		<div class="pull-left">
+ <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/system/province/list" role="form">
+            <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+            <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
+            <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
+			 <label for="search_state"><b>是否可用:</b></label> 
+			 <select id="search_state" name="state" class="col-10" >
+				<option value="是">是</option>
+				<option value="否">否</option>
+			</select>
+			<a  href="javascript:mySubmitForm('searchForm');"
+				class="btn btn-purple btn-sm">
+					查询 <i class="ace-icon fa fa-search icon-on-right bigger-10"></i>
+				</a>
+
+</form>
+
+		</div>
+		<div class="pull-right">
+			    <@shiro.hasPermission name="/province/list/export" >
+				  <button onclick="myexport('searchForm','${ctx}/province/list/export');" class="btn  btn-sm  btn-primary">
+                      
+                        导出
+                    </button>
+		    	</@shiro.hasPermission>
+			    <@shiro.hasPermission name="/province/update" >
+				  <button onclick="myhref('${ctx}/province/update/pre');" class="btn  btn-sm  btn-primary">
+                        添加
+                    </button>
+			    </@shiro.hasPermission>
+			    <@shiro.hasPermission name="/province/delete" >
+			    |
+				  <button onclick="deleteProvince();" class="btn btn-sm btn-danger">
+                        删除
+                    </button>
+			    </@shiro.hasPermission>
+			
+		</div>
+	</div>
+</div>
+ -->
+   <div class="row">
+            <div class="col-xs-12">
+	            <!--start_export-->
+                <table id="listDataTable" border="1" class="table table-striped table-bordered table-hover">
+                    <!--end_no_export-->
+                    <!--first_start_export-->
+                    <thead>
+                    <tr>
+                        <th style="width: 1%;">操作</th>
+                        <!--first_end_no_export-->
+						<th style="width: 8%;" id="th_name" >名称</th>
+						<th style="width: 8%;" id="th_city" >市</th>
+						<th style="width: 3%;" id="th_open" >是否开通</th>
+						<th style="width: 3%;" id="th_capital" >拼音</th>
+                    </tr>
+                    </thead>
+                    <!--first_end_export-->
+
+                    <!--start_export-->
+                    <tbody>
+           
+				   <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					 <#list returnDatas.data as _data>
+                            <!--start_no_export-->
+                            <tr class="" onclick="trClick(${_data.id});" id="${_data.id}">
+                                <td>
+                                    <div class="hidden-sm hidden-xs btn-group hidden-lg">
+                                       <!--  <button class="btn btn-xs btn-info"
+                                                onclick="myhref('${ctx}/province/update/pre?id=${(_data.id)!''}');">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </button> -->
+                                    </div>
+                                    <div class="hidden-md ">
+                                        <div class="inline position-relative">
+                                            <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                    data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+	                                          <li>
+													<a  href="javascript:myhref('${ctx}/province/look?id=${(_data.id)!''}');"  class="tooltip-info" data-rel="tooltip" title="View">
+														<span class="blue">
+															<i class="ace-icon fa fa-search-plus bigger-120"></i>
+														</span>
+													</a>
+											  </li>	
+                                                <li>
+                                                    <a data-original-title="Edit"
+                                                       href="javascript:myhref('${ctx}/province/update/pre?id=${(_data.id)!''}');"
+                                                       class="tooltip-success" data-rel="tooltip" title="">
+																		<span class="green">
+																			<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																		</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-original-title="Delete"
+                                                       href="javascript:mydelete('${ctx}/province/delete?id=${(_data.id)!''}','${ctx}/province/list',null,'确认此操作？');"
+                                                       class="tooltip-error" data-rel="tooltip" title="">
+																		<span class="red">
+																			<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																		</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <!--end_no_export-->
+
+							<td >
+								${(_data.name)!''}
+							</td>
+							<td >
+							</td>
+							<td >
+							<!-- 	<#if (_data.open) == 0 >
+									未开通
+								</#if>
+								<#if (_data.open) == 1 >
+									开通
+								</#if> -->
+							</td>
+							<td >
+								${(_data.capital)!''}
+							</td>
+						</tr>
+					</#list>
+					 </#if>
+                    </tbody>
+                </table>
+                <!--end_export-->
+            </div>
+            <!-- /.span -->
+        </div>
+        <#if returnDatas.page??>	
+            <@h.pagetoolbar page=returnDatas.page formId='searchForm' />
+        </#if>
+    </div>
+</div>
+
+<!-- /.main-container -->
+</#escape>

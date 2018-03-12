@@ -1,0 +1,112 @@
+h2 {
+    font-size: 24px;
+    color: #333333;
+    margin: 53px 0 43px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.help-l {
+    width: 240px;
+    border: 1px solid #e5e5e5;
+}
+
+.help-l h3 {
+    height: 50px;
+    border-bottom: #e5e5e5;
+    background: #00a0e2;
+    color: #fff;
+    font-size: 16px;
+    padding-left: 28px;
+    line-height: 50px;
+}
+
+.help-l {
+}
+
+.help-l ul {
+    padding-bottom: 24px;
+    padding-top: 9px;
+}
+
+.help-l ul > li {
+    line-height: 34px;
+    overflow: hidden;
+
+}
+
+.help-l ul li span {
+    padding-left: 50px;
+    font-size: 14px;
+    color: #666666;
+    display: block;
+    height: 34px;
+    position: relative;
+    cursor: pointer;
+}
+
+.help-l ul li span.active:before {
+    content: "";
+    background: #666666;
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    left: 34px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.help-l ul li span.on:before {
+    background: #00a0e2;
+}
+
+.help-l ul li ol {
+
+}
+
+.help-l ul li ol li {
+    height: 34px;
+    padding-left:60px;
+    font-size: 14px;
+    color: #666666;
+    cursor: pointer;
+}
+.help-l ul li ol li:hover{
+    color: #00a0e2;
+}
+.help-r {
+    width: 917px;
+    border: 1px solid #e5e5e5;
+}
+
+.help-r h3 {
+    font-size: 18px;
+    color: #00a0e2;
+    line-height: 70px;
+    border-bottom: 1px dashed #e5e5e5;
+    padding-left: 43px;
+}
+
+.help-r ul {
+    padding: 30px 43px 73px 43px;
+}
+
+.help-r ul li {
+}
+
+.help-r ul li h4 {
+    font-size: 16px;
+    color: #1f1f1f;
+    margin-bottom:16px;
+}
+.help-r ul li p{
+    line-height: 50px;
+    font-size: 16px;
+    color: #666666;
+}
+
+.help-r ul li img {
+    margin-bottom: 56px;
+    display: block;
+}
+

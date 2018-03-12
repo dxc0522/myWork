@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_7zkkyo61s6c7hkt9.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+    
+</head>
+<body style="padding-top: 60px;">
+<div class="help-warn">
+    <span>如果你对该模块的配置不太了解可以先导入演示数据</span>
+    <b>一键导入</b>
+</div>
+<div class="main animated rotateInUpLeft">
+    <!--菜单选择-->
+    <div id="menus"> 
+    <ul class="menus-tab clearfix">
+                <li id="qnewsHtml">
+                    参数设置
+                </li>
+                <li  id="qnewsCategory">
+                    分类中心
+                </li>
+                <li id="qnewsId" class="active-top">
+                    新闻中心
+                </li>
+    </div>     
+    </div>
+    <div style="height: 12px"></div>
+    <!--主要内容-->
+    <ul class="mainS">
+        	<li>
+			 	<div >
+                    <div class="mainM">
+                    <form class="form-horizontal" id="add_good_form"  action ="${ctx}/userSystem/qnews/update/cru" method="post">
+               			 <input type="hidden" name="miniBinId" id="miniBinId" value="${(miniBindId)!'1'}"/>
+                    <input type="hidden" name="id" id="id" value="${(returnDatas.data.id)!''}"/>
+                    <input type="hidden" name="isRecommend" id="isRecommend" value="${(returnDatas.data.isRecommend)!''}"/>
+                    <div>
+                            
+                            <p><span>*</span> 新闻标题</p>
+                            <input autocomplete="off" type="text" placeholder="请输入新闻标题" name="title" value="${(returnDatas.data.title)!''}">
+                        </div>
+                        <div>
+                            <p><span>*</span>新闻内容</p>
+                            <textarea    name="content" value="${(returnDatas.data.content)!''}">请输入内容 </textarea>
+                        </div>
+                        <div>
+                            <p><span>*</span> 新闻图片 </p>
+                            <div style="margin-left:21%;" class="col-xs-12 col-sm-9" id="newsIcon"></div>
+                        </div>
+                        <div>
+                            <p style="font-size: 12px;font-weight: normal;width: 80%;padding-left:20%;text-align: left">
+                                宽高比例330px*220px</p>
+                        </div>
+                        <div>
+                            <p><span>*</span> 排序</p>
+                            <input autocomplete="off"  type="text" placeholder="排序" name="sorts" value="${(returnDatas.data.sorts)!''}">
+                        </div>
+                        <p style="font-weight: normal;font-size: 12px;margin-left:20%;width: 80%;text-align: left">
+                            数字越小越靠前</p>
+                       <div>
+                            
+                            <p><span>*</span> 新闻分类ID</p>
+                            <input autocomplete="off" type="text" placeholder="请输入分类ID" name="categoryId" value="${(returnDatas.data.categoryId)!''}">
+                        </div>
+                        
+                       <div>
+                            <p><span>*</span> 是否推荐</p>
+                            <div class="radio-box dis-inb">
+                                <input type="radio" name="type" value="1" id="type1"><span>推荐</span>
+                                <input type="radio" name="type" value="0" id="type2"><span>不推荐</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div>
+                            <p><span>*</span> 查看量 </p>
+                            <input autocomplete="off"  type="text" placeholder="请输入查看量" name="lookNum" value="${(returnDatas.data.lookNum)!''}">
+                        </div>
+                        
+                        <p><span>*</span> 产品介绍</p>
+                        <textarea id="editorAdd" autocomplete="off"  name="descr" rows="5" cols="3" value="${(returnDatas.data.descr)!''}">请输入产品介绍</textarea>
+                        </div>
+                        
+                        <p><span>*</span> 文章详情</p>
+                        <div class="dis-inb">
+                            <script id="editorNews" type="text/plain" style="width:600px;height:300px;">初始化语言</script>
+                            <div id="btnsnew">
+                                <div>
+                                    <button onclick="getContent()">获得内容</button>
+                                    <button onclick="getContentTxt()">获得纯文本</button>
+                                    <button onclick="getPlainTxt()">获得带格式的纯文本</button>
+                                    <button onclick="hasContent()">判断是否有内容</button>
+                                </div>
+                            </div>
+                            <script>
+
+                                //实例化编辑器
+                                //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+                                var ue = UE.getEditor('editorNews', {
+                                    toolbars: [
+                                        [
+                                            'source', //源代码
+                                            'undo', //撤销
+                                            'redo', //重做
+                                            'bold', //加粗
+                                            'indent', //首行缩进
+                                            'italic', //斜体
+                                            'underline', //下划线
+                                            'strikethrough', //删除线
+                                            'fontborder', //字符边框
+                                            'formatmatch', //格式刷
+                                            'blockquote', //引用
+                                            'selectall', //全选
+                                            'horizontal', //分隔线
+                                            'removeformat', //清除格式
+                                            'unlink', //取消链接
+                                            'customstyle', //自定义标题
+                                            'fontfamily', //字体
+                                            'fontsize', //字号
+                                            'paragraph', //段落格式
+                                            'insertimage', //多图上传
+                                            'link', //超链接
+                                            'emotion', //表情
+                                            'searchreplace', //查询替换
+                                            'justifyleft', //居左对齐
+                                            'justifyright', //居右对齐
+                                            'justifycenter', //居中对齐
+                                            'justifyjustify', //两端对齐
+                                            'forecolor', //字体颜色
+                                            'backcolor', //背景色
+                                            'fullscreen', //全屏
+                                            'rowspacingtop', //段前距
+                                            'rowspacingbottom', //段后距
+                                            'attachment', //附件
+                                            'wordimage', //图片转存
+                                            'lineheight', //行间距
+                                            'edittip ', //编辑提示
+                                        ]
+                                    ]
+                                });
+
+                                function getContent() {
+                                    var arr = [];
+                                    arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+                                    arr.push("内容为：");
+                                    arr.push(UE.getEditor('editor').getContent());
+                                    alert(arr.join("\n"));
+                                }
+                                function getPlainTxt() {
+                                    var arr = [];
+                                    arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+                                    arr.push("内容为：");
+                                    arr.push(UE.getEditor('editor').getPlainTxt());
+                                    alert(arr.join('\n'))
+                                }
+                                function getContentTxt() {
+                                    var arr = [];
+                                    arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+                                    arr.push("编辑器的纯文本内容为：");
+                                    arr.push(UE.getEditor('editor').getContentTxt());
+                                    alert(arr.join("\n"));
+                                }
+                                function hasContent() {
+                                    var arr = [];
+                                    arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+                                    arr.push("判断结果为：");
+                                    arr.push(UE.getEditor('editor').hasContents());
+                                    alert(arr.join("\n"));
+                                }
+                            </script>
+                        </div>
+                        
+                        <div class="btn-box clearfix">
+                                   <div class="btn-box clearfix">
+                            <div class="oks fl" onclick="isCheck();commonUpdateFormMiniBind('add_good_form','${ctx}/userSystem/qnews/list/pre','成功！','miniBinId');">
+                                确定
+                            </div>
+                            <div class="cancel fl" id="newsCancle">
+                                取消
+                            </div>
+                        </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            
+            <!--添加页面-->
+
+        </li>
+    </ul>
+</div>
+</body>
+
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script src="${ctx}/js/userSystem/lib/My97DatePicker/WdatePicker.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/validate/Validform_v5.3.2_min.js"></script>
+<script src="${ctx}/layer-v3.0.3/layer/mobile/layer.js"></script>
+<script src="${ctx}/layer-v3.0.3/layer/layer.js"></script>
+<script src="${ctx}/js/userSystem/lib/common.js"></script>
+<script src="${ctx}/js/userSystem/lib/image.js"></script>
+<script src="${ctx}/js/userSystem/lib/ajaxfileupload.js"></script>
+<script>
+
+    $(function(){
+    imageUtil.initImage("newsIcon","icon","${(returnDatas.data.icon)!''}") ;
+    });
+   /* $(".btn-b").on("click",function () {
+        $(this).siblings('.add-txt').show().siblings().hide();
+    });*/
+    $("ul.menus-tab li").on("click",function () {
+        $("ul.main-show li").eq($(this).index()).show().siblings().hide();
+    });
+    $(".btn-danger").on("click",function(){
+    	$("#rem").toggle();
+    });
+    
+    
+    //回选 下拉框
+		jQuery("#isLook option[value='${(returnDatas.queryBean.isLook)!''}']").prop("selected",true);
+  if($("#isRecommend").val()==1){
+    	$("#type1").attr("checked","checked");
+    }else{
+   		$("#type2").attr("checked","checked");
+    }
+    
+    function isCheck(){
+	    var item = $(":radio"); 
+		var len=item.length; 
+		if(len>0){ 
+			if($(":radio:checked").val()==1){
+				$("#isRecommend").val(1);
+			}else{
+				$("#isRecommend").val(0);
+			}
+		} 
+    }
+</script>
+</html>

@@ -1,0 +1,244 @@
+<#escape x as x?html>
+
+
+<script type="text/javascript">
+function deleteCustomizationOrder(){
+	var id=jQuery("#id").val();
+	if(!id||id==""){
+		myalert("请选择你要删除的记录");
+		return;
+	}else{
+		var _url="${ctx}/customizationorder/delete?id="+id;
+		var listurl="${ctx}/customizationorder/list";
+		mydelete(_url,listurl);
+	}
+}
+
+
+
+function check(id,status){
+		var index = layer.load(0, {    //0为加载样式  有 0  ，  1   2
+		  shade: [0.1,'#fff'] //0.1透明度的白色背景
+		});
+		
+		var list="<textarea name=\"value\"  id=\"value\" value=\"\" placeholder=\"常量的值\" class=\"form-control\" rows=\"20\" cols=\"20\"></textarea><div class=\"wizard-actions\"><button class=\"btn btn-success btn-info\" data-last=\"Finish\" onclick=\"submit("+id+","+status+");\" style=\"float:left;margin-left:25.4%;\">保存</button></div>";
+		
+		layer.close(index);
+		layer.open({
+			  type: 1,
+			  skin: 'layui-layer-demo', //样式类名
+			  closeBtn: 1, //显示关闭按钮
+			  anim: 2,
+			  id:'layerOpen',
+			  resize :false,
+			  area: ['860px', '400px'],
+			  shadeClose: false, //开启遮罩关闭
+			  content: list
+		});
+	}
+	
+	function submit(id,status){
+		var _url="${ctx}/system/customizationOrder/check/json?status="+status+"&id="+id+"&remark="+$("#value").val();
+		var listurl="";
+		
+		if(status==1){
+			listurl="/system/customizationOrder/listStatus1";
+		}else if(status==2){
+			listurl="/system/customizationOrder/listStatus2";
+		}else if(status==3){
+			listurl="/system/customizationOrder/listStatus3";
+		}else if(status==4){
+			listurl="/system/customizationOrder/listStatus4";
+		}
+		
+		mydelete(_url,listurl);
+	}
+	
+</script>
+
+
+	
+
+<!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+<div class="operate panel panel-default" style="height:65px;">
+	<div class="panel-body">
+		<div class="pull-left">
+ 		<form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/customizationorder/list" role="form">
+            <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+            <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
+            <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
+			<label for="search_state"><b>是否可用:</b></label> 
+			 <select id="search_state" name="state" class="col-10" >
+				<option value="是">是</option>
+				<option value="否">否</option>
+			</select>
+			<a  href="javascript:mySubmitForm('searchForm');"
+				class="btn btn-purple btn-sm">
+					查询 <i class="ace-icon fa fa-search icon-on-right bigger-10"></i>
+			</a>
+		</form>
+		</div>
+		<div class="pull-right">
+			    <@shiro.hasPermission name="/customizationorder/list/export" >
+				  <button onclick="myexport('searchForm','${ctx}/customizationorder/list/export');" class="btn  btn-sm  btn-primary">
+                        导出
+                  </button>
+		    	</@shiro.hasPermission>
+			    <@shiro.hasPermission name="/customizationorder/update" >
+				  <button onclick="myhref('${ctx}/customizationorder/update/pre');" class="btn  btn-sm  btn-primary">
+                        添加
+                  </button>
+			    </@shiro.hasPermission>
+			    <@shiro.hasPermission name="/customizationorder/delete" >
+			    |
+				  <button onclick="deleteCustomizationOrder();" class="btn btn-sm btn-danger">
+                        删除
+                  </button>
+			    </@shiro.hasPermission>
+			
+		</div>
+	</div>
+</div>
+
+   <div class="row">
+            <div class="col-xs-12">
+	            <!--start_export-->
+                <table id="listDataTable" border="1"  class="table table-striped table-bordered table-hover">
+                    <!--end_no_export-->
+                    <!--first_start_export-->
+                    <thead>
+                    <tr>
+                        <th>操作</th>
+                        <!--first_end_no_export-->
+						<th style="width:80px;" id="th_name" >姓名</th>
+						<th style="width:80px;" id="th_phone" >电话</th>
+						<th style="width:90px;" id="th_qQnum" >QQ</th>
+						<th style="width:80px;" id="th_project" >项目名称</th>
+						<th style="width:300px;" id="th_content" >定制内容</th>
+						<th style="width:60px;" id="th_status" >状态</th>
+						<th style="width:300px;" id="th_remark" >备注</th>
+						<th id="th_createTime" >创建时间</th>
+						<th id="th_follow" >跟进人</th>
+						<th id="th_noFollowTime" >未跟进时间</th>
+						<th id="th_followingTime" >跟进中时间</th>
+						<th id="th_succTime" >成功时间</th>
+						<th id="th_failTime" >失败时间</th>
+						<th id="th_money" >预算</th>
+                    </tr>
+                    </thead>
+        	     <tbody>
+           
+				   <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					 <#list returnDatas.data as _data>
+                            <!--start_no_export-->
+                            <tr class="">
+                                <td>
+                                    <div class="hidden-md">
+                                        <div class="inline position-relative">
+                                            <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                    data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+	                                          <@shiro.hasPermission name="/system/customizationorder/check/json" >
+	                                                <#if (_data.status) == 1 >
+	                                                <li>
+	                                                 <button onclick="check(${(_data.id)!''},2)" class="btn  btn-sm  btn-primary">
+									                       跟进处理
+									                  </button>
+	                                                </li>
+													</#if>
+	                                                 <#if (_data.status) == 2 >
+	                                                 <li>
+	                                                 <button onclick="check(${(_data.id)!''},4)" class="btn  btn-sm  btn-primary">
+									                       处理成功
+									                  </button>
+	                                                </li>
+	                                                 <li>
+	                                                 <button onclick="check(${(_data.id)!''},3)" class="btn  btn-sm  btn-primary">
+									                       处理失败
+									                  </button>
+	                                                </li>
+									                  </#if>
+                                                </@shiro.hasPermission>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+							<td >
+								${(_data.name)!''}
+							</td>
+							<td >
+								${(_data.phone)!''}
+							</td>
+							<td >
+								${(_data.qQnum)!''}
+							</td>
+							<td >
+								${(_data.project)!''}
+							</td>
+							<td style="Word-break: break-all;">
+								${(_data.content)!''}
+							</td>
+							<td >
+								<#if (_data.status) == 1 >
+									未跟进
+								</#if>
+								<#if (_data.status) == 2 >
+									跟进中
+								</#if>
+								<#if (_data.status) == 3 >
+									失败
+								</#if>
+								<#if (_data.status) == 4 >
+									成功
+								</#if>
+							</td>
+							<td style="Word-break: break-all;">
+								${(_data.remark)!''}
+							</td>
+							<td >
+								<!--日期型-->
+							${((_data.createTime)?string('yyyy-MM-dd HH:mm:ss'))!''}
+							</td>
+							<td >
+								${(_data.follow)!''}
+							</td>
+							<td >
+								<!--日期型-->
+							${((_data.noFollowTime)?string('yyyy-MM-dd HH:mm:ss'))!''}
+							</td>
+							<td >
+								<!--日期型-->
+							${((_data.followingTime)?string('yyyy-MM-dd HH:mm:ss'))!''}
+							</td>
+							<td >
+								<!--日期型-->
+							${((_data.succTime)?string('yyyy-MM-dd HH:mm:ss'))!''}
+							</td>
+							<td >
+								<!--日期型-->
+							${((_data.failTime)?string('yyyy-MM-dd HH:mm:ss'))!''}
+							</td>
+							<td >
+								${(_data.money)!''}
+							</td>
+						</tr>
+					</#list>
+					 </#if>
+                    </tbody>
+                </table>
+                <!--end_export-->
+            </div>
+            <!-- /.span -->
+        </div>
+        <#if returnDatas.page??>	
+            <@h.pagetoolbar page=returnDatas.page formId='searchForm' />
+         </#if>
+    </div>
+</div>
+<!-- /.main-container -->
+</#escape>

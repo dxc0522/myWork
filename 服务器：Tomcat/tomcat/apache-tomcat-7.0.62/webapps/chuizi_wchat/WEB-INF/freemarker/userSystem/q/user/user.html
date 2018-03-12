@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+     <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_pap8r1pc6uz3erk9.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft">
+    <!--菜单选择-->
+    <div id="menus">
+        <ul class="menus-tab clearfix">
+            <li class="active-top">
+                会员管理
+            </li>
+   
+        </ul>
+        <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/userSystem/qwxuser/list/pre" role="form"> 
+        	<input type="hidden" name="miniBinId" id="miniBinId" value="${(returnDatas.queryBean.miniBinId)!'1'}"/>
+          	<input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+	        <div class="fn-box clearfix">
+	            <div class="fl">
+	                <span>性别</span>
+	                <select name="sex" id="sex">
+	                	<option value="">全部</option>
+	                    <option value="1">男</option>
+	                    <option value="2">女</option>
+	                </select>
+	            </div>
+	            <div class="fl">
+	                <span>名称</span>
+	                <input type="text" value="${(returnDatas.queryBean.nickName)!''}" name="nickName" placeholder="请输入会员名称">
+	            </div>
+	            <div class="fl">
+	                <span>手机号</span>
+	                <input type="text" value="${(returnDatas.queryBean.phone)!''}" name="phone" placeholder="请输入会员手机号">
+	            </div>
+	            <div class="fl">
+	                <span>邀请码</span>
+	                <input type="text" value="${(returnDatas.queryBean.invitationCode)!''}" name="invitationCode" placeholder="请输入会员邀请码">
+	            </div>
+	            <button onclick="$('#pageIndex').val(1)"  class="btnH" href="javascript:mySubmitForm('searchForm');" id="search">查询</button>
+	            <button class="btnH" href="javascript:mySubmitForm('searchForm');" id="searchPage" style="display: none;">分页查询</button>
+	            <button class="btnD">重置</button>
+	        </div>
+        </form>
+    </div>
+    <div style="height: 12px"></div>
+    <!--主要内容-->
+    <ul class="mainS">
+        <li>
+            <table class="vip-setting vip-icon">
+                <tr>
+               	 	<th>操作</th>
+                	<th>是否拉黑</th>
+                    <th>ID</th>
+                    <th>会员昵称</th>
+                    <th>用户头像</th>
+                    <th>用户性别</th>
+                    <th>手机号</th>
+                    <th>余额</th>
+                    <th>省</th>
+                    <th>市</th>
+                    <th>邀请码</th>
+                    <th>可提现金额</th>
+                    <th>冻结金额</th>
+                    
+                </tr>
+                <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					         <#list returnDatas.data as _data>
+                <tr>
+                <td><span class="edit">发送短信</span><span class="addM" userId="${_data.id}">增加余额</span><br><span updateItemId="${_data.id}" class="userUpdateHtml">修改信息</span><span class="fenx" userId="${(_data.id)!''}">分销关系</span><br><span class="addMonList" userId="${(_data.id)!''}" >充值记录</span><span class="orderList" userId="${(_data.id)!''}" >订单记录</span></td>
+                <td ><#if _data.isBlack??><#if _data.isBlack==1><i itemId1="${(_data.id)!''}" class="iconfont active">&#xe601;</i><#else><i itemId1="${(_data.id)!''}" class="iconfont">&#xe601;</i></#if></#if></td>
+                    <td>${(_data.id)!''}</td>
+                    <td>${(_data.nickName)!''}</td>
+                    <td>
+                        <b class="cen">
+                            <img width="80px" height="80px" src="${(_data.header)!''}" alt="" class="cen">
+                        </b>
+                    </td>
+                    <td><#if _data.sex??><#if _data.sex==1>男<#else>女</#if></#if></td>
+                    <td>${(_data.phone)!''}</td>
+                    <td>${(_data.balance)!''}</td>
+                    <td>${(_data.provinceName)!''}</td>
+                    <td>${(_data.cityName)!''}</td>
+                    <td>${(_data.invitationCode)!''}</td>
+                    <td>${(_data.withdrawBalance)!''}</td>
+                    <td>${(_data.frozenBalance)!''}</td>
+                    
+                </tr>
+                			</#list>
+				</#if>
+
+            </table>
+            <div class="pages clearfix">
+                <div id="pagination" class="pages-list">
+                </div>
+            </div>
+            <!--发短信-->
+            <div class="alert-warn-box" id="edit-box">
+                <div class="cen alert-warn">
+                    <h6>请填写发送短信内容，70个字符为一条短信</h6>
+                    <h6>当前短信条数：<span><b>100</b>条</span></h6>
+                    <textarea placeholder="请填写您要发送的短信内容"></textarea>
+                    <p><span>本次条数：</span><b>11</b></p>
+                    <div class="btn-box clearfix" style="margin-left:0;">
+                        <div class="cancel fr" onclick="$(this).parents('.alert-warn-box').hide()">
+                            取消发送
+                        </div>
+                        <div class=" oks fr" style="margin-right: 20px;">
+                            确认发送
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--分销管理-->
+            <div class="alert-warn-box cancleL" id="fenx-box">
+                <div class="type-main cen" style="padding: 0 5%">
+                    <div class="close-type iconfont icon-guanbi1" onclick="javascript:$('.cancleL').toggle()"></div>
+                    <h3>分销关系</h3>
+            <div class="fenx-box">
+       	 <div class="fn-box clearfix">
+            <div class="fl">
+                <span>手机号</span>
+                <input autocomplete="off" id="phoneDis" name="phoneDis" type="text" placeholder="请输入手机号" value="${(returnDatas.queryBean.selectInfo)!''}">
+                </div>
+                <div class="fl">
+		                <span>分销等级</span>
+		                <select name="levelDis" id="levelDis">
+		                	<option value=''>全部</option>
+		                    <option value='1'>1</option>
+		                    <option value='2'>2</option>
+		                </select>
+		            </div>
+		            
+            <button onclick="$('#pageIndex').val(1);"  class="btnH"  id="searchDis">查询</button>
+            <button class="btnH"  id="searchPageDis" style="display: none;">分页查询</button>
+            <button class="btnD">重置</button>
+        </div>
+                    </div>
+            <table id="fenxiaoguanxi">
+                
+                
+                
+            </table>
+             <div id="pagination3" class="pages-list" style="margin:20px 0;"></div>
+            
+                    <div class="sub" style="margin:30px auto;" onclick="javascript:$('#fenx-box').toggle()">
+                        确定
+                    </div>
+                </div>
+            </div>
+            <script id="fenxiao_list_tmpl" type="text/x-jquery-tmpl">
+						<tr>
+              					
+                          		
+								<td >
+										{{= id}}
+								</td>
+								<td >
+										{{= phone}}
+								</td>
+								<td >
+										{{= chName}}
+								</td>
+								
+								<td >
+										{{= level}}
+								</td>
+								
+								
+								
+								
+            			</tr>
+	</script>
+    <script id="fenxiao_top_tmpl" type="text/x-jquery-tmpl">
+						<tr>
+                           		
+								<th id="th_position" >序号</th>
+								<th id="th_1cityId" >手机号</th>
+								<th id="th_2cityId" >下级名字</th>
+								<th id="th_3cityId" >分销等级</th>
+                       	 </tr>
+	</script>
+	
+	
+	
+	
+	
+	
+	
+           <!--余额增加--> 
+      <div class="alert-warn-box money">
+                        <div class="cue cen" style="height: auto;padding-bottom: 20px">
+                            <h3 style="border:none">提示</h3>
+                            <input type="text" placeholder="请输入要增加的金额：" id="moneyInput" style="width: 80%;margin-bottom: 20px;background-color: #f6f6f6;">
+                            <div class="btn-box clearfix" style="margin:0;margin-left: 56px;">
+                                <div class="oks fl"  onclick="updateMoney();">
+                                    确定  
+                                </div>
+                                <div class="cancel fl"  onclick="javascript:$('.money').toggle()">
+                                    取消
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                     <!--充值记录-->
+    <div class="alert-warn-box addMonList1">
+         <div class="type-main cen">
+            <div class="close-type iconfont icon-guanbi1" onclick="javascript:$('.addMonList1').toggle()"></div>
+            <h3>充值记录</h3>
+            <table id="addMoneyList">
+                
+                
+                
+            </table>
+            <div id="pagination1" class="pages-list" style="margin:20px 0;">
+            </div>
+        </div> 
+    </div>
+    <script id="commend_list_tmpl" type="text/x-jquery-tmpl">
+						<tr>
+              					
+                          		
+								<td >
+										充值
+								</td>
+								<td >
+										{{= money}}
+								</td>
+								
+								<td >
+										{{= balance}}
+								</td>
+								
+								<td >
+										{{= createTime}}
+								</td>
+								
+								<td >	
+										{{if payType == 1}}支付宝{{/if}}
+										{{if payType == 2}}微信{{/if}}
+										{{if payType == 3}}余额{{/if}}
+	
+								</td>
+
+								<td >
+										{{= orderId}}
+								</td>
+								
+								
+								
+								
+            			</tr>
+	</script>
+    <script id="commend_top_tmpl" type="text/x-jquery-tmpl">
+						<tr>
+                           		
+								<th id="th_position" >类型</th>
+								<th id="th_cityId" >充值金额</th>
+								<th id="th_cityId" >余额</th>
+								<th id="th_itemId" >充值时间</th>
+								 <th id="th_url" >支付方式</th>
+								<th id="th_cityId" >订单ID</th>
+                       	 </tr>
+	</script>
+	
+	
+	
+	<!--订单记录-->
+    <div class="alert-warn-box ordelList1">
+         <div class="type-main cen">
+            <div class="close-type iconfont icon-guanbi1" onclick="javascript:$('.ordelList1').toggle()"></div>
+            <h3>订单列表</h3>
+            <table id=orderList>
+                
+                
+                
+            </table>
+            <div id="pagination2" class="pages-list" style="margin:20px 0;">
+            </div>
+        </div> 
+    </div>
+    <script id="order_list_tmpl" type="text/x-jquery-tmpl">
+						<tr>
+              					
+                          		
+								<td >
+										{{= code}}
+								</td>
+								<td >
+										{{= goodId}}
+								</td>
+								<td >
+										{{= createTime}}
+								</td>
+								
+								<td >
+										
+								</td>
+								<td >
+										{{= payTime}}
+								</td>
+										
+								<td >
+										{{= sendTime}}
+								</td>
+								
+								<td >
+										{{= endTime}}
+								</td>
+								<td >
+										{{if payType == 1}}支付宝{{/if}}
+										{{if payType == 2}}微信{{/if}}
+										{{if payType == 3}}余额{{/if}}
+										
+								</td>
+
+								<td >
+										{{if status == 0}}不使用{{/if}}
+										{{if status == 1}}使用{{/if}}
+								</td>
+								
+								<td >
+										{{= addrPhone}}
+								</td>
+										
+								<td >
+										{{= address}}
+								</td>
+								<td >
+										{{= expressage}}
+								</td>
+								<td >
+										{{= expressageCode}}
+								</td>
+										
+								
+            			</tr>
+	</script>
+    <script id="order_top_tmpl" type="text/x-jquery-tmpl">
+						<tr>
+                           		
+								<th id="th_position" >订单编号</th>
+								<th id="th_position" >产品名称</th>
+								<th id="th_itemId" >下单时间</th>
+								 <th id="th_url" >状态</th>
+								<th id="th_21cityId" >支付时间</th>
+								<th id="th_1cityId" >发货时间</th>
+								<th id="th_1cityId" >结束时间</th>
+								<th id="th_2cityId" >支付方式</th>
+								<th id="th_3cityId" >是否使用优惠券</th>
+								<th id="th_4cityId" >手机号</th>
+								<th id="th_5cityId" >收货地址</th>
+								<th id="th_6cityId" >快递公司</th>
+								<th id="th_7cityId" >物流单号</th>
+                       	 </tr>
+	</script>
+        </li>
+    </ul>
+</div>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/My97DatePicker/WdatePicker.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.tmpl.min.js"></script>
+<script>
+ $(function () {
+  $("ul.menus-tab li").on("click",function () {
+            $(this).addClass("active-top").siblings().removeClass("active-top");
+            $("ul.mainS li").eq($(this).index()).show().siblings().hide();
+            $("form").each(function (item) {
+                this.reset()
+            });
+            $(".add-txt").hide().siblings().show()
+        });
+        $(".btn-b").on("click",function () {
+            $(this).siblings('.add-txt').show().siblings().hide();
+        });
+ 
+
+ //        页码
+	$("#pagination").pagination({
+	    currentPage:${(returnDatas.page.pageIndex)!1},// 当前页数
+	    totalPage:${(returnDatas.page.pageCount)!1},// 总页数
+	    count: 5,// 显示个数
+	    callback: function (num) {
+	      	$("#pageIndex").val(num);
+	       	$("#searchPage").click();
+	    }
+	});
+
+	
+	
+    //    会员
+    $(".edit").click(function () {
+        $("#edit-box").show();
+    });
+    /* $(".alert-warn-box .oks").click(function () {
+        $(".alert-warn-box").hide();
+        alert("发送")
+    }); */
+    
+    });
+    
+    
+    //是否拉黑
+	$("table td i").click(function () {
+        	$(this).toggleClass("active");
+        	$.ajax({
+				url : '/chuizi_wchat/system/qwxuser/isBlack/json?id='+$(this).attr("itemId1"),
+				type : "get",
+				success : function(result){
+					$("#searchPage").click();
+				},
+				error:function(XMLHttpRequest,textStatus,errorThrown){
+					console.log(XMLHttpRequest);
+					console.log(textStatus);
+				}
+			});
+        	
+   		});
+    //    分销关系
+    $(".fenx").click(function () {
+        $("#fenx-box").show();
+        
+         $("#searchDis").attr("userId",$(this).attr("userId"));
+         fenxiaoList($(this).attr("userId"),1);
+    });
+    
+    $("#searchDis").click(function () {
+        fenxiaoList($(this).attr("userId"),1);
+    });
+    
+    function fenxiaoList(userId,num){
+    
+    	var url1='';
+    	
+    	if($("#levelDis").val()!=undefined){
+    		url1=url1+"&levelDis="+$("#levelDis").val();
+    	
+    	}
+    	
+    	if($("#phoneDis").val()!=undefined){
+    		url1=url1+"&phoneDis="+$("#phoneDis").val();
+    	
+    	}
+    	
+	        $.ajax({
+				url : '/chuizi_wchat/userSystem/qdistribution/fenxiaolist/pre?userId='+userId+'&pageIndex='+num+'&miniBinId='+getCookie('miniBinId')+url1+'&pageSize=5',
+				type : "get",
+				dataType : "json",
+				success : function(result){
+					if(result.data!=undefined){
+						$('#fenxiaoguanxi').html("");
+						$('#fenxiao_top_tmpl').tmpl(result.data[int]).appendTo($('#fenxiaoguanxi'));
+						for (var int = 0; int < result.data.length; int++){
+							
+							$('#fenxiao_list_tmpl').tmpl(result.data[int]).appendTo($('#fenxiaoguanxi'));
+							
+						}
+						
+						$("#pagination3").pagination({
+				            currentPage:result.page.pageIndex,// 当前页数
+					        totalPage:result.page.pageCount,// 总页数
+					        count: 5,// 显示个数
+					        callback: function (num) {
+					        	$("#pageIndex").val(num);
+					        	fenxiaoList(userId,num);
+					        }
+				        });
+						
+					}
+					
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					
+					console.log(XMLHttpRequest);
+					
+					console.log(textStatus);
+					
+				}
+			});
+        
+        }
+    
+    
+    	//订单记录
+    	$(".orderList").click(function () {
+            $(".ordelList1").toggle();
+          orderList($(this).attr("userId"),1);
+        });
+          
+          function orderList(userId,num){
+	        $.ajax({
+				url : '/chuizi_wchat/userSystem/qorder/orderlist/pre?userId='+userId+'&pageIndex='+num+'&miniBinId='+getCookie('miniBinId'),
+				type : "get",
+				dataType : "json",
+				success : function(result){
+					if(result.data!=undefined){
+						$('#orderList').html("");
+						$('#order_top_tmpl').tmpl(result.data[int]).appendTo($('#orderList'));
+						for (var int = 0; int < result.data.length; int++){
+							
+							$('#order_list_tmpl').tmpl(result.data[int]).appendTo($('#orderList'));
+							
+						}
+						$("#pageIndex2").val(result.page.pageIndex);
+						$("#pagination2").pagination({
+				            currentPage:${(result.page.pageIndex)!1},// 当前页数
+					        totalPage:${(result.page.pageCount)!1},// 总页数
+					        count: 5,// 显示个数
+					        callback: function (num) {
+					        	$("#pageIndex2").val(num);
+					        	orderList(userId,num);
+					        }
+				        });
+						
+					}
+					
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					
+					console.log(XMLHttpRequest);
+					
+					console.log(textStatus);
+					
+				}
+			});
+        
+        }
+    
+    
+    	//充值记录
+    	$(".addMonList").click(function () {
+            $(".addMonList1").toggle();
+          addMonList($(this).attr("userId"),1);
+            
+            
+        });
+         function addMonList(userId,num){
+	        $.ajax({
+				url : '/chuizi_wchat/userSystem/qmoneydetail/moneylist/pre?type=2&userId='+userId+'&pageIndex='+num+'&miniBinId='+getCookie('miniBinId')+'&pageSize=5',
+				type : "get",
+				dataType : "json",
+				success : function(result){
+					if(result.data!=undefined){
+						$('#addMoneyList').html("");
+						$('#commend_top_tmpl').tmpl(result.data[int]).appendTo($('#addMoneyList'));
+						for (var int = 0; int < result.data.length; int++){
+							
+							$('#commend_list_tmpl').tmpl(result.data[int]).appendTo($('#addMoneyList'));
+							
+						}
+						
+						$("#pagination1").pagination({
+				            currentPage:result.page.pageIndex,// 当前页数
+					        totalPage:result.page.pageCount,// 总页数
+					        count: 5,// 显示个数
+					        callback: function (num) {
+					        	$("#pageIndex").val(num);
+					        	addMonList(userId,num);
+					        }
+				        });
+						
+					}
+					
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					
+					console.log(XMLHttpRequest);
+					
+					console.log(textStatus);
+					
+				}
+			});
+        
+        }
+    
+    //增加金额按钮
+    $(".addM").click(function () {
+            $(".money").toggle();
+            $(".money").attr("userId",$(this).attr("userId"));
+           
+        });
+        
+        function updateMoney(){
+        
+        $(".money").toggle();
+        if($("#moneyInput").val()!=undefined&&$("#moneyInput").val()!=null&&$("#moneyInput").val()> 0){
+        	
+        	
+        	$.ajax({
+				url : '/chuizi_wchat/system/qwxuser/updateMoney/json?id='+$(".money").attr("userId")+'&balance='+$("#moneyInput").val(),
+				type : "get",
+				dataType : "json",
+				success : function(result){
+					$("#searchPage").click();
+					
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					
+					console.log(XMLHttpRequest);
+					
+					console.log(textStatus);
+					
+				}
+			});
+        }else{
+        alert("输入的金额不合法");
+        }
+        
+	        
+        
+        }
+    //回选 下拉框
+	jQuery("#sex option[value='${(returnDatas.queryBean.sex)!''}']").prop("selected",true);
+</script>
+</body>
+</html>

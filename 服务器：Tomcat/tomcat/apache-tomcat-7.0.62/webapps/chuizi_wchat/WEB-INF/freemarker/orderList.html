@@ -1,0 +1,724 @@
+<#escape x as x?html>
+
+<script type="text/javascript" src="${ctx}/js/system/order/order.js"></script>
+
+<script type="text/javascript">
+
+
+jQuery(document).ready(function(){
+
+	$(".sub_left_menu tbody tr").click(function() {
+			$(".sub_left_menu tbody tr").removeClass("active");
+			$(this).attr("class", "active");
+			var _url=ctx + "/order/look/json?id="+ $(this).attr("id");
+		
+			jQuery.ajax({
+				url : _url,
+				type : "post",
+				dataType : "json",
+				success : function(_json) {
+					if(_json.status=="success"){
+						showdata(_json);
+					}
+				}
+			});
+			return false;
+	})
+
+});
+
+	
+	
+	
+
+function showdata(result) {
+
+    $("#btn_add").hide();
+	$("#btn_reload").show();
+	$("#btn_update").show();
+     
+	for (var s in result.data) {
+		set_val(s, result.data[s]);
+	}
+}
+
+
+
+
+
+
+var listurl="${ctx}/order/list";
+function deleteOrder(){
+	var id=jQuery("#id").val();
+	if(!id||id==""){
+		myalert("请选择你要删除的记录");
+		return;
+	}else{
+		var _url="${ctx}/order/delete?id="+id;
+		mydelete(_url,listurl);
+	}
+}
+
+function updateOrder(){
+    var id=jQuery("#id").val();
+	if(!id||id==""){
+		myalert("请选择你要更新的记录");
+		return;
+	}else{
+		var _url="${ctx}/order/update?id="+id;
+		commonUpdateForm("updateForm",_url,listurl);
+	}
+
+}
+
+function saveOrder(){
+	commonUpdateForm("updateForm",listurl);
+}
+
+</script>
+
+<div class="operate panel panel-default" style="height: 65px;">
+	<div class="panel-body">
+	
+		<div class="pull-left">
+			<form class="form-horizontal" method="post"  action="${ctx}/order/list" name="searchForm" id="searchForm" onkeydown="if(event.keyCode==13)return false;">
+				 <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+				 <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
+				 <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
+				 
+				 <label for="search_name"><b>名称:</b></label> 
+				 <input type="text" id="search_name" name="name" placeholder="请输入名称" value="${(returnDatas.queryBean.name)!''}"> 
+				 <label for="search_state"><b>是否可用:</b></label> 
+				 <select id="search_state" name="state">
+					<option value="是">是</option>
+					<option value="否">否</option>
+				</select> 
+				<a href="javascript:mySubmitForm('searchForm');" class="btn btn-purple btn-sm"> 
+				    查询 
+					<iclass="ace-icon fa fa-search icon-on-right bigger-10"></i>
+				</a>
+
+			</form>
+		</div>
+
+
+
+		<div class="pull-right">
+			 <@shiro.hasPermission name="/order/update" >
+				<a id="btn_reload" href="javascript:location.reload();" class="btn  btn-sm  btn-primary " style="display: none;"> 
+					跳转至新增>>
+				</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	
+				<a id="btn_add" href="javascript:saveOrder();" class="btn  btn-sm  btn-primary "> 
+					<img src="${ctx}/images/btn_save.png" style="vertical-align: middle;" />保存新增
+				</a>
+				
+				 <a id="btn_update" href="javascript:updateOrder();" class="btn  btn-sm  btn-primary " style="display: none;">
+				    <img src="${ctx}/images/btn_save.png" style="vertical-align: middle;" />
+				  	保存修改
+				 </a> 
+			 </@shiro.hasPermission> 
+			
+			 <@shiro.hasPermission name="/order/delete" > 
+				 <a id="btn_delete" href="javascript:deleteOrder();" class="btn btn-sm btn-danger " style="display: none;">
+					删除
+				 </a> 
+			 </@shiro.hasPermission> 
+		</div>
+
+	</div>
+</div>
+
+
+
+
+<!-- /.page-header -->
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="col-sm-5 sub_left_menu ">
+					<div class="widget-box">
+						<div class="widget-header">
+							<h4 class="widget-title">数据列表</h4>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+							 <!--start_export-->
+								<table  class="table table-striped table-bordered table-hover">
+								  <!--end_no_export-->
+                                  <!--first_start_export-->
+									<thead>
+										<tr>
+										 <!--first_start_no_export-->
+										 <!--first_end_no_export-->
+												<th id="th_userId" >userId</th>
+												<th id="th_goodId" >goodId</th>
+												<th id="th_name" >商品名称</th>
+												<th id="th_nowPrice" >现价</th>
+												<th id="th_oldPrice" >原价</th>
+												<th id="th_tecId" >技师id</th>
+												<th id="th_serviceTime" >服务时间</th>
+												<th id="th_images" >图片</th>
+												<th id="th_twCategory" >二级分类id</th>
+												<th id="th_thCategory" >三级分类id</th>
+												<th id="th_cityId" >所在城市id</th>
+												<th id="th_num" >数量，默认1</th>
+												<th id="th_addrPhone" >联系电话</th>
+												<th id="th_addrName" >联系人</th>
+												<th id="th_addrLat" >纬度</th>
+												<th id="th_addrLot" >经度</th>
+												<th id="th_address" >服务地址（从地图中获取）</th>
+												<th id="th_addr" >详细地址</th>
+												<th id="th_addrSex" >性别</th>
+												<th id="th_startTime" >开始时间</th>
+												<th id="th_endTime" >结束时间</th>
+												<th id="th_bak" >备注</th>
+												<th id="th_couponId" >优惠券id</th>
+												<th id="th_status" >状态1待付款  2待接单 3待服务 4服务中 5待评价 6已完成 7已取消       8投标中</th>
+												<th id="th_type" >1商品订单2自由抢单</th>
+												<th id="th_isReturn" >是否退款0没有退款1申请退款2技师同意退款3技师拒绝退款4退款成功5平台拒绝退款</th>
+												<th id="th_returnReason" >退款原因</th>
+												<th id="th_returnType" >1原卡元退2退到余额</th>
+												<th id="th_tecFail" >技师拒绝原因</th>
+												<th id="th_fail" >平台拒绝原因</th>
+												<th id="th_createTime" >创建时间--</th>
+												<th id="th_payTime" >待支付时间</th>
+												<th id="th_receOrderTime" >待接单事件</th>
+												<th id="th_waitServiceTime" >待服务</th>
+												<th id="th_sreviceIngTime" >服务中时间</th>
+												<th id="th_waitCommTime" >待评论</th>
+												<th id="th_endOrderTime" >已完成时间</th>
+												<th id="th_cancelTime" >取消时间</th>
+												<th id="th_bidTime" >开始投标事件</th>
+												<th id="th_returnTecTime" >技师审核退款订单事件</th>
+												<th id="th_returnTime" >申请退款时间</th>
+												<th id="th_checkReturnTime" >平台审核事件</th>
+
+										</tr>
+									</thead>
+									
+									<!--first_end_export-->
+									<!--start_export-->
+									
+									<tbody>
+
+							        <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					                <#list returnDatas.data as _data>
+									
+                                    <!--start_no_export-->
+									<!--end_no_export-->
+									 
+										<tr id="${_data.id}">
+										
+										
+											<td >
+													${(_data.userId)!0}
+											</td>
+											<td >
+													${(_data.goodId)!0}
+											</td>
+											<td >
+													${(_data.name)!''}
+											</td>
+											<td >
+													${(_data.nowPrice)!0}
+											</td>
+											<td >
+													${(_data.oldPrice)!0}
+											</td>
+											<td >
+													${(_data.tecId)!0}
+											</td>
+											<td >
+													${(_data.serviceTime)!0}
+											</td>
+											<td >
+													${(_data.images)!''}
+											</td>
+											<td >
+													${(_data.twCategory)!0}
+											</td>
+											<td >
+													${(_data.thCategory)!0}
+											</td>
+											<td >
+													${(_data.cityId)!0}
+											</td>
+											<td >
+													${(_data.num)!0}
+											</td>
+											<td >
+													${(_data.addrPhone)!''}
+											</td>
+											<td >
+													${(_data.addrName)!''}
+											</td>
+											<td >
+													${(_data.addrLat)!0}
+											</td>
+											<td >
+													${(_data.addrLot)!0}
+											</td>
+											<td >
+													${(_data.address)!''}
+											</td>
+											<td >
+													${(_data.addr)!''}
+											</td>
+											<td >
+													${(_data.addrSex)!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.startTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.endTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+													${(_data.bak)!''}
+											</td>
+											<td >
+													${(_data.couponId)!0}
+											</td>
+											<td >
+													${(_data.status)!0}
+											</td>
+											<td >
+													${(_data.type)!0}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.isReturn)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+													${(_data.returnReason)!''}
+											</td>
+											<td >
+													${(_data.returnType)!0}
+											</td>
+											<td >
+													${(_data.tecFail)!''}
+											</td>
+											<td >
+													${(_data.fail)!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.createTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.payTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.receOrderTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.waitServiceTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.sreviceIngTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.waitCommTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.endOrderTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.cancelTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.bidTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.returnTecTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.returnTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											<td >
+												<!--日期型-->
+													${((_data.checkReturnTime)?string('yyyy-MM-dd'))!''}
+											</td>
+											
+										</tr>
+										
+									</#list>
+									 </#if>
+									</tbody>
+								</table>
+							  <!--end_export-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-7">
+					<div class="widget-box">
+						<div class="widget-header">
+							<h4 class="widget-title">详细信息</h4>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<form class="form-horizontal clearfix" method="post" action="${ctx}/order/update"  name="updateForm" id="updateForm">
+								
+										<input type="hidden" id="id" name="id" value=""/>	
+									
+									<div class="col-sm-6">
+								
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="userId" >userId</label>
+												 <div class="col-sm-9">
+													<input name="userId"  id="userId" value="" placeholder="userId" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="goodId" >goodId</label>
+												 <div class="col-sm-9">
+													<input name="goodId"  id="goodId" value="" placeholder="goodId" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="name" >商品名称</label>
+												 <div class="col-sm-9">
+													<input name="name"  id="name" value="" placeholder="商品名称" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="nowPrice" >现价</label>
+												 <div class="col-sm-9">
+													<input name="nowPrice"  id="nowPrice" value="" placeholder="现价" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="oldPrice" >原价</label>
+												 <div class="col-sm-9">
+													<input name="oldPrice"  id="oldPrice" value="" placeholder="原价" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="tecId" >技师id</label>
+												 <div class="col-sm-9">
+													<input name="tecId"  id="tecId" value="" placeholder="技师id" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="serviceTime" >服务时间</label>
+												 <div class="col-sm-9">
+													<input name="serviceTime"  id="serviceTime" value="" placeholder="服务时间" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="images" >图片</label>
+												 <div class="col-sm-9">
+													<input name="images"  id="images" value="" placeholder="图片" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="twCategory" >二级分类id</label>
+												 <div class="col-sm-9">
+													<input name="twCategory"  id="twCategory" value="" placeholder="二级分类id" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="thCategory" >三级分类id</label>
+												 <div class="col-sm-9">
+													<input name="thCategory"  id="thCategory" value="" placeholder="三级分类id" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="cityId" >所在城市id</label>
+												 <div class="col-sm-9">
+													<input name="cityId"  id="cityId" value="" placeholder="所在城市id" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="num" >数量，默认1</label>
+												 <div class="col-sm-9">
+													<input name="num"  id="num" value="" placeholder="数量，默认1" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="addrPhone" >联系电话</label>
+												 <div class="col-sm-9">
+													<input name="addrPhone"  id="addrPhone" value="" placeholder="联系电话" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="addrName" >联系人</label>
+												 <div class="col-sm-9">
+													<input name="addrName"  id="addrName" value="" placeholder="联系人" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="addrLat" >纬度</label>
+												 <div class="col-sm-9">
+													<input name="addrLat"  id="addrLat" value="" placeholder="纬度" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="addrLot" >经度</label>
+												 <div class="col-sm-9">
+													<input name="addrLot"  id="addrLot" value="" placeholder="经度" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="address" >服务地址（从地图中获取）</label>
+												 <div class="col-sm-9">
+													<input name="address"  id="address" value="" placeholder="服务地址（从地图中获取）" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="addr" >详细地址</label>
+												 <div class="col-sm-9">
+													<input name="addr"  id="addr" value="" placeholder="详细地址" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="addrSex" >性别</label>
+												 <div class="col-sm-9">
+													<input name="addrSex"  id="addrSex" value="" placeholder="性别" class="form-control"  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="startTime" >开始时间</label>
+										
+												 <div class="col-sm-9">
+													<input name="startTime"  class="form-control date-picker"  id="startTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="endTime" >结束时间</label>
+										
+												 <div class="col-sm-9">
+													<input name="endTime"  class="form-control date-picker"  id="endTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="bak" >备注</label>
+												 <div class="col-sm-9">
+													<input name="bak"  id="bak" value="" placeholder="备注" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="couponId" >优惠券id</label>
+												 <div class="col-sm-9">
+													<input name="couponId"  id="couponId" value="" placeholder="优惠券id" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="status" >状态1待付款  2待接单 3待服务 4服务中 5待评价 6已完成 7已取消       8投标中</label>
+												 <div class="col-sm-9">
+													<input name="status"  id="status" value="" placeholder="状态1待付款  2待接单 3待服务 4服务中 5待评价 6已完成 7已取消       8投标中" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="type" >1商品订单2自由抢单</label>
+												 <div class="col-sm-9">
+													<input name="type"  id="type" value="" placeholder="1商品订单2自由抢单" class="form-control"  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="isReturn" >是否退款0没有退款1申请退款2技师同意退款3技师拒绝退款4退款成功5平台拒绝退款</label>
+										
+												 <div class="col-sm-9">
+													<input name="isReturn"  class="form-control date-picker"  id="isReturn" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="returnReason" >退款原因</label>
+												 <div class="col-sm-9">
+													<input name="returnReason"  id="returnReason" value="" placeholder="退款原因" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="returnType" >1原卡元退2退到余额</label>
+												 <div class="col-sm-9">
+													<input name="returnType"  id="returnType" value="" placeholder="1原卡元退2退到余额" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="tecFail" >技师拒绝原因</label>
+												 <div class="col-sm-9">
+													<input name="tecFail"  id="tecFail" value="" placeholder="技师拒绝原因" class="form-control"  type="text" />
+												 </div> 
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="fail" >平台拒绝原因</label>
+												 <div class="col-sm-9">
+													<input name="fail"  id="fail" value="" placeholder="平台拒绝原因" class="form-control"  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="createTime" >创建时间--</label>
+										
+												 <div class="col-sm-9">
+													<input name="createTime"  class="form-control date-picker"  id="createTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="payTime" >待支付时间</label>
+										
+												 <div class="col-sm-9">
+													<input name="payTime"  class="form-control date-picker"  id="payTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="receOrderTime" >待接单事件</label>
+										
+												 <div class="col-sm-9">
+													<input name="receOrderTime"  class="form-control date-picker"  id="receOrderTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="waitServiceTime" >待服务</label>
+										
+												 <div class="col-sm-9">
+													<input name="waitServiceTime"  class="form-control date-picker"  id="waitServiceTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="sreviceIngTime" >服务中时间</label>
+										
+												 <div class="col-sm-9">
+													<input name="sreviceIngTime"  class="form-control date-picker"  id="sreviceIngTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="waitCommTime" >待评论</label>
+										
+												 <div class="col-sm-9">
+													<input name="waitCommTime"  class="form-control date-picker"  id="waitCommTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="endOrderTime" >已完成时间</label>
+										
+												 <div class="col-sm-9">
+													<input name="endOrderTime"  class="form-control date-picker"  id="endOrderTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="cancelTime" >取消时间</label>
+										
+												 <div class="col-sm-9">
+													<input name="cancelTime"  class="form-control date-picker"  id="cancelTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="bidTime" >开始投标事件</label>
+										
+												 <div class="col-sm-9">
+													<input name="bidTime"  class="form-control date-picker"  id="bidTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="returnTecTime" >技师审核退款订单事件</label>
+										
+												 <div class="col-sm-9">
+													<input name="returnTecTime"  class="form-control date-picker"  id="returnTecTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="returnTime" >申请退款时间</label>
+										
+												 <div class="col-sm-9">
+													<input name="returnTime"  class="form-control date-picker"  id="returnTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+												<!--日期型-->
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="checkReturnTime" >平台审核事件</label>
+										
+												 <div class="col-sm-9">
+													<input name="checkReturnTime"  class="form-control date-picker"  id="checkReturnTime" readonly="readonly" value=""  type="text" />
+												 </div> 
+										</div>
+																		
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+
+
+			</div>
+			<!-- /.span -->
+
+		</div>
+
+		<#if returnDatas.page??>	
+            <@h.pagetoolbar page=returnDatas.page formId='searchForm' />
+         </#if>
+
+	</div>
+</div>
+
+
+<!-- /.main-container -->
+
+
+
+</#escape>

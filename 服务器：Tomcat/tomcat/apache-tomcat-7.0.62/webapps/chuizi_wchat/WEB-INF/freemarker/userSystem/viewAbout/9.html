@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_cgeywbe2glwpzaor.css">
+    <link rel="stylesheet" href="../img/sprite.css">
+    <link rel="stylesheet" href="../css/aboutUs.css">
+</head>
+<body>
+<li class="order">
+    <div class="w  mt">
+        <div class="slideTxtBox">
+        <h2>售后工单</h2>
+        </div>
+        <div class="order-box">
+            <!--未登录-->
+            <div class="order-log dis-n">
+                <p>您处于未登录状态，请先登录您的账号</p>
+                <ul>
+                    <li>
+                        <span><em>*</em>手机号：</span><input type="text" placeholder="请输入手机号">
+                    </li>
+                    <li>
+                        <span><em>*</em>密码：</span><input type="password" placeholder="请输入密码">
+                    </li>
+                    <li>
+                        <span><em>*</em>验证码：</span><input style="width: 150px;" type="text" placeholder="请输入验证码">
+                        <div class="codes clearfix">
+                            <div id="v_container"></div>
+                            <span class="fr">点击换一张</span>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="sub">
+                            登录
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!--已登录-->
+            <div class="order-inp dis-n">
+                <ul>
+                    <li>
+                        <span><em>*</em>联络人：</span><input onblur="sType(this)" name="peopleName" type="text" placeholder="请输入姓名">
+                        <p>请输入联系人</p>
+                    </li>
+                    <li>
+                        <span><em>*</em>手机号码：</span><input onblur="sType(this)" name="phone" type="text" placeholder="请输入手机号码">
+                        <p>请输入手机号</p>
+                    </li>
+                    <li>
+                        <span><em>*</em>订单编号：</span><input onblur="sType(this)" name="code" type="text" placeholder="请输入订单编号">
+                        <p>请输入订单编号</p>
+                    </li>
+                    <li class="clearfix">
+                        <span><em>*</em>问题类型：</span>
+                        <select class="selec" name="issueTypeId" onblur="sType(this)">
+                            <script type="text/x-handlebars-template">
+                                <option value="">请选择问题类型</option>
+                                {{#each data}}
+                                <option value="{{this.id}}">{{this.content}}</option>
+                                {{/each}}
+                            </script>
+                        </select>
+                        <p>请选择问题类型</p>
+                    </li>
+                    <li  style="margin-bottom: 10px;">
+                        <span><em>*</em>问题内容：</span><textarea onblur="sType(this)" name="content" placeholder="请将您的问题详细的告诉我们。"></textarea>
+                        <p>请详细描述下你的问题</p>
+                    </li>
+                    <li>
+                        <button class="sub">
+                            提交
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</li>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script src="../lib/gVerify.js"></script>
+<script src="../js/pulic.js"></script>
+<script>
+    userLogin(function (data) {
+        if(data.status=="success"){
+            $(".order-inp").show()
+        }else{
+            $(".order-log").show()
+        }
+    });
+    function sType(obj) {
+        var that=$(obj);
+        if (that.val() == "0"||that.val()=="") {
+            that.siblings("p").show();
+            return false
+        } else {
+            that.siblings("p").hide();
+            return true
+        }
+    }
+    $(".order-log .sub").click(function () {
+        alert("登录成功");
+        $(".order-inp").toggle().siblings().toggle()
+    });
+//    下拉列表
+    $.ajax({
+        url:urls+"/chuizi_wchat/system/sysType/list/json",
+        type: "post",
+        dataType: "json",
+        data:{type:6},
+        xhrFields: {
+            withCredentials: true
+        },
+        success:function (data) {
+            var template = Handlebars.compile($(".selec script").html());
+            $(".order-inp .selec").html(template(data));
+        },
+        error:function (ero) {
+            console.log(ero)
+        }
+    });
+    //        验证码
+    var verifyCode = new GVerify("v_container");
+    $("#my_button").click(function () {
+        var res = verifyCode.validate(document.getElementById("code_input").value);
+        if (res) {
+            alert("验证正确");
+        } else {
+            alert("验证码错误");
+        }
+    });
+    $("#v_container").siblings("span").click(function () {
+        verifyCode.refresh();
+    });
+    $(".order-inp .sub").on("click",function () {
+        if(sType($("input[name='phone']"))&&sType($("input[name='issueTypeId']"))&&sType($("input[name='content']"))){
+            $.ajax({
+                url:urls+"/chuizi_wchat/system/afterOrder/save/json",
+                type:"post",
+                dataType:"json",
+                xhrFields: {
+                    withCredentials: true
+                },
+                data:{
+                    phone:$("input[name='phone']").val(),
+                    issueTypeId:$("select[name='issueTypeId']").val(),
+                    content:$("textarea[name='content']").val(),
+                    code:$("input[name='code']").val(),
+                    peopleName:$("input[name='peopleName']").val()
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data.status=="success"){
+                        alert("数据添加成功")
+                    }
+                },
+                error:function (ero) {
+                    console.log(ero)
+                }
+            });
+        }
+    });
+</script>
+</html>

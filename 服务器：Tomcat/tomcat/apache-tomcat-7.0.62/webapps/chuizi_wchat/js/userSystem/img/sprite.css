@@ -1,0 +1,534 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-2-anli1 {
+  background-image: url(sprite.png);
+  background-position: -160px -445px;
+  width: 17px;
+  height: 19px;
+}
+.icon-2-chongzhi1 {
+  background-image: url(sprite.png);
+  background-position: -99px -445px;
+  width: 21px;
+  height: 21px;
+}
+.icon-2-cpgl1 {
+  background-image: url(sprite.png);
+  background-position: -48px -476px;
+  width: 19px;
+  height: 21px;
+}
+.icon-2-dianshang1 {
+  background-image: url(sprite.png);
+  background-position: -558px -330px;
+  width: 19px;
+  height: 16px;
+}
+.icon-2-fenlei1 {
+  background-image: url(sprite.png);
+  background-position: -241px -410px;
+  width: 17px;
+  height: 17px;
+}
+.icon-2-guanyuwemn {
+  background-image: url(sprite.png);
+  background-position: -519px -330px;
+  width: 20px;
+  height: 16px;
+}
+.icon-2-huiyuanguanli {
+  background-image: url(sprite.png);
+  background-position: -36px -445px;
+  width: 21px;
+  height: 23px;
+}
+.icon-2-jichushes {
+  background-image: url(sprite.png);
+  background-position: -78px -445px;
+  width: 21px;
+  height: 21px;
+}
+.icon-2-kefu {
+  background-image: url(sprite.png);
+  background-position: -223px -410px;
+  width: 18px;
+  height: 18px;
+}
+.icon-2-lunbo {
+  background-image: url(sprite.png);
+  background-position: -163px -410px;
+  width: 21px;
+  height: 19px;
+}
+.icon-2-mima-2 {
+  background-image: url(sprite.png);
+  background-position: -258px -410px;
+  width: 17px;
+  height: 17px;
+}
+.icon-2-qiye {
+  background-image: url(sprite.png);
+  background-position: -57px -445px;
+  width: 21px;
+  height: 23px;
+}
+.icon-2-xiangqing1 {
+  background-image: url(sprite.png);
+  background-position: -478px -330px;
+  width: 22px;
+  height: 17px;
+}
+.icon-2-ziliao-2 {
+  background-image: url(sprite.png);
+  background-position: -204px -410px;
+  width: 19px;
+  height: 19px;
+}
+.icon-2-zixun-2 {
+  background-image: url(sprite.png);
+  background-position: -500px -330px;
+  width: 19px;
+  height: 17px;
+}
+.icon-4444 {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 292px;
+  height: 192px;
+}
+.icon-44444444444 {
+  background-image: url(sprite.png);
+  background-position: -292px 0px;
+  width: 303px;
+  height: 109px;
+}
+.icon-add {
+  background-image: url(sprite.png);
+  background-position: -222px -268px;
+  width: 51px;
+  height: 51px;
+}
+.icon-ads-icon {
+  background-image: url(sprite.png);
+  background-position: -556px -138px;
+  width: 12px;
+  height: 8px;
+}
+.icon-biao {
+  background-image: url(sprite.png);
+  background-position: -495px -268px;
+  width: 41px;
+  height: 41px;
+}
+.icon-check {
+  background-image: url(sprite.png);
+  background-position: -577px -330px;
+  width: 14px;
+  height: 14px;
+}
+.icon-checked {
+  background-image: url(sprite.png);
+  background-position: -579px -230px;
+  width: 14px;
+  height: 14px;
+}
+.icon-class-dp {
+  background-image: url(sprite.png);
+  background-position: -448px -330px;
+  width: 30px;
+  height: 18px;
+}
+.icon-class-wx {
+  background-image: url(sprite.png);
+  background-position: -554px -192px;
+  width: 26px;
+  height: 25px;
+}
+.icon-close-allow {
+  background-image: url(sprite.png);
+  background-position: -577px -268px;
+  width: 18px;
+  height: 19px;
+}
+.icon-close {
+  background-image: url(sprite.png);
+  background-position: 0px -410px;
+  width: 36px;
+  height: 66px;
+}
+.icon-free {
+  background-image: url(sprite.png);
+  background-position: -562px -147px;
+  width: 33px;
+  height: 33px;
+}
+.icon-gl03 {
+  background-image: url(sprite.png);
+  background-position: -432px -256px;
+  width: 40px;
+  height: 12px;
+}
+.icon-gl05 {
+  background-image: url(sprite.png);
+  background-position: -472px -256px;
+  width: 40px;
+  height: 12px;
+}
+.icon-help-server {
+  background-image: url(sprite.png);
+  background-position: -36px -410px;
+  width: 35px;
+  height: 35px;
+}
+.icon-help-suppor {
+  background-image: url(sprite.png);
+  background-position: -247px -330px;
+  width: 35px;
+  height: 37px;
+}
+.icon-home {
+  background-image: url(sprite.png);
+  background-position: -273px -268px;
+  width: 52px;
+  height: 48px;
+}
+.icon-huo {
+  background-image: url(sprite.png);
+  background-position: -536px -268px;
+  width: 41px;
+  height: 41px;
+}
+.icon-icon_17-g {
+  background-image: url(sprite.png);
+  background-position: -24px -476px;
+  width: 12px;
+  height: 54px;
+}
+.icon-icon_17-h {
+  background-image: url(sprite.png);
+  background-position: 0px -476px;
+  width: 12px;
+  height: 54px;
+}
+.icon-icon_23-g {
+  background-image: url(sprite.png);
+  background-position: -36px -476px;
+  width: 12px;
+  height: 54px;
+}
+.icon-icon_23-h {
+  background-image: url(sprite.png);
+  background-position: -12px -476px;
+  width: 12px;
+  height: 54px;
+}
+.icon-icon_menu {
+  background-image: url(sprite.png);
+  background-position: -325px -268px;
+  width: 47px;
+  height: 47px;
+}
+.icon-index_03 {
+  background-image: url(sprite.png);
+  background-position: -578px -138px;
+  width: 10px;
+  height: 5px;
+}
+.icon-index_05 {
+  background-image: url(sprite.png);
+  background-position: -568px -138px;
+  width: 10px;
+  height: 5px;
+}
+.icon-index_13 {
+  background-image: url(sprite.png);
+  background-position: -584px -126px;
+  width: 8px;
+  height: 12px;
+}
+.icon-kuaijie {
+  background-image: url(sprite.png);
+  background-position: 0px -268px;
+  width: 40px;
+  height: 142px;
+}
+.icon-list-c {
+  background-image: url(sprite.png);
+  background-position: 0px -192px;
+  width: 227px;
+  height: 38px;
+}
+.icon-list-c2 {
+  background-image: url(sprite.png);
+  background-position: -227px -192px;
+  width: 227px;
+  height: 38px;
+}
+.icon-list-l {
+  background-image: url(sprite.png);
+  background-position: -292px -147px;
+  width: 229px;
+  height: 38px;
+}
+.icon-list-l2 {
+  background-image: url(sprite.png);
+  background-position: -292px -109px;
+  width: 229px;
+  height: 38px;
+}
+.icon-list-r {
+  background-image: url(sprite.png);
+  background-position: -216px -230px;
+  width: 216px;
+  height: 38px;
+}
+.icon-list-r2 {
+  background-image: url(sprite.png);
+  background-position: 0px -230px;
+  width: 216px;
+  height: 38px;
+}
+.icon-little {
+  background-image: url(sprite.png);
+  background-position: -104px -330px;
+  width: 54px;
+  height: 56px;
+}
+.icon-more-r {
+  background-image: url(sprite.png);
+  background-position: -320px -330px;
+  width: 32px;
+  height: 32px;
+}
+.icon-more-w {
+  background-image: url(sprite.png);
+  background-position: -416px -330px;
+  width: 32px;
+  height: 32px;
+}
+.icon-more {
+  background-image: url(sprite.png);
+  background-position: -521px -138px;
+  width: 19px;
+  height: 9px;
+}
+.icon-new-more {
+  background-image: url(sprite.png);
+  background-position: -532px -256px;
+  width: 6px;
+  height: 12px;
+}
+.icon-no-history {
+  background-image: url(sprite.png);
+  background-position: -40px -330px;
+  width: 64px;
+  height: 65px;
+}
+.icon-phon {
+  background-image: url(sprite.png);
+  background-position: -384px -330px;
+  width: 32px;
+  height: 32px;
+}
+.icon-play {
+  background-image: url(sprite.png);
+  background-position: -109px -268px;
+  width: 58px;
+  height: 59px;
+}
+.icon-qi {
+  background-image: url(sprite.png);
+  background-position: -158px -330px;
+  width: 49px;
+  height: 49px;
+}
+.icon-qiu {
+  background-image: url(sprite.png);
+  background-position: -521px -147px;
+  width: 41px;
+  height: 35px;
+}
+.icon-radio-icon_03 {
+  background-image: url(sprite.png);
+  background-position: -120px -445px;
+  width: 20px;
+  height: 20px;
+}
+.icon-radio-icon_05 {
+  background-image: url(sprite.png);
+  background-position: -140px -445px;
+  width: 20px;
+  height: 20px;
+}
+.icon-renew {
+  background-image: url(sprite.png);
+  background-position: -40px -268px;
+  width: 69px;
+  height: 62px;
+}
+.icon-router {
+  background-image: url(sprite.png);
+  background-position: -580px -192px;
+  width: 15px;
+  height: 19px;
+}
+.icon-seach-w {
+  background-image: url(sprite.png);
+  background-position: -184px -410px;
+  width: 20px;
+  height: 19px;
+}
+.icon-shoping_03 {
+  background-image: url(sprite.png);
+  background-position: -94px -410px;
+  width: 22px;
+  height: 22px;
+}
+.icon-shoping_06 {
+  background-image: url(sprite.png);
+  background-position: -540px -138px;
+  width: 16px;
+  height: 8px;
+}
+.icon-shoping_11 {
+  background-image: url(sprite.png);
+  background-position: -512px -256px;
+  width: 20px;
+  height: 12px;
+}
+.icon-shoping_15 {
+  background-image: url(sprite.png);
+  background-position: -584px -109px;
+  width: 9px;
+  height: 17px;
+}
+.icon-shou {
+  background-image: url(sprite.png);
+  background-position: -282px -330px;
+  width: 38px;
+  height: 34px;
+}
+.icon-speak {
+  background-image: url(sprite.png);
+  background-position: -352px -330px;
+  width: 32px;
+  height: 32px;
+}
+.icon-stop {
+  background-image: url(sprite.png);
+  background-position: -167px -268px;
+  width: 55px;
+  height: 55px;
+}
+.icon-tall {
+  background-image: url(sprite.png);
+  background-position: -116px -410px;
+  width: 23px;
+  height: 21px;
+}
+.icon-tell {
+  background-image: url(sprite.png);
+  background-position: -448px -348px;
+  width: 15px;
+  height: 13px;
+}
+.icon-tg-1 {
+  background-image: url(sprite.png);
+  background-position: -507px -230px;
+  width: 24px;
+  height: 24px;
+}
+.icon-tg-2 {
+  background-image: url(sprite.png);
+  background-position: -555px -230px;
+  width: 24px;
+  height: 24px;
+}
+.icon-tg-3 {
+  background-image: url(sprite.png);
+  background-position: -531px -230px;
+  width: 24px;
+  height: 24px;
+}
+.icon-tvs {
+  background-image: url(sprite.png);
+  background-position: -454px -268px;
+  width: 41px;
+  height: 41px;
+}
+.icon-upa {
+  background-image: url(sprite.png);
+  background-position: -372px -268px;
+  width: 41px;
+  height: 41px;
+}
+.icon-vip {
+  background-image: url(sprite.png);
+  background-position: -413px -268px;
+  width: 41px;
+  height: 41px;
+}
+.icon-warn {
+  background-image: url(sprite.png);
+  background-position: -71px -410px;
+  width: 23px;
+  height: 23px;
+}
+.icon-weixins {
+  background-image: url(sprite.png);
+  background-position: -454px -192px;
+  width: 100px;
+  height: 28px;
+}
+.icon-word {
+  background-image: url(sprite.png);
+  background-position: -207px -330px;
+  width: 40px;
+  height: 40px;
+}
+.icon-wx-b {
+  background-image: url(sprite.png);
+  background-position: -139px -410px;
+  width: 24px;
+  height: 19px;
+}
+.icon-xinwen {
+  background-image: url(sprite.png);
+  background-position: -577px -287px;
+  width: 18px;
+  height: 18px;
+}
+.icon-years {
+  background-image: url(sprite.png);
+  background-position: -521px -109px;
+  width: 63px;
+  height: 29px;
+}
+.icon-yhj {
+  background-image: url(sprite.png);
+  background-position: -539px -330px;
+  width: 19px;
+  height: 16px;
+}
+.icon-zhifubao {
+  background-image: url(sprite.png);
+  background-position: -432px -230px;
+  width: 75px;
+  height: 26px;
+}

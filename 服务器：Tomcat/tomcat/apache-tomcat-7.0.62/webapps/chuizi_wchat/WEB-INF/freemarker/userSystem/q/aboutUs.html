@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_h15ug20rer9kke29.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/ueditor.all.min.js"></script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/zh-cn.js"></script>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft">
+    <form >
+        <!--菜单选择-->
+        <div id="menus">
+            <ul class="menus-tab clearfix">
+                <li class="active-top">
+                    基础配置
+                </li>
+                <li>关于我们</li>
+            </ul>
+            <div class="fn-box clearfix">
+                <div class="fl">
+                    <span>开始时间</span>
+                    <input placeholder="2015-05-01" class="Wdate Date" type="text"
+                           onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd'})">
+                </div>
+                <div class="fl">
+
+                    <span>结束时间</span>
+                    <input placeholder="2015-05-01" class="Wdate Date" type="text"
+                           onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd'})">
+                </div>
+                <div class="fl">
+
+                    <span>付款方式</span>
+                    <select>
+                        <option>微信支付</option>
+                        <option>微信支付</option>
+                        <option>微信支付</option>
+                        <option>微信支付</option>
+                    </select>
+                </div>
+                <div class="fl">
+
+                    <span>付款金额</span>
+                    <select>
+                        <option>￥5-￥20</option>
+                        <option>￥5-￥20</option>
+                        <option>￥5-￥20</option>
+                        <option>￥5-￥20</option>
+                    </select>
+                </div>
+                <div class="fl">
+                    <span>是否使用优惠卷</span>
+                    <select>
+                        <option>是</option>
+                        <option>否</option>
+                    </select>
+                </div>
+                <div class="fl">
+
+                    <span>搜索</span>
+                    <input type="text" placeholder="请输入会员名称">
+                </div>
+                <button class="btnH">查询</button>
+                <button class="btnD">重置</button>
+            </div>
+        </div>
+        <div style="height: 12px"></div>
+        <!--主要内容-->
+        <ul class="mainS">
+            <li>
+                <div class="mainM">
+                    <p><span>*</span> 分类主标题</p>
+                    <input type="text" placeholder="请您写您企业的联络QQ，方便用户与您直接沟通！">
+                    <br>
+                    <p><span>*</span> 分类副标题</p>
+                    <input type="text" placeholder="请您写您企业的联络QQ，方便用户与您直接沟通！">
+                    <br>
+                    <p><span>*</span> 分类图标</p>
+                    <div class="banner-img dis-inb">
+                        <input type="file" id="about-file-i">
+                        <label for="about-file-b">
+                            <div class="add-imgs">
+                                <b class="icon-add cen dis-inb"></b>
+                            </div>
+                        </label>
+                    </div>
+                    <br>
+                    <p><span>*</span> 首页导航是否展示</p>
+                    <div class="radio-box dis-inb">
+                        <input type="radio" name="type1" checked><span>展示</span>
+                        <input type="radio" name="type1"><span>不展示</span>
+                    </div>
+                    <br>
+                    <p><span>*</span>内容是否在首页展示</p>
+                    <div class="radio-box dis-inb">
+                        <input checked="true" type="radio" name="types2" value="1"/><span>展示</span>
+                        <input type="radio" name="type2"><span>不展示</span>
+                    </div>
+                    <br>
+                    <p><span>*</span>是否在栏目页显示标题</p>
+                    <div class="radio-box dis-inb">
+                        <input type="radio" name="type3" checked value="1"/><span>展示</span>
+                        <input type="radio" name="type3"><span>不展示</span>
+                    </div>
+                    <br>
+                    <p><span>*</span>单页Banner图</p>
+                    <div class="banner-img dis-inb">
+                        <input type="file" id="about-file-b">
+                        <label for="about-file-b">
+                            <div class="add-imgb">
+                                <b class="icon-add cen dis-inb"></b>
+
+                            </div>
+                        </label>
+                    </div>
+                    <br>
+                    <p><span>*</span> 排序 数字越小越靠前</p>
+                    <input type="text" placeholder="请填写排序数字">
+                    <div class="btn-box clearfix">
+                        <div class="oks fl">
+                            确定
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <table>
+                    <tr>
+                        <th width="100">ID</th>
+                        <th width="100">标题</th>
+                        <th width="200">banner图</th>
+                        <th width="200">添加时间</th>
+                        <th width="100">操作</th>
+                    </tr>
+                    <tr>
+                        <td>8354</td>
+                        <td>关于我们</td>
+                        <td><img src="./img/show-banners.png" alt=""></td>
+                        <td>2017-09-25 17:25:52</td>
+                        <td><span class="edt">编辑</span></td>
+                    </tr>
+                    <tr>
+                        <td>8354</td>
+                        <td>关于我们</td>
+                        <td><img src="./img/show-banners.png" alt=""></td>
+                        <td>2017-09-25 17:25:52</td>
+                        <td><span class="edt">编辑</span></td>
+                    </tr>
+                    <tr>
+                        <td>8354</td>
+                        <td>关于我们</td>
+                        <td><img src="./img/show-banners.png" alt=""></td>
+                        <td>2017-09-25 17:25:52</td>
+                        <td><span class="edt">编辑</span></td>
+                    </tr>
+                </table>
+                <div class="pages clearfix">
+                    <div id="pagination1" class="pages-list">
+                    </div>
+                </div>
+                <div class="add-txt mainM">
+                    <p><span>*</span> 标题</p>
+                    <input type="text" placeholder="">
+                    <br>
+                    <p><span>*</span> 单页banner</p>
+                    <div class="banner-img dis-inb" style="margin:0;">
+                        <input type="file" id="news-file-ii">
+                        <label for="news-file-ii">
+                            <div class="add-imgs">
+                                <b class="dis-inb icon-add cen"></b>
+                            </div>
+                        </label>
+                    </div>
+                    <p style="    font-weight: normal;font-size: 12px;margin-left: 20%;width: 80%;text-align: left;">
+                        宽高比例360px*233px</p>
+                    <br>
+                    <p><span>*</span>简介</p>
+                    <textarea placeholder="机械种类繁多机械种类繁多机械种类繁多机械种类繁多"></textarea>
+                    <br>
+                    <p><span>*</span> 单页内容 </p>
+                    <div class="dis-inb">
+                        <script id="editorAbout" type="text/plain" style="width:600px;height:300px;">初始化语言</script>
+                        <script>
+                            //实例化编辑器
+                            //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+                            var ue = UE.getEditor('editorAbout', {
+                                toolbars: [
+                                    [
+                                        'source', //源代码
+                                        'undo', //撤销
+                                        'redo', //重做
+                                        'bold', //加粗
+                                        'indent', //首行缩进
+                                        'italic', //斜体
+                                        'underline', //下划线
+                                        'strikethrough', //删除线
+                                        'fontborder', //字符边框
+                                        'formatmatch', //格式刷
+                                        'blockquote', //引用
+                                        'selectall', //全选
+                                        'horizontal', //分隔线
+                                        'removeformat', //清除格式
+                                        'unlink', //取消链接
+                                        'customstyle', //自定义标题
+                                        'fontfamily', //字体
+                                        'fontsize', //字号
+                                        'paragraph', //段落格式
+                                        'insertimage', //多图上传
+                                        'link', //超链接
+                                        'emotion', //表情
+                                        'searchreplace', //查询替换
+                                        'justifyleft', //居左对齐
+                                        'justifyright', //居右对齐
+                                        'justifycenter', //居中对齐
+                                        'justifyjustify', //两端对齐
+                                        'forecolor', //字体颜色
+                                        'backcolor', //背景色
+                                        'fullscreen', //全屏
+                                        'rowspacingtop', //段前距
+                                        'rowspacingbottom', //段后距
+                                        'attachment', //附件
+                                        'wordimage', //图片转存
+                                        'lineheight', //行间距
+                                        'edittip ', //编辑提示
+                                    ]
+                                ]
+                            });
+                        </script>
+                    </div>
+                    <div class="btn-box clearfix">
+                        <div class="oks fl">
+                            确认
+                        </div>
+                        <div class="cancel fl">
+                            取消
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+
+<script>
+    $("ul.menus-tab li").on("click",function () {
+        $(this).addClass("active-top").siblings().removeClass("active-top");
+        $("ul.mainS li").eq($(this).index()).show().siblings().hide();
+        $("form").each(function (item) {
+            this.reset()
+        });
+        $(".add-txt").hide().siblings().show()
+    });
+    $(".btn-b").on("click",function () {
+        $(this).siblings('.add-txt').show().siblings().hide();
+    });
+    //        页码
+    $("#pagination1").pagination({
+        currentPage:10,// 当前页数
+        totalPage:20,// 总页数
+        count: 5,// 显示个数
+        callback: function (num) {
+        }
+    });
+    $(".mode-add .oks").click(function () {
+        $(".mode-add").toggle().siblings().toggle();
+        alert("发送")
+    });
+    $(".edt").click(function () {
+        $(".add-txt").toggle().siblings().toggle();
+    });
+</script>
+</html>

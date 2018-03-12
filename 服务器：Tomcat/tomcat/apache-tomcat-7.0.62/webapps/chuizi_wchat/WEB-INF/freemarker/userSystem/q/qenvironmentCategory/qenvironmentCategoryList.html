@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_h15ug20rer9kke29.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft">
+    <form>
+        <!--菜单选择-->
+        <div id="menus">
+            <ul class="menus-tab clearfix">
+                <li  class="active-top">环境分类</li>
+                <li id="qenvironmentHtml">环境相册</li>
+            </ul>
+            <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/userSystem/qrecharge/list/pre" role="form"> 
+            <input type="hidden" name="miniBinId" id="miniBinId" value="${(returnDatas.queryBean.miniBinId)!'1'}"/>
+          	<input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+	            <div class="fn-box clearfix">
+	                <div class="fl">
+	                    <span>名称</span>
+	                    <input autocomplete="off" type="text" name="name" id="name" value="${(returnDatas.queryBean.name)!''}" placeholder="请输入名称">
+	                </div>
+	                <div class="fl">
+	                    <span>排序</span>
+	                    <input autocomplete="off" type="text" name="sort" id="sort" value="${(returnDatas.queryBean.sort)!''}" placeholder="请输入排序">
+	                </div>
+	                <button onclick="$('#pageIndex').val(1)"  class="btnH" href="javascript:mySubmitForm('searchForm');" id="search">查询</button>
+	                <button class="btnH" href="javascript:mySubmitForm('searchForm');" id="searchPage" style="display: none;">分页查询</button>
+	                <button class="btnD">重置</button>
+	            </div>
+            </form>
+        </div>
+        <div style="height: 12px"></div>
+        <div class="tab-box">
+            <ul class="mainS">
+                <!--案例中心-->
+                <li  id="mode-cen">
+                    <div class="btn-b qenvironmentCategoryAddHtml" style="margin: 10px 0 20px;">新建</div>
+
+                   <table>
+                        <tr>
+                            <th width="150">操作</th>
+                            <th width="100">名字</th>
+                            <th width="100">排序</th>
+                            <th width="100">图标</th>
+                        </tr>
+                        <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					        <#list returnDatas.data as _data>
+	                        <tr>
+	                            <td><span class="edt qenvironmentCategoryAddHtml" updateItemId="${_data.id}" >编辑</span><span class="btn btn-danger btn-xs" itemId="${_data.id}">删除</span></td>
+	                            <td>${(_data.name)!''}</td>
+	                            <td>${(_data.sorts)!''}</td>
+	                            <td>
+									<img style="width: 300px;height: 150px;" src="${(_data.icon)!''}">
+								</td>
+	                        </tr>
+                       		</#list>
+						</#if>
+                    </table>
+                    <div class="pages clearfix">
+                        <div id="pagination" class="pages-list">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+    
+    
+     <!--是否删除弹窗-->
+    <div class="alert-warn-box" id="rem">
+        <div class="alert-warn cen">
+            <h4>是否确认进行删除？删除后不可进行恢复。</h4>
+            <div class="btn-box clearfix" style="margin-left: 0;">
+                <div class="oks fl" onclick="deleteInfo();">
+                    确定
+                </div>
+                <div class="cancel fr" onclick="javascript:$('.alert-warn-box').toggle()">
+                    取消
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+
+<script>
+    $(function () {
+          $("ul.menus-tab li").on("click",function () {
+            $(this).addClass("active-top").siblings().removeClass("active-top");
+            $("ul.mainS li").eq($(this).index()).show().siblings().hide();
+            $("form").each(function (item) {
+                this.reset()
+            });
+            $(".add-txt").hide().siblings().show()
+        });
+        //        页码
+	    $("#pagination").pagination({
+	        currentPage:${(returnDatas.page.pageIndex)!1},// 当前页数
+	        totalPage:${(returnDatas.page.pageCount)!1},// 总页数
+	        count: 5,// 显示个数
+	        callback: function (num) {
+	        	$("#pageIndex").val(num);
+	        	$("#searchPage").click();
+	        }
+	    });
+        /* $(".btn-b").on("click",function () {
+            $(this).siblings('.add-txt').show().siblings().hide();
+        }) */
+
+        $(".mode-add .oks").click(function () {
+            $(".mode-add").toggle().siblings().toggle();
+            alert("提交")
+        });
+        $("#cen-add").click(function () {
+            $("#mode-cen .add-txt").toggle().siblings().toggle();
+            alert("提交")
+        });
+       
+        
+        $(".btn-danger").on("click",function(){
+	    	$("#rem").toggle();
+	    	$("#rem").attr("itemId",$(this).attr("itemId"));
+	    });
+    }) 
+    
+        
+	   //删除按钮
+        function deleteInfo(){
+        
+        	$.ajax({
+				url : '/chuizi_wchat/userSystem/qenvironmentcategory/del/more?id='+$("#rem").attr("itemId"),
+				type : "get",
+				success : function(result){
+					$("#searchPage").click();
+				},
+				error:function(XMLHttpRequest,textStatus,errorThrown){
+					console.log(XMLHttpRequest);
+					console.log(textStatus);
+				}
+			});
+        
+        }
+    
+    
+    
+    
+</script>
+</html>

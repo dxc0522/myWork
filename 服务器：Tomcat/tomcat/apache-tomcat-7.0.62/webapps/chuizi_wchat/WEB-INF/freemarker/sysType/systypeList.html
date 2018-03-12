@@ -1,0 +1,209 @@
+<#escape x as x?html>
+
+<script type="text/javascript" src="${ctx}/js/system/systype/systype.js"></script>
+
+<script type="text/javascript">
+
+function deleteSysType(){
+	var id=jQuery("#id").val();
+	if(!id||id==""){
+		myalert("请选择你要删除的记录");
+		return;
+	}else{
+		var _url="${ctx}/systype/delete?id="+id;
+		var listurl="${ctx}/systype/list";
+		mydelete(_url,listurl);
+	}
+}
+</script>
+
+
+	
+
+<!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+<div class="operate panel panel-default" style="height:65px;">
+	<div class="panel-body">
+		<div class="pull-left">
+ <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/systype/list" role="form">
+           <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+            <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
+            <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
+			<label for="search_type"><b>类型:</b></label> 
+			<select id="search_type" name="type" >
+			 	<option value="">请选择</option>
+				<option value="1">企业宣传图片</option>
+				<option value="2">营销拓客图片</option>
+				<option value="3">云企汇小程序功能体系图片</option>
+				<option value="4">合作伙伴</option>
+				<option value="6">售后工单问题类型</option>
+				<option value="7">拉黑原因</option>
+				<option value="8">价格区间</option>
+			</select>
+			<a  href="javascript:mySubmitForm('searchForm');"
+				class="btn btn-purple btn-sm">
+					查询 <i class="ace-icon fa fa-search icon-on-right bigger-10"></i>
+				</a>
+
+</form>
+		</div>
+		<div class="pull-right">
+			    <@shiro.hasPermission name="/systype/list/export" >
+				  <button onclick="myexport('searchForm','${ctx}/systype/list/export');" class="btn  btn-sm  btn-primary">
+                        导出
+                    </button>
+		    	</@shiro.hasPermission>
+			    <@shiro.hasPermission name="/system/sysType/update" >
+				  <button onclick="myhref('${ctx}/system/sysType/update/pre');" class="btn  btn-sm  btn-primary">
+                        添加
+                    </button>
+			    </@shiro.hasPermission>
+			    <@shiro.hasPermission name="/systype/delete" >
+			    |
+				  <button onclick="deleteSysType();" class="btn btn-sm btn-danger">
+                        删除
+                    </button>
+			    </@shiro.hasPermission>
+			
+		</div>
+	</div>
+</div>
+
+   <div class="row">
+            <div class="col-xs-12">
+	            <!--start_export-->
+                <table id="listDataTable" border="1" class="table table-striped table-bordered table-hover">
+                    <!--end_no_export-->
+                    <!--first_start_export-->
+                    <thead>
+                    <tr>
+                        <!--first_start_no_export-->
+                        <th>操作</th>
+                        <!--first_end_no_export-->
+						<th id="th_type" >类型</th>
+						<th id="th_sorts" >排序</th>
+						<th id="th_content" >内容</th>
+                    </tr>
+                    </thead>
+                    <!--first_end_export-->
+
+                    <!--start_export-->
+                    <tbody>
+           
+				   <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					 <#list returnDatas.data as _data>
+                            <!--start_no_export-->
+                            <tr class="">
+                                <td>
+                                    <div class="hidden-md">
+                                        <div class="inline position-relative">
+                                            <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                    data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            	<@shiro.hasPermission name="/system/sysType/update" >
+                                                <li>
+                                                    <a data-original-title="Edit"
+                                                       href="javascript:myhref('${ctx}/system/sysType/update/pre?id=${(_data.id)!''}');"
+                                                       class="tooltip-success" data-rel="tooltip" title="">
+																		<span class="green">
+																			<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																		</span>
+                                                    </a>
+                                                </li>
+                                                </@shiro.hasPermission>
+                                                <@shiro.hasPermission name="/system/sysType/delete" >
+                                                <li>
+                                                    <a data-original-title="Delete"
+                                                       href="javascript:mydelete('${ctx}/system/sysType/delete?id=${(_data.id)!''}','${ctx}/system/sysType/list');"
+                                                       class="tooltip-error" data-rel="tooltip" title="">
+																		<span class="red">
+																			<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																		</span>
+                                                    </a>
+                                                </li>
+                                                </@shiro.hasPermission>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <!--end_no_export-->
+
+							<td >
+								<#if (_data.type) == 1 >
+									企业宣传图片
+								</#if>
+								<#if (_data.type) == 2 >
+									营销拓客图片
+								</#if>
+								<#if (_data.type) == 3 >
+									云企汇小程序功能体系图片
+								</#if>
+								<#if (_data.type) == 4 >
+									合作伙伴
+								</#if>
+								<#if (_data.type) == 5 >
+									小程序标签
+								</#if>
+								<#if (_data.type) == 6 >
+									售后工单问题类型
+								</#if>
+								<#if (_data.type) == 7 >
+									拉黑原因
+								</#if>
+								<#if (_data.type) == 8 >
+									价格区间
+								</#if>
+							</td>
+							<td >
+								${(_data.sorts)!0}
+							</td>
+							<td >
+								<#if (_data.type) == 1 >
+									<img class="sim"  height="120px" width="120px" alt="" src="${(_data.content)!''}"  >
+								</#if>
+								<#if (_data.type) == 2 >
+									<img class="sim"  height="120px" width="120px" alt="" src="${(_data.content)!''}"  >
+								</#if>
+								<#if (_data.type) == 3 >
+									<img class="sim"  height="120px" width="120px" alt="" src="${(_data.content)!''}"  >
+								</#if>
+								<#if (_data.type) == 4 >
+									<img class="sim"  height="120px" width="120px" alt="" src="${(_data.content)!''}"  >
+								</#if>
+								
+								
+								
+								<#if (_data.type) == 5 >
+									${(_data.content)!''}
+								</#if>
+								<#if (_data.type) == 6 >
+									${(_data.content)!''}
+								</#if>
+								<#if (_data.type) == 7 >
+									${(_data.content)!''}
+								</#if>
+								<#if (_data.type) == 8 >
+									${(_data.content)!''}
+								</#if>
+								
+							</td>
+						</tr>
+					</#list>
+					 </#if>
+                    </tbody>
+                </table>
+                <!--end_export-->
+            </div>
+            <!-- /.span -->
+        </div>
+        <#if returnDatas.page??>	
+            <@h.pagetoolbar page=returnDatas.page formId='searchForm' />
+         </#if>
+    </div>
+</div>
+<!-- /.main-container -->
+</#escape>

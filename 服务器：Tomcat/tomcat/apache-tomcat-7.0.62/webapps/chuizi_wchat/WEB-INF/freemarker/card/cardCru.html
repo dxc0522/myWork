@@ -1,0 +1,126 @@
+<#escape x as x?html>
+
+<SCRIPT type="text/javascript">
+<!--
+
+jQuery(document).ready(function(){
+	//回选 下拉框
+	//jQuery("#search_state option[value='是']").prop("selected",true);
+	
+	/*
+	$('.date-picker').datepicker({
+		    autoclose: true,
+		    format: 'yyyy-mm-dd',
+		    language: 'zh-CN'
+		    //,todayBtn: 'linked',
+		    //startDate:new Date(2014,10,27),
+			//endDate:'+60d',
+		    //startDate: '+1d',
+		}).next().on(ace.click_event, function(){
+			$(this).prev().focus();
+		});
+	*/
+	
+	
+	changeType();
+	
+	
+	});
+	
+	$(document).on("change", "#type", function() {
+		
+		changeType();
+		
+	});
+	
+	function changeType(){
+		var type=$("#type").val();
+		switch (type) {
+		case "2":
+			$("#limitShow").show();
+			break;
+		default :
+			$("#limitShow").hide();
+			$("#limitMoney").val(0);
+			break;
+		}
+	}
+//-->
+</SCRIPT>
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<form class="form-horizontal" id="validation-form" method="POST" novalidate="novalidate" action="${ctx}/system/card/update/json" > 
+			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+<!--input  hidden  End-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name" >卡券名</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="name" class="col-xs-12 col-sm-6" id="name" value="${(returnDatas.data.name)!''}"  type="text" />
+					</div><div class="help-block" for="name"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="type" >优惠券类型</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<select name="type" id="type">
+							<option <#if (((returnDatas.data.type)!0) == 1)>selected</#if> value="1">折扣券</option>
+							<option <#if (((returnDatas.data.type)!0) == 2)>selected</#if> value="2">满减券</option>
+							<option <#if (((returnDatas.data.type)!0) == 3)>selected</#if> value="3">不限制</option>
+						</select>
+					</div><div class="help-block" for="type"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group" id="limitShow">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="limitMoney" >满多少</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="limitMoney" class="col-xs-12 col-sm-6" id="limitMoney" value="${(returnDatas.data.limitMoney)!''}"  type="number" />
+					</div><div class="help-block" for="limitMoney"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="cutMoney" >减多少/折扣</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="cutMoney" class="col-xs-12 col-sm-6" id="cutMoney" value="${(returnDatas.data.cutMoney)!''}"  type="number" />
+					</div><div class="help-block" for="cutMoney"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="timeLimit" >可用时间</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="timeLimit" class="col-xs-12 col-sm-6" id="timeLimit" value="${(returnDatas.data.timeLimit)!''}"  type="number" />
+					</div><div class="help-block" for="timeLimit"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="money" >购买金额</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="money" class="col-xs-12 col-sm-6" id="money" value="${(returnDatas.data.money)!''}"  type="number" />
+					</div><div class="help-block" for="money"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+		</form>
+		<div class="wizard-actions">
+			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/system/card/list');" style="float:left;margin-left:25.4%;">
+				保存
+			</button>
+		</div>
+	</div>
+</div>
+
+
+</#escape>

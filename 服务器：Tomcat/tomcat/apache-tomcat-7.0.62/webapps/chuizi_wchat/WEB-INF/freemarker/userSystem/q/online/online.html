@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_h15ug20rer9kke29.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft">
+    <!--菜单选择-->
+    <div id="menus">
+        <ul class="menus-tab clearfix">
+            <li class="active-top" id="onlineSub">
+                基础配置
+            </li>
+            <li id="qonlinesubHtml" >咨询列表</li>
+            <li id="qonlinesubSuccHtml" >已处理列表</li>
+        </ul>
+      
+    <div style="height: 20px"></div>
+    <!--主要内容-->
+    <ul class="mainS">
+        <li>
+            <div class="mainM">
+                <form class="form-horizontal" id="add_online_form"  action ="${ctx}/userSystem/qtmplrole/update/cru" method="post">
+                <input type="hidden" name="miniBinId" id="miniBinId" value="${(returnDatas.data.miniBinId)!'1'}"/>
+                <input type="hidden" name="id" id="id" value="${(returnDatas.data.id)!''}"/>
+                <input type="hidden" name="isRecommend" id="isRecommend" value="${(returnDatas.data.isRecommend)!''}"/>
+                <input type="hidden" name="isTitle" id="isTitle" value="${(returnDatas.data.isTitle)!''}"/>
+                        <div>
+                            <p><span>*</span> 分类主标题</p>
+                            <input type="text" placeholder="请您写您企业的联络QQ，方便用户与您直接沟通！" name="muneName" value="${(returnDatas.data.muneName)!''}">
+                        </div>
+                        <div>
+                            <p><span>*</span> 分类副标题</p>
+                            <input type="text" placeholder="请您写您企业的联络QQ，方便用户与您直接沟通！" name="menuNameT" value="${(returnDatas.data.menuNameT)!''}">
+                        </div>
+                        <div>
+                            <p><span>*</span> 分类图标</p>
+                            <div class="banner-img dis-inb">
+                                <input type="file" id="mode-file-i">
+                                <label for="mode-file-i">
+                                    <div class=" add-imgs">
+                                        <b class="dis-inb icon-add cen"></b>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        
+                        <div>
+                            <p><span>*</span> 内容是否在首页展示</p>
+                            <div class="radio-box dis-inb">
+                                <input type="radio" class="type" name="type" value="1" id="isRecommend1"><span>展示</span>
+                                <input type="radio" class="type" name="type" value="0" id="isRecommend2"><span>不展示</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p><span>*</span> 是否在栏目页显示标题</p>
+                            <div class="radio-box dis-inb">
+                                <input type="radio" class="type1" id="isTitle1" name="type1" value="1" ><span>展示</span>
+                                <input type="radio" class="type1" id="isTitle2" name="type1" value="0"><span>不展示</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p><span>*</span> 单页Banner图</p>
+                            <div class="banner-img dis-inb">
+                                <input type="file" id="mode-file-b">
+                                <label for="mode-file-b">
+                                    <div class=" add-imgb">
+                                        <b class="dis-inb icon-add cen"></b>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <p><span>*</span> 排序 数字越小越靠前</p>
+                            <input type="text" placeholder="请填写排序数字" name="sorts" value="${(returnDatas.data.sorts)!''}">
+                        </div>
+                        <div>
+                            <div class="btn-box clearfix">
+                                <div class="oks fl" onclick="isCheckTitle();isCheck();commonUpdateFormMiniBind('add_online_form','${ctx}/userSystem/qtmplrole/look/pre','成功！','menuId=18&miniBinId');">
+                                    确定
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+            </div>
+        </li>
+        
+    </ul>
+</div>
+</body>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script src="${ctx}/js/userSystem/lib/My97DatePicker/WdatePicker.js"></script>
+<script src="${ctx}/js/validate/Validform_v5.3.2_min.js"></script>
+<script src="${ctx}/layer-v3.0.3/layer/mobile/layer.js"></script>
+<script src="${ctx}/layer-v3.0.3/layer/layer.js"></script>
+<script src="${ctx}/js/userSystem/lib/common.js"></script>
+<script>
+    $(function () {
+          //        页码
+    $("#pagination").pagination({
+        currentPage:${(returnDatas.page.pageIndex)!1},// 当前页数
+        totalPage:${(returnDatas.page.pageCount)!1},// 总页数
+        count: 5,// 显示个数
+        callback: function (num) {
+        	$("#pageIndex").val(num);
+        	$("#searchPage").click();
+        }
+    });
+        $("ul.menus-tab li").on("click",function () {
+            $(this).addClass("active-top").siblings().removeClass("active-top");
+            $("ul.mainS li").eq($(this).index()).show().siblings().hide();
+            $("form").each(function (item) {
+            
+                this.reset();
+                return false;
+            });
+          
+        });
+    });
+    
+    
+    if($("#isRecommend").val()==1){
+    	$("#isRecommend1").attr("checked","checked");
+    }else{
+   		$("#isRecommend2").attr("checked","checked");
+    }
+    if($("#isTitle").val()==1){
+    	$("#isTitle1").attr("checked","checked");
+    }else{
+   		$("#isTitle2").attr("checked","checked");
+    }
+    function isCheck(){
+	    var item = $(".type"); 
+		var len=item.length; 
+		if(len>0){ 
+			if($(".type:checked").val()==1){
+				$("#isRecommend").val(1);
+			}else{
+				$("#isRecommend").val(0);
+			}
+		} 
+    }
+      function isCheckTitle(){
+	    var item = $(".type1"); 
+		var len=item.length; 
+		if(len>0){ 
+			if($(".type1:checked").val()==1){
+				$("#isTitle").val(1);
+			}else{
+				$("#isTitle").val(0);
+			}
+		} 
+    }
+</script>
+</html>

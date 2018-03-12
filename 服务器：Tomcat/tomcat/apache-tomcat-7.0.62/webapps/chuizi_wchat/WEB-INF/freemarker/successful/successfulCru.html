@@ -1,0 +1,158 @@
+<#escape x as x?html>
+
+<SCRIPT type="text/javascript">
+<!--
+
+jQuery(document).ready(function(){
+	//回选 下拉框
+	//jQuery("#search_state option[value='是']").prop("selected",true);
+	
+	/*
+	$('.date-picker').datepicker({
+		    autoclose: true,
+		    format: 'yyyy-mm-dd',
+		    language: 'zh-CN'
+		    //,todayBtn: 'linked',
+		    //startDate:new Date(2014,10,27),
+			//endDate:'+60d',
+		    //startDate: '+1d',
+		}).next().on(ace.click_event, function(){
+			$(this).prev().focus();
+		});
+	*/
+	
+	imageUtil.initImage("imageDiv","image","${(returnDatas.data.image)!''}") ;
+	
+	imageUtil.initImage("qrCodeDiv","qrCode","${(returnDatas.data.qrCode)!''}") ;
+	
+	
+			jQuery.ajax({
+                url : ctx+"/system/successfulcategory/list/json",
+                type : "post",
+                dataType : "json",
+                success : function(_json) {
+                	
+                    if(_json.status=="error"){
+                        return;
+                    }
+                    
+                    //先清除原来的数据
+                    $("#categoryId").empty();
+                    jQuery(_json.data).each(function(i,_obj){
+                        if(_obj.name){
+                            jQuery("#categoryId").append("<option value='"+_obj.id+"'>"+_obj.name+"</option>");
+						}
+                    });
+
+                    jQuery("#categoryId").select2();
+                    jQuery("#categoryId").select2();
+					console.log($('#categoryId').attr("code"));
+					//$('#itemId').select2('val',$('#itemId').attr("code")) ;
+					$('#categoryId').select2().val($('#categoryId').attr("code"));
+					$('#categoryId').select2().val($('#categoryId').attr("code"));
+                }
+            });
+	
+	
+			//富文本编辑框的对象
+		    var ueditor ;
+		    
+		    //销毁ueditor
+			if (ueditor != undefined){
+		        UE.delEditor('ueditor') ;
+				$('#ueditor').remove() ;
+		        $('#descrDiv').append('<script id="ueditor"  type="text/plain" ><'+'/script>') ;
+			}
+			$('#ueditor').html($('#descr').val()) ;
+		    ueditor = UE.getEditor('ueditor');
+			
+		    //每改动一次富文本编辑器就相应的把内容赋值给input
+		    ueditor.addListener( 'contentChange', function(  ) {
+		    	$('#descr').val(ueditor.getContent()) ;
+		    });
+	
+	});
+	
+	
+//-->
+</SCRIPT>
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<form class="form-horizontal" id="validation-form" method="POST" novalidate="novalidate" action="${ctx}/system/successful/update/json" > 
+			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+<!--input  hidden  End-->
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name" >名称</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="name" class="col-xs-12 col-sm-6" id="name" value="${(returnDatas.data.name)!''}"  type="text" />
+					</div><div class="help-block" for="name"></div>
+				</div>
+			</div>
+			<div class="space-2"></div>
+			<div class="form-group">
+					<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="categoryId">分类</label>
+					<div class="col-xs-12 col-sm-2">
+						<select  id="categoryId" name="categoryId" code="${(returnDatas.data.categoryId)!''}"   class="form-control">
+						</select>
+					</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+					<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="image" >图片</label>
+					<div class="col-xs-12 col-sm-9" id="imageDiv">
+					</div>
+				</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="qrCode" >二维码</label>
+					<div class="col-xs-12 col-sm-9" id="qrCodeDiv">
+					</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sorts" >排序</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="sorts" class="col-xs-12 col-sm-6" id="sorts" value="${(returnDatas.data.sorts)!''}"  type="number" />
+					</div><div class="help-block" for="sorts"></div>
+				</div>
+			</div>
+			
+			<div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isRecommend" >是否推荐到首页</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<select name="isRecommend" id="isRecommend">
+							<option <#if (((returnDatas.data.isRecommend)!0) == 0)>selected</#if> value="0">否</option>
+							<option <#if (((returnDatas.data.isRecommend)!0) == 1)>selected</#if> value="1">是</option>
+						</select>
+					</div><div class="help-block" for="type"></div>
+				</div>
+			</div>
+	       <div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="descr" >内容</label>
+				<div class="col-sm-9" id="descrDiv">
+					<!--富文本编辑框-->
+					<script id="ueditor"  type="text/plain" ></script>
+					<input style="display: none;" name="descr" class="col-xs-12 col-sm-6" id="descr" value="${(returnDatas.data.descr)!''}"  type="text" />
+				</div>
+			</div>
+	        
+	        
+	        
+		</form>
+		<div class="wizard-actions">
+			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/system/successful/list');" style="float:left;margin-left:25.4%;">
+				保存
+			</button>
+		</div>
+	</div>
+</div>
+
+
+</#escape>

@@ -1,0 +1,108 @@
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Server version:        Apache Tomcat/7.0.62
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Server built:          May 7 2015 17:14:55 UTC
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Server number:         7.0.62.0
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: OS Name:               Windows 8.1
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: OS Version:            6.3
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Architecture:          x86
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Java Home:             D:\java\jdk\jre
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: JVM Version:           1.7.0_67-b01
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: JVM Vendor:            Oracle Corporation
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: CATALINA_BASE:         D:\apache-tomcat-7.0.62
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: CATALINA_HOME:         D:\apache-tomcat-7.0.62
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Command line argument: -Djava.util.logging.config.file=D:\apache-tomcat-7.0.62\conf\logging.properties
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Command line argument: -Djava.endorsed.dirs=D:\apache-tomcat-7.0.62\endorsed
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Command line argument: -Dcatalina.base=D:\apache-tomcat-7.0.62
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Command line argument: -Dcatalina.home=D:\apache-tomcat-7.0.62
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.VersionLoggerListener log
+信息: Command line argument: -Djava.io.tmpdir=D:\apache-tomcat-7.0.62\temp
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+信息: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: D:\java\jdk\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;D:\java\jdk\bin;D:\git\Git\cmd;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;.
+十一月 14, 2017 6:06:06 下午 org.apache.coyote.AbstractProtocol init
+信息: Initializing ProtocolHandler ["http-bio-80"]
+十一月 14, 2017 6:06:06 下午 org.apache.coyote.AbstractProtocol init
+信息: Initializing ProtocolHandler ["ajp-bio-8009"]
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.Catalina load
+信息: Initialization processed in 351 ms
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.core.StandardService startInternal
+信息: Starting service Catalina
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.core.StandardEngine startInternal
+信息: Starting Servlet Engine: Apache Tomcat/7.0.62
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory D:\apache-tomcat-7.0.62\webapps\docs
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory D:\apache-tomcat-7.0.62\webapps\docs has finished in 246 ms
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory D:\apache-tomcat-7.0.62\webapps\examples
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory D:\apache-tomcat-7.0.62\webapps\examples has finished in 196 ms
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory D:\apache-tomcat-7.0.62\webapps\host-manager
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory D:\apache-tomcat-7.0.62\webapps\host-manager has finished in 43 ms
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory D:\apache-tomcat-7.0.62\webapps\manager
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory D:\apache-tomcat-7.0.62\webapps\manager has finished in 51 ms
+十一月 14, 2017 6:06:06 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory D:\apache-tomcat-7.0.62\webapps\mts
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/core_rt is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/core is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jsp/jstl/core is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/fmt_rt is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/fmt is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jsp/jstl/fmt is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jsp/jstl/functions is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://jakarta.apache.org/taglibs/standard/permittedTaglibs is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://jakarta.apache.org/taglibs/standard/scriptfree is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/sql_rt is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/sql is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jsp/jstl/sql is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/xml_rt is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jstl/xml is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TaglibUriRule body
+信息: TLD skipped. URI: http://java.sun.com/jsp/jstl/xml is already defined
+十一月 14, 2017 6:06:09 下午 org.apache.catalina.startup.TldConfig execute
+信息: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+十一月 14, 2017 6:06:16 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory D:\apache-tomcat-7.0.62\webapps\mts has finished in 9,344 ms
+十一月 14, 2017 6:06:16 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deploying web application directory D:\apache-tomcat-7.0.62\webapps\ROOT
+十一月 14, 2017 6:06:16 下午 org.apache.catalina.startup.HostConfig deployDirectory
+信息: Deployment of web application directory D:\apache-tomcat-7.0.62\webapps\ROOT has finished in 27 ms
+十一月 14, 2017 6:06:16 下午 org.apache.coyote.AbstractProtocol start
+信息: Starting ProtocolHandler ["http-bio-80"]
+十一月 14, 2017 6:06:16 下午 org.apache.coyote.AbstractProtocol start
+信息: Starting ProtocolHandler ["ajp-bio-8009"]
+十一月 14, 2017 6:06:16 下午 org.apache.catalina.startup.Catalina start
+信息: Server startup in 9950 ms

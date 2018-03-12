@@ -1,0 +1,335 @@
+/*我的设置顶部*/
+.my-top {
+    height: 60px;
+    background: #f6f6f6;
+    min-width: 1200px;
+    position: fixed;
+    top:0;
+    padding-right: 90px;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #e1e4e5
+}
+
+.my-top .my-top-box {
+    height: 100%;
+}
+
+.my-top .my-top-box > ul {
+    height: 100%;
+    padding-top: 8px;
+}
+
+.my-top .my-top-box > ul a > li {
+    vertical-align: middle;
+    float: left;
+    height: 40px;
+    width: 120px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    color: #333333;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.my-top .my-top-box > ul a > li.active {
+    background: #00a0e2;
+    color: #fff;
+}
+
+.my-top .my-icon {
+    cursor: pointer;
+    width: 80px;
+    height: 100%;
+    margin-left: 50px;
+    position: relative;
+    border-right: 1px solid #d6d6d6;
+    border-left: 1px solid #d6d6d6;
+}
+.my-top .my-icon:before {
+    content: "";
+    border-left: 5px solid #999;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    transform: rotate(45deg);
+}
+
+.my-top .my-icon.active {
+    background: #fff;
+}
+
+.my-top .my-icon ol {
+    right: 0;
+    z-index: 1000;
+    display: none;
+    top: 55px;
+    position: absolute;
+    width: 170px;
+    border: 1px solid #dddddd;
+    background: #fff;
+}
+
+.my-top .my-icon ol li {
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+    height: 40px;
+    line-height: 40px;
+
+    font-size: 14px;
+}
+
+.my-top .my-icon ol li a {
+    color: #666666;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.my-top .my-icon ol li a {
+
+}
+
+.my-top .my-icon ol li a span {
+    display: inline-block;
+    width: 120px;
+    line-height: 40px;
+
+}
+
+.my-top .my-icon ol li a b {
+    display: inline-block;
+    width: 45px;
+    height: 38px;
+    float: left;
+    position: relative;
+}
+
+.my-top .my-icon ol li a b i {
+    position: absolute;
+    right: 0;
+    color: #666666;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.my-top .my-icon ol li:last-of-type{
+    border:0;
+}
+.my-top .my-icon ol li:hover{
+    background: #f1f1f1;
+}
+
+.my-top .my-icon img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.my-top .my-icon span {
+    font-size: 14px;
+    color: #333333;
+    padding-left: 15px;
+}
+
+.my-top .my-icon i {
+    vertical-align: middle;
+}
+
+/*!*左侧菜单*!*/
+.my-l {
+    width: 200px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    bottom:0;
+    position: fixed;
+    background: #2a323d;
+    overflow-y: auto;
+    scrollbar-arrow-color: #828080; /*三角箭头的颜色*/
+    scrollbar-face-color: #828080; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+    scrollbar-3dlight-color: #828080; /*立体滚动条亮边的颜色*/
+    scrollbar-highlight-color: #828080; /*滚动条的高亮颜色（左阴影？）*/
+    scrollbar-shadow-color: #828080; /*立体滚动条阴影的颜色*/
+    scrollbar-darkshadow-color: #2d2d2d; /*立体滚动条外阴影的颜色*/
+    scrollbar-track-color: #2d2d2d; /*立体滚动条背景颜色*/
+    scrollbar-base-color: #2d2d2d; /*滚动条的基色*/
+}
+.my-l::-webkit-scrollbar-track-piece {
+    background-color: #2d2d2d;
+}
+
+.my-l::-webkit-scrollbar {
+    width: 5px;
+    height: 13px;
+    position: absolute;
+    right: 0;
+}
+
+.my-l::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #828080;
+    background-clip: padding-box;
+    min-height: 28px;
+}
+.server-txt {
+    width: 100%;
+    height: 80px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 80px;
+    text-align: center;
+    color: #fff;
+    border-bottom: 1px solid #1e242c;
+}
+
+.my-l ul li:hover span {
+    color: #00a0e2;
+}
+
+.my-l-icon {
+    position: relative;
+    height: 134px;
+    width: 100%;
+    background: #333d49;
+}
+
+.my-l li {
+    height: 60px;
+    border-bottom: 1px solid #1e242c;
+    padding-left: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.my-l li.on {
+    background: #222933;
+}
+
+.my-l li.on span {
+    color: #00a0e2;
+
+}
+
+.my-l li.on:before {
+    content: "";
+    width: 8px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #00a0e2;
+}
+
+.my-l li i {
+    vertical-align:middle;
+    margin-right: 9px;
+    margin-top:-3px;
+}
+
+.my-l li span {
+    display: inline-block;
+    line-height: 60px;
+    color: #fff;
+    font-size: 14px;
+}
+
+/*!*中间显示内容*!*/
+.show-my {
+    position: fixed;
+    left: 200px;
+    top:61px;
+    z-index: -1;
+    right:0;
+    bottom:0;
+}
+.show-my iframe{
+    width: 100%;
+    height: 100%;
+border:0;
+    padding-bottom:50px;
+min-width: 1200px;
+}
+/*
+.show-my > ul {
+}
+
+.show-my > ul > li {
+    display: none;
+    background: #fff;
+}
+
+.show-my > ul > li:nth-of-type(1) {
+    display: block;
+}
+*/
+/*底部提示*/
+.setting-foot {
+    height: 50px;
+    background: #2a323d;
+position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+.set-foot-txt {
+    line-height: 50px;
+    color: #666666;
+    font-size: 14px;
+}
+.set-foot-txt ul{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform:translateX(-50%);
+}
+.set-foot-txt ul li {
+    padding:0 40px;
+    color: #aaa;
+    cursor: pointer;
+    display: inline-block;
+    border-right: 1px solid #41484d;
+}
+.set-foot-txt ul li:last-of-type{
+    border:none;
+}
+.set-foot-txt ul li:hover {
+    color: #00a0e2;
+}
+.set-foot-txt ul li:hover a{
+    color: #00a0e2;
+}
+.set-foot-txt a {
+    color: #aaa;
+}
+/*右侧帮助按钮*/
+.help-box {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+}
+.help-each{
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    background:#2a323d;
+    border-radius: 5px;
+    margin-bottom:25px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
+.help-box i{
+    margin:12px auto;
+}
+.help-box p{
+}
+.help-each:hover{
+    background:#00a0e2;
+}

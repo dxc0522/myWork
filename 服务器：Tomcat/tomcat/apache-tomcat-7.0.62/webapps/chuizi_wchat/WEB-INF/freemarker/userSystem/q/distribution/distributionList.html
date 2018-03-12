@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/ueditor.all.min.js"></script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="${ctx}/js/userSystem/lib/zh-cn.js"></script>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft fenx">
+    <form >
+        <!--菜单选择-->
+        <div id="menus">
+            <ul class="menus-tab clearfix">
+                <li id="distributionLookHtml">
+                    分销开关
+                </li>
+                <li class="active-top">
+                    分销记录
+                </li>
+                <li  id="whthdrawListHtml">
+                    提现列表
+                </li>
+                 <li id="whthdrawListHtmlSucc">
+                   提现成功列表
+                </li>
+                <li id="whthdrawListHtmlFail">
+                   提现失败列表
+                </li>
+            </ul>
+            <div class="fn-box clearfix">
+            	<form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/userSystem/qmoneydetail/list/pre?type=4" role="form"> 
+            	<input type="hidden" name="miniBinId" id="miniBinId" value="${(returnDatas.queryBean.miniBinId)!'1'}"/>
+          		<input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+	                <div class="fl">
+	
+	                    <span>搜索</span>
+	                    <input type="text" placeholder="请输入会员名称">
+	                </div>
+	                <button onclick="$('#pageIndex').val(1)"  class="btnH" href="javascript:mySubmitForm('searchForm');" id="search">查询</button>
+	                <button class="btnH" href="javascript:mySubmitForm('searchForm');" id="searchPage" style="display: none;">分页查询</button>
+	                <button class="btnD">重置</button>
+                </form>
+            </div>
+        </div>
+        <div style="height: 12px"></div>
+        <!--主要内容-->
+        <ul class="mainS">
+            <li>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>会员昵称</th>
+                        <th>分销金额</th>
+                        <th>分销后余额</th>
+                        <th>分销时间</th>
+                        <th>分销人</th>
+                    </tr>
+                    <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					                <#list returnDatas.data as _data>
+                    <tr>
+                        <td>${(_data.id)!''}</td>
+                        <td>${(_data.userName)!''}</td>
+                        <td>${(_data.money)!''}</td>
+                        <td>${(_data.balance)!''}</td>
+                        <td>${(_data.createTime)!''}</td>
+                        <td>${(_data.itemName)!''}</td>
+                    </tr>
+                    			 </#list>
+						</#if>
+                </table>
+                <div class="pages clearfix">
+                    <div id="pagination" class="pages-list">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script >
+    $("ul.menus-tab li").on("click",function () {
+        $(this).addClass("active-top").siblings().removeClass("active-top");
+        $("ul.mainS li").eq($(this).index()).show().siblings().hide();
+        $("form").each(function (item) {
+            this.reset()
+        });
+        $(".add-txt").hide();
+    });
+     //        页码
+	    $("#pagination").pagination({
+	        currentPage:${(returnDatas.page.pageIndex)!1},// 当前页数
+	        totalPage:${(returnDatas.page.pageCount)!1},// 总页数
+	        count: 5,// 显示个数
+	        callback: function (num) {
+	        	$("#pageIndex").val(num);
+	        	$("#searchPage").click();
+	        }
+	    });
+    $(".rela").on("click",function () {
+        $(".rela-alert").toggle()
+    });
+    $(".msg").on("click",function () {
+        $(".cash-alert").toggle()
+    });
+    $(".edt").on("click",function () {
+        $("#edit-box").toggle()
+    })
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>topHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-main.css">
+
+  </head>
+  
+  <body style="width:200px;">
+    <div class="my-l-icon">
+        <a href="index.html" target="_blank">
+            <img src="${ctx}/js/userSystem/img/logo2.png" alt="" class="cen">
+        </a>
+    </div>
+    <ul>
+    	<@shiro.hasPermission name="/userSystem/appuser/index" >
+        <li class="on" src="/chuizi_wchat/userSystem/appuser/index">
+            <i class="dis-inb icon-2-dianshang1" ></i>
+            <span>首页</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/appuser/my" >
+        <li src="/chuizi_wchat/userSystem/appuser/my">
+            <i class="dis-inb icon-2-ziliao-2"></i>
+            <span>我的资料</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/appuser/password" >
+        <li  src="/chuizi_wchat/userSystem/appuser/password">
+            <i class="dis-inb icon-2-mima-2"></i>
+            <span>修改密码</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/sms/detail" >
+        <li  src="/chuizi_wchat/userSystem/sms/detail">
+            <i class="dis-inb icon-2-chongzhi1" style="margin-left: -3px"></i>
+            <span>短信充值</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/card/list" >
+        <li  src="/chuizi_wchat/userSystem/card/list">
+            <i class="dis-inb icon-yhj"></i>
+            <span>优惠卷</span>
+        </li>
+        </@shiro.hasPermission>
+    </ul>
+  </body>
+</html>

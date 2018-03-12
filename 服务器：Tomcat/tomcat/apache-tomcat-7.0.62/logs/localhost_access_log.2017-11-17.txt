@@ -1,0 +1,13 @@
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:02:49 +0800] "GET /chuizi_wchat/system/template/look/json?id=1 HTTP/1.1" 200 779
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:03:00 +0800] "GET /chuizi_wchat/system/template/look/json?id=1 HTTP/1.1" 200 779
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:05:59 +0800] "GET /chuizi_wchat/system/templateversion/list/json HTTP/1.1" 200 829
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:06:16 +0800] "GET /chuizi_wchat/system/templateversion/list/json?templateId=1 HTTP/1.1" 200 481
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:06:23 +0800] "GET /chuizi_wchat/system/templateversion/list/json?templateId=2 HTTP/1.1" 200 662
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:07:09 +0800] "GET /chuizi_wchat/system/templateversion/list/json?templateId=2 HTTP/1.1" 200 670
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:07:09 +0800] "GET /favicon.ico HTTP/1.1" 200 21630
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:07:41 +0800] "GET /chuizi_wchat/system/templateversion/list/json?templateId=2 HTTP/1.1" 200 670
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:07:42 +0800] "GET /favicon.ico HTTP/1.1" 200 21630
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:22:29 +0800] "GET /chuizi_wchat/system/templatetariff/list/json?templateId=2 HTTP/1.1" 200 302
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:23:13 +0800] "GET /chuizi_wchat/system/templatetariff/list/json?templateId=2 HTTP/1.1" 200 357
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:23:17 +0800] "GET /chuizi_wchat/system/templatetariff/list/json?templateId=1 HTTP/1.1" 200 426
+0:0:0:0:0:0:0:1 - - [17/Nov/2017:10:23:24 +0800] "GET /chuizi_wchat/system/templatetariff/list/json?templateId=2 HTTP/1.1" 200 357

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_h15ug20rer9kke29.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=NgMZRcGV4cz2tc9tvQD7M5VkgB7gUT3g"></script>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body style="padding-top: 60px;">
+<div class="help-warn">
+    <span>如果你对该模块的配置不太了解可以先导入演示数据</span>
+    <b>一键导入</b>
+</div>
+<div class="main animated rotateInUpLeft">
+    <!--菜单选择-->
+    <div id="menus">
+        <ul class="menus-tab clearfix">
+            <li id="miniHtml" class="active-top">
+                基础设置
+            </li>
+            <li id="miniPeitaoHtml" >
+                配套设置
+            </li>
+        </ul>
+    </div>
+    <div style="height: 12px"></div>
+    <form class="form-horizontal" id="add_form"  action ="${ctx}/userSystem/mini/update/cru" method="post">
+    <input type="hidden" name="id" id="id" value="${(returnDatas.data.id)!''}"/>
+    <ul class="mainS">
+        <li>
+            <div class="tab-box">
+			
+            <div>
+                <p><span>*</span> 公司名称</p>
+                <input type="text" name="companyName" placeholder="请输入您的企业名称" value="${(returnDatas.data.companyName)!''}">
+            </div>
+            <div>
+                <p><span>*</span> 企业简介文字</p>
+                <textarea id="companyDescr" name="companyDescr" value="${(returnDatas.data.companyDescr)!''}" placeholder="请输入您的企业简介文字，方便用户全面了解您的企业">${(returnDatas.data.companyDescr)!''}</textarea>
+            </div>
+            <div>
+                <p><span>*</span> 联络电话</p>
+                <input type="text" name="phone" placeholder="请输入您的企业的联络电话，方便用户与您直接沟通！" value="${(returnDatas.data.phone)!''}">
+            </div>
+            <div>
+                <p><span>*</span> 联络QQ</p>
+                <input type="text" name="qQOne" placeholder="请输入您的企业的联络QQ，方便用户与您直接沟通！"value="${(returnDatas.data.qQOne)!''}">
+            </div>
+            <div>
+                <p><span>*</span> 联络QQ</p>
+                <input type="text" name="QQTwo" placeholder="请输入您的企业的联络QQ，方便用户与您直接沟通！"value="${(returnDatas.data.QQTwo)!''}">
+            </div>
+            <div>
+                <p><span>*</span> 联络微信号</p>
+                <input type="text" name="wxOne" placeholder="请输入您的企业的联络微信，方便用户与您直接沟通！"value="${(returnDatas.data.wxOne)!''}">
+            </div>
+            <div>
+                <p><span>*</span> 联络微信号</p>
+                <input type="text" name="wxTwo" placeholder="请输入您的企业的联络微信，方便用户与您直接沟通！"value="${(returnDatas.data.wxTwo)!''}">
+            </div>
+            <div>
+                <p><span>*</span> 公司地址</p>
+                <div class="local clearfix dis-inb">
+                    <input type="text" name="companyAddr" placeholder="请输入您的公司地址 " class="fl"  value="${(returnDatas.data.companyAddr)!''}">
+                    <div class="btn-b fl">
+                        定位
+                    </div>
+                </div>
+            </div>
+            <div id="allmap"></div>
+            <div class="btn-box clearfix" style="width: 400px;">
+                <div class="oks fl" onclick="commonUpdateFormMiniBind('add_form','${ctx}/userSystem/mini/look','成功！','id');">
+                    确定
+                </div>
+                <div class="cancel fl" style="margin-left: 20px;">
+                    取消
+                </div>
+            </div>
+            </div>
+        </li>
+    </ul>
+    </form>
+    <div class="mainM">
+        <div class="show-box">
+
+        </div>
+    </div>
+</div>
+</body>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script src="${ctx}/js/userSystem/lib/My97DatePicker/WdatePicker.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/validate/Validform_v5.3.2_min.js"></script>
+<script src="${ctx}/layer-v3.0.3/layer/mobile/layer.js"></script>
+<script src="${ctx}/layer-v3.0.3/layer/layer.js"></script>
+<script src="${ctx}/js/userSystem/lib/common.js"></script>
+<script>
+    $(function () {
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(${(returnDatas.data.companyLng)!''}, ${(returnDatas.data.companyLat)!''}), 14);
+        map.addEventListener("tilesloaded", function () {
+            map.setZoom(14);
+        });
+        var local = new BMap.LocalSearch(map, {
+            renderOptions: {map: map}
+        });
+        document.getElementsByClassName("btn-b")[0].onclick = function () {
+            if ($(".local input").html() != " ") {
+                local.search($(".local input").val());
+            }
+        };
+        
+        $("#companyDescr").on("change",function(){
+    		$("#companyDescr").val($("#companyDescr").html());
+    	});
+        
+        $("#companyDescr").html($("#companyDescr").val());
+    })
+</script>
+</html>

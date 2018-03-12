@@ -1,0 +1,109 @@
+<#escape x as x?html>
+
+<SCRIPT type="text/javascript">
+<!--
+
+jQuery(document).ready(function(){
+	//回选 下拉框
+	//jQuery("#search_state option[value='是']").prop("selected",true);
+	
+	
+	$('.date-picker').datepicker({
+		    autoclose: true,
+		    format: 'yyyy-mm-dd',
+		    language: 'zh-CN'
+		    //,todayBtn: 'linked',
+		    //startDate:new Date(2014,10,27),
+			//endDate:'+60d',
+		    //startDate: '+1d',
+		}).next().on(ace.click_event, function(){
+			$(this).prev().focus();
+		});
+	
+	});
+	
+	
+//-->
+</SCRIPT>
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<form class="form-horizontal" id="validation-form" method="POST" novalidate="novalidate" action="${ctx}/system/config/update" > 
+			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+<!--input  hidden  End-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="itemId" >地暖/散热器id</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="itemId" class="col-xs-12 col-sm-6" id="itemId" value="${(returnDatas.data.itemId)!''}"  type="text" />
+					</div><div class="help-block" for="itemId"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="roomId" >功能id</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="roomId" class="col-xs-12 col-sm-6" id="roomId" value="${(returnDatas.data.roomId)!''}"  type="text" />
+					</div><div class="help-block" for="roomId"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="roomName" >功能名称</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="roomName" class="col-xs-12 col-sm-6" id="roomName" value="${(returnDatas.data.roomName)!''}"  type="text" />
+					</div><div class="help-block" for="roomName"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="area" >面积</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="area" class="col-xs-12 col-sm-6" id="area" value="${(returnDatas.data.area)!''}"  type="text" />
+					</div><div class="help-block" for="area"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="texture" >材质</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="texture" class="col-xs-12 col-sm-6" id="texture" value="${(returnDatas.data.texture)!''}"  type="text" />
+					</div><div class="help-block" for="texture"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="remark" >备注</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="remark" class="col-xs-12 col-sm-6" id="remark" value="${(returnDatas.data.remark)!''}"  type="text" />
+					</div><div class="help-block" for="remark"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="type" >类型 1地暖 2散热器</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="type" class="col-xs-12 col-sm-6" id="type" value="${(returnDatas.data.type)!''}"  type="text" />
+					</div><div class="help-block" for="type"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+		</form>
+		<div class="wizard-actions">
+			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/system/config/list');" style="float:left;margin-left:25.4%;">
+				保存
+			</button>
+		</div>
+	</div>
+</div>
+
+
+</#escape>

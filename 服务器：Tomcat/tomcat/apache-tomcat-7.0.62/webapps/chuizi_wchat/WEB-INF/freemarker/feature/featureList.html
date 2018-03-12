@@ -1,0 +1,240 @@
+<#escape x as x?html>
+
+<script type="text/javascript" src="${ctx}/js/system/feature/feature.js"></script>
+
+<script type="text/javascript">
+
+function deleteFeature(){
+	var id=jQuery("#id").val();
+	if(!id||id==""){
+		myalert("请选择你要删除的记录");
+		return;
+	}else{
+		var _url="${ctx}/feature/delete?id="+id;
+		var listurl="${ctx}/feature/list";
+		mydelete(_url,listurl);
+	}
+}
+
+
+		jQuery(document).ready(function(){
+			
+			//回选 下拉框
+			
+			jQuery("#search_type option[value='${(returnDatas.queryBean.type)!''}']").prop("selected",true);
+			
+		});
+</script>
+
+
+	
+
+<!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+<div class="operate panel panel-default" style="height:65px;">
+	<div class="panel-body">
+		<div class="pull-left">
+ <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/system/feature/list" role="form">
+            <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+            <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
+            <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
+			<label for="search_type"><b>类型:</b></label> 
+			<select id="search_type" name="type" >
+			 	<option value="">请选择</option>
+				<option value="1">云企汇小程序功能特性</option>
+				<option value="2">云企汇小程序可以解决哪些问题</option>
+				<option value="3">企业小程序特色功能</option>
+				<option value="4">小程序功能支持</option>
+				<option value="5">行业解决方案页</option>
+				<option value="6">全网推广方法</option>
+				<option value="7">合作模式</option>
+				<option value="8">公司资质</option>
+				<option value="9">办公环境</option>
+				<option value="10">发展历程</option>
+				<option value="11">人才招聘</option>
+				<option value="12">合作代理</option>
+				<option value="13">代理支持文字内容</option>
+				<option value="14">代理支持图片</option>
+				<option value="15">合作案例</option>
+				<option value="16">云企汇规则</option>
+				<option value="17">我们以跨领域的互联网嗅觉与他们一起创造奇迹</option>
+			</select>
+			<a  href="javascript:mySubmitForm('searchForm');"
+				class="btn btn-purple btn-sm">
+					查询 <i class="ace-icon fa fa-search icon-on-right bigger-10"></i>
+				</a>
+
+</form>
+		</div>
+		<div class="pull-right">
+			    <@shiro.hasPermission name="/feature/list/export" >
+				  <button onclick="myexport('searchForm','${ctx}/system/feature/list/export');" class="btn  btn-sm  btn-primary">
+                        导出
+                    </button>
+		    	</@shiro.hasPermission>
+			    <@shiro.hasPermission name="/system/feature/update" >
+				  <button onclick="myhref('${ctx}/system/feature/update/pre');" class="btn  btn-sm  btn-primary">
+                        添加
+                    </button>
+			    </@shiro.hasPermission>
+			    <@shiro.hasPermission name="/feature/delete" >
+			    |
+				  <button onclick="deleteFeature();" class="btn btn-sm btn-danger">
+                        删除
+                    </button>
+			    </@shiro.hasPermission>
+			
+		</div>
+	</div>
+</div>
+
+   <div class="row">
+            <div class="col-xs-12">
+	            <!--start_export-->
+                <table id="listDataTable" border="1" class="table table-striped table-bordered table-hover">
+                    <!--end_no_export-->
+                    <!--first_start_export-->
+                    <thead>
+                    <tr>
+                        <th>操作</th>
+                        <!--first_end_no_export-->
+						<th id="th_name" >标题</th>
+						<th id="th_image" >图片</th>
+						<th id="th_descr" >简介</th>
+						<th id="th_sorts" >排序</th>
+						<th id="th_type" >类型</th>
+						<th id="th_createTime" >创建时间</th>
+                    </tr>
+                    </thead>
+                    <!--first_end_export-->
+
+                    <!--start_export-->
+                    <tbody>
+           
+				   <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					 <#list returnDatas.data as _data>
+                            <!--start_no_export-->
+                            <tr class="">
+                                <td>
+                                    <div class="hidden-md">
+                                        <div class="inline position-relative">
+                                            <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                    data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            	<@shiro.hasPermission name="/system/feature/update" >
+                                                <li>
+                                                    <a data-original-title="Edit"
+                                                       href="javascript:myhref('${ctx}/system/feature/update/pre?id=${(_data.id)!''}');"
+                                                       class="tooltip-success" data-rel="tooltip" title="">
+																		<span class="green">
+																			<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																		</span>
+                                                    </a>
+                                                </li>
+											    </@shiro.hasPermission>
+											    <@shiro.hasPermission name="/system/feature/delete" >
+                                                <li>
+                                                    <a data-original-title="Delete"
+                                                       href="javascript:mydelete('${ctx}/system/feature/delete?id=${(_data.id)!''}','${ctx}/feature/list');"
+                                                       class="tooltip-error" data-rel="tooltip" title="">
+																		<span class="red">
+																			<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																		</span>
+                                                    </a>
+                                                </li>
+                                                </@shiro.hasPermission>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <!--end_no_export-->
+							<td >
+								${(_data.name)!''}
+							</td>
+							<td >
+								<img class="sim"  height="120px" width="120px" alt="" src="${(_data.image)!''}"  >
+							</td>
+							<td >
+								${(_data.descr)!''}
+							</td>
+							<td >
+								${(_data.sorts)!0}
+							</td>
+							<td >
+								<#if (_data.type) == 1 >
+									云企汇小程序功能特性
+								</#if>
+								<#if (_data.type) == 2 >
+									云企汇小程序可以解决哪些问题
+								</#if>
+								<#if (_data.type) == 3 >
+									企业小程序特色功能
+								</#if>
+								<#if (_data.type) == 4 >
+									小程序功能支持
+								</#if>
+								<#if (_data.type) == 5 >
+									行业解决方案页
+								</#if>
+								<#if (_data.type) == 6 >
+									全网推广方法
+								</#if>
+								<#if (_data.type) == 7 >
+									合作模式
+								</#if>
+								<#if (_data.type) == 8 >
+									公司资质
+								</#if>
+								<#if (_data.type) == 9 >
+									办公环境
+								</#if>
+								<#if (_data.type) == 10 >
+									发展历程
+								</#if>
+								<#if (_data.type) == 11 >
+									人才招聘
+								</#if>
+								<#if (_data.type) == 12 >
+									合作代理
+								</#if>
+								<#if (_data.type) == 13 >
+									代理支持文字内容
+								</#if>
+								<#if (_data.type) == 14 >
+									代理支持图片
+								</#if>
+								<#if (_data.type) == 15 >
+									合作案例
+								</#if>
+								<#if (_data.type) == 16 >
+									云企汇规则
+								</#if>
+								<#if (_data.type) == 17 >
+									我们以跨领域的互联网嗅觉与他们一起创造奇迹
+								</#if>
+								
+							</td>
+							<td >
+								<!--日期型-->
+							${((_data.createTime)?string('yyyy-MM-dd'))!''}
+							</td>
+						</tr>
+					</#list>
+					 </#if>
+                    </tbody>
+                </table>
+                <!--end_export-->
+            </div>
+            <!-- /.span -->
+        </div>
+        <#if returnDatas.page??>	
+            <@h.pagetoolbar page=returnDatas.page formId='searchForm' />
+         </#if>
+    </div>
+</div>
+<!-- /.main-container -->
+</#escape>

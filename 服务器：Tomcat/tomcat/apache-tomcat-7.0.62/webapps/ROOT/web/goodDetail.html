@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+          name="viewport">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+
+    <title>首页</title>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
+    <script type="text/javascript" src="js/global_phone.js"></script>
+    <script src="js/jquery.jsonp.js"></script>
+    <style type="text/css">
+        .time_out{
+            height: 2.5rem;
+
+        }
+        .time_out .time_l{
+            width: 10.4rem;
+            height: 100%;
+            box-sizing: border-box;
+            background:#f33167;
+            padding-top:.2rem;
+            padding-left: .8rem;
+            color: #fff;
+            background: -webkit-linear-gradient(left, #f22c8d , #f33359); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(right, #f22c8d , #f33359); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(right, #f22c8d , #f33359); /* Firefox 3.6 - 15 */
+            background: linear-gradient(to right, #f22c8d , #f33359); /* 标准的语法 */
+        }
+        .time_out .time_l	.moy_txt span i{
+            font-style: normal;
+            font-size: .9rem;
+        }
+        .time_out .time_l	.moy_txt em{
+            font-size: .5rem;
+            font-style: normal;
+            text-decoration: line-through;
+        }
+        .time_out .time_l .sell_num{
+            background: #fff;
+            padding:1px;
+            height: .7rem;
+            display: inline-flex;
+            display: -webkit-inline-flex;
+        }
+        .time_out .time_l .sell_num .sell_icon{
+            height: .8rem;
+            width: .8rem;
+        }
+        .time_out .time_l .sell_num .sell_icon img{
+            width: .5rem;
+
+        }
+        .time_out .time_l .sell_num .sell_txt{
+            padding:0 .2rem;
+            background: #f22d89;
+            text-align: center;
+            height: 100%;
+            line-height: .7rem;
+            font-size: .4rem;
+        }
+        .time_r{
+            flex: 1;
+        }
+        .time_r p{
+            font-size: .6rem;
+            color: #e42550;
+            text-align: center;
+            line-height: 1rem;
+            margin-top:.2rem;
+        }
+        .time_r .time_o .tim{
+            display: inline-block;
+            color: #fff;
+            line-height: 1rem;
+            padding:0 .2rem;
+            background: #f33359;
+            border-radius: .1rem;
+        }
+        .time_r .time_o span{
+            line-height: 1rem;
+            display: inline-block;
+            padding:.1rem;
+            font-size: .6rem;
+            color: #f33359;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wraper overh ">
+    <div class="box_top overh ">
+        <img src="images/close.png" class="close dis_b">
+        <img src="images/logo.png" class="dis_b fl logo">
+        <ul class="fl label_box">
+            <li class=" clr_f f_22">下载火锅里APP购物</li>
+            <li class="clr_a f_16 news">立即注册，免费开个自己的火锅店</li>
+        </ul>
+        <span class="fr dis_b clr_f download f_28 down">立即下载</span>
+        <div class="clearfix"></div>
+    </div>
+    <!--商品图片-->
+    <div class="picture">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <!-- 限时购 -->
+    <div class="time_out dis_f" style="display: none">
+        <div class="time_l">
+            <div class="moy_txt"><span style="font-size: .6rem;">￥<i>160.00</i></span>　<em>￥<i style="font-style: normal;">200</i></em></div>
+            <div class="sell dis_f  ali_ct">
+                <div class="sell_num dis_f  ali_ct">
+                    <div class="sell_icon dis_f  ali_ct jus_ct">
+                        <img src="./images/sell.png">
+                    </div>
+                    <div class="sell_txt">
+                        <span>已售<i style="font-style: normal;">5555</i>份</span>
+                    </div>
+                </div>
+                <div class="sell_Stxt" style="font-size: .4rem;padding-left: .5rem;">
+                    每人限购<span>5</span>件
+                </div>
+            </div>
+        </div>
+        <div class="time_r">
+            <p>距离结束还剩</p>
+            <div class="time_o  dis_f  ali_ct jus_ct">
+                <div class="tim hours">
+                    22
+                </div>
+                <span>:</span>
+                <div class="tim  minutes">
+                    22
+                </div>
+                <span>:</span>
+                <div class="tim seconds">
+                    22
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品详情-->
+    <div class="details pad_20">
+        <span class="dis_b clr_0 f_26">商品标题商品标题商品标题标题商品标题品</span>
+        <span class="dis_b clr_a f_22 mt_10">商品介绍这是澳洲的小楼下，经过九九八十一人围攻堵截捕截捕获而来。</span>
+        <ul class="mt_30">
+            <li class="fl f_32 clr_red"><span class="f_24">￥</span><span>160</span><span class="f_24">.00</span></li>
+            <s class="fl clr_9 f_18 jg">￥200.00</s>
+            <li class="fr f_18 clr_a Sold">
+                已售<span>223</span>份
+            </li>
+            <li class="clearfix"></li>
+        </ul>
+    </div>
+    <div class=" yf mt_10">
+        <span class="fl clr_a f_22">运费</span>
+        <span class="fl clr_3 f_22 yf">全场满<span>299</span>元包邮</span>
+        <div class="clearfix"></div>
+    </div>
+    <div class="mt_10 pad_20 hdyh">
+        <ul class="f_22 clr_3" id="cutUl" style="display: none">
+            <img src="images/mj.png" class="fl tp">
+            <li class="fl padl_10"></li>
+            <li class="clearfix"></li>
+        </ul>
+        <ul class="f_22 clr_3">
+            <img src="images/xr.png" class="fl tp">
+            <li class="fl padl_10">新人购买享受 <span></span> 元优惠折扣</li>
+            <li class="clearfix"></li>
+        </ul>
+
+    </div>
+    <div class="bak_f mt_10 pinglun ">
+        <div class="f_22 clr_3 line_66 borderbot1 padl_20 comment">查看评论</div>
+        <!--        <ul class=" padl_20 borderbot1">
+                    <li class="">
+                        &lt;!&ndash;<img src="images/xjpf.png" class=" width_90" style="margin-top: 0.5rem">&ndash;&gt;
+                        <div class="width_90 starts" style="margin-top: 0.5rem">
+                            <img src="images/iv_rat_yes.png" alt="">
+                            <img src="images/iv_rat_yes.png" alt="">
+                            <img src="images/iv_rat_yes.png" alt="">
+                            <img src="images/iv_rat_yes.png" alt="">
+                            <img src="images/iv_rat_yes.png" alt="">
+                        </div>
+                        <span class="dis_b fr clr_9 f_18 line_60">2017-07-12 12:12</span>
+                        <div class="clearfix"></div>
+                    </li>
+                    <li class="f_24" style="padding-bottom: 0.8rem">登高者必自卑，行远者必自迩，在这个世界上，重要的..
+                        不是你正站在哪里，而是你正朝什么方向移动！
+                    </li>
+                    <li class="clearfix"></li>
+                </ul>-->
+        <div class="f_24 clr_3 line_80 borderbot1 padl_20 down" style="text-align: center">下载火锅里APP，查看全部评价</div>
+    </div>
+    <div class="bak_f mt_10">
+        <div class="f_22 clr_3 line_66 borderbot1 padl_20">图文详情</div>
+        <ul class="pad_20 twxq f_20 clr_3">
+            <!--<img src="images/tw1.png">-->
+            <div class="light-box">
+                <img src="images/21352730423103.jpg">
+                <li class="mt_10">我将于茫茫人海中访我唯一灵魂之伴侣,得之,我幸;不得,我命,如此而已。或得则吾生，不或则吾灭。</li>
+            </div>
+        </ul>
+
+
+    </div>
+    <div class="bottom_lj bak_f pad_20 bordertop1 down">
+        <span style=" border-radius: 0.1rem;width: 100%" class="dis_b bak_red clr_f f_28 down">下载火锅里APP，更多优惠等您来</span>
+    </div>
+</div>
+<script src="js/swiper.min.js"></script>
+<script>
+    var id = '' ;
+    id = get_url_param("id") ;
+    var inviteCode = get_url_param("inviteCode") ;
+//    console.log(userId);
+    function get_url_param(name){
+        var reg = new RegExp( "(^|&)" + name + "=([^&]*)(&|$)", "i" );
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+//    var swiper = new Swiper('.swiper-container', {
+//        pagination: '.swiper-pagination',
+//        paginationClickable: true
+//    });
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        autoplay : 3000,
+        paginationClickable: true,
+        observer:true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents:true//修改swiper的父元素时，自动初始化swiper
+    });
+    //        商品详情
+    $.ajax({
+        type: "post",
+        url: "http://app.huoguoli.com/hgl/system/good/look/json?id="+id,
+//        url: "http://localhost:8080/hgl/system/good/look/json?id="+id,
+        success: function (msg) {
+//            var a = JSON.parse(msg).data;
+            var a = msg.data;
+            console.log(a);
+            var imgs = (a.images).split(";");
+            imgs.forEach(function (item) {
+//                console.log(item);
+                if (item != "") {
+//                    console.log("this");
+                    $(".swiper-wrapper").append("<div></div>").find("div:last").addClass("swiper-slide").append("<img>").find("img").addClass("dis_b picture").attr("src",item)
+                }
+            });
+            $(".details span:eq(0)").html(a.title);
+            $(".details span:eq(1)").html(a.descr);
+            console.log(a.isLimit)
+            console.log(a.isVipLimit)
+            if(0==a.isLimit && 0==a.isVipLimit){
+                $(".details ul li:eq(0) span:eq(1)").html(a.vipPrice);
+                $(".details ul s").html(a.retailPrice);
+                $(".details ul li:eq(1) span").html(a.sellNum)
+//            console.log(a.cuts.length);
+                if(0<a.cuts.length){
+                    $("#cutUl").show();
+                    for (var i = 0; i < a.cuts.length; i++) {
+                        $(".hdyh ul:first li:first").append("<span></span>").find("span").eq(i).html("满" + a.cuts[i].limitMoney + "减" + a.cuts[i].cutMoney + "元活动");
+                        if (i != a.cuts.length - 1) {
+                            $(".hdyh ul:first li:first span").eq(i).append(",")
+                        }
+                    }
+                }
+                $(".hdyh ul:first li:first span").eq(1).after("<br>");
+            }else if(1==a.isLimit){
+                $(".details ul").hide();
+                $(".hdyh").hide();
+                $(".dis_f").show();
+//                init(a.limitEndTime)
+                init(GetDateDiff(a.limitEndTime))
+                $(".sell_txt span i").html(a.sellNum)
+                $(".sell_Stxt span").html(a.limitNum)
+                $(".moy_txt span i").html(a.limitLowPrice)
+                $(".moy_txt em i").html(a.price)
+            }else if(1==a.isVipLimit){
+                $(".details ul").hide();
+                $(".hdyh").hide();
+                $(".dis_f").show();
+//                init(a.vipLimitEndTime)
+                init(GetDateDiff(a.vipLimitEndTime))
+                $(".sell_txt span i").html(a.sellNum)
+                $(".sell_Stxt span").html(a.vipLimitNum)
+                $(".moy_txt span i").html(a.vipLimitLowPrice)
+                $(".moy_txt em i").html(a.price)
+            }
+
+
+
+            $(".light-box").html(a.detail).find("p:last").addClass("mt_10");
+
+        }
+    });
+    //商品评论
+    $.ajax({
+        type: "post",
+        url: "http://app.huoguoli.com/hgl/system/goodcomment/list/json?goodId="+id,
+//        url: "http://localhost:8080/hgl/system/goodcomment/list/json?goodId="+id,
+        success: function (data) {
+//            var data = JSON.parse(data).data;
+            var data = data.data;
+//            console.log(data)
+            if(undefined!=data){
+                for (var i = 0; i < data.length; i++) {
+                    if (parseInt(i) < 3) {
+                        $(".comment").after("<ul></ul>").next().addClass("padl_20 borderbot1").append("<li></li>")
+                            .find("li:first").append("<div></div>").find("div").addClass("width_90 starts").css("margin-top", "0.5rem")
+                            .after("<span></span>").next().html(data[i].createTime).addClass("dis_b fr clr_9 f_18 line_60")
+                            .after("<div></div>").next().addClass("clearfix")
+                            .parents("li").after("<li></li>").next().addClass("f_24").css("padding-bottom", "0.8rem").html(data[i].content);
+                        for (var p = 1; p <= 5; p++) {
+                            if (p <= data[i].star) {
+                                $(".pinglun ul:first .starts").append("<img></img>").find("img:last").attr("src", "images/iv_rat_yes.png")
+                            } else {
+                                $(".pinglun ul:first .starts").append("<img></img>").find("img:last").attr("src", "images/iv_rat_no.png")
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+    });
+    //    促销信息
+    $.ajax({
+        type: "post",
+        url: "http://app.huoguoli.com/hgl/system/syssysparam/list/json",
+//        url: "http://localhost:8080/hgl/system/syssysparam/list/json",
+        success: function (data) {
+//            var data = JSON.parse(data).data;
+            var data = data.data;
+            $(".hdyh ul:last li:first span").html(data.newExclusive);
+            $(".yf:eq(1) span").html(data.satisfy);
+        }
+
+    });
+
+
+    $(".down").click(function () {
+        if(undefined!=inviteCode){
+            window.location.href = "http://app.huoguoli.com/hgl/shareApp/down.html?inviteCode=" + inviteCode;
+        }else {
+            window.location.href = "http://app.huoguoli.com/hgl/shareApp/down.html"
+        }
+    });
+    $(".close").click(function () {
+        $(".box_top").remove()
+    });
+
+
+    function init(endTime){
+        setTimeout(function () {
+            init(endTime)
+        },1000);
+//        var endDate=new Date("2017/11/13 18:29:00");//结束事件
+        var endDate=new Date(endTime);
+        var nowDate=new Date();
+        var diffTime=(endDate.getTime()-nowDate.getTime())/1000;//秒
+        if(diffTime<0){
+            $(".time_out").remove()
+        }
+        var hour=parseInt(diffTime/(60*60));//小时
+        var minute=parseInt((diffTime/60)%60);//分
+        var second=parseInt(diffTime%60);//秒
+        if(hour<10){
+            hour="0"+hour;
+        }
+        if(second<10){
+            second="0"+second;
+        }
+        if(minute<10){
+            minute="0"+minute;
+        }
+        $(".hours").html(hour);
+        $(".minutes").html(minute);
+        $(".seconds").html(second);
+    }
+    //在苹果safari浏览器中无法识别xxxx-xx-xx的时间格式，需要转换为 xxxx/xx/xx的格式
+    function GetDateDiff(diffTime) {
+        //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式
+        startTime = diffTime.replace(/\-/g, "/");
+        return startTime;
+    };
+</script>
+</body>
+
+</html>

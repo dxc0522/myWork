@@ -1,0 +1,106 @@
+h2 {
+    color: #1f1f1f;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 130px;
+    text-align: center;
+}
+
+.new-msg-top {
+    font-size: 20px;
+    color: #00a0e2;
+    line-height: 62px;
+    margin-top: 15px;
+    border-bottom: 1px solid #dddddd;
+
+}
+
+.new-msg-top span {
+    float: left;
+}
+
+.new-msg-top a {
+    float: right;
+    color: #666666;
+}
+
+.show-msg-each {
+    padding-top: 40px;
+    height: 266px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.msg-each-l {
+    width: 780px;
+}
+
+.msg-each-l h4 {
+
+    font-size: 18px;
+    color: #333333;
+    line-height: 60px;
+}
+
+.msg-each-l h4 b {
+    font-size: 16px;
+    color: #999999;
+    float: right;
+    line-height: 60px;
+}
+
+.msg-each-l p {
+    font-size: 16px;
+    color: #666666;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis; /*超出文本出现省略号*/
+    display: -webkit-box; /*设置成一个弹性的盒子*/
+    -webkit-line-clamp: 2; /*只显示三行*/
+    -webkit-box-orient: vertical; /*垂直方向 竖向显示*/
+    width: 100%;
+}
+
+.msg-each-l i {
+    display: inline-block;
+    padding: 3px 30px;
+    border-radius: 15px;
+
+    vertical-align: bottom;
+    margin-top: 45px;
+    border: 1px solid #e4ebf0;
+    background: #fff;
+    color: #9f9f9f;
+    cursor: pointer;
+}
+
+.msg-each-l i:hover {
+    color: #fff;
+    background: #00a0e2;
+    border-color: #00a0e2;
+
+}
+
+.msg-each-l i b {
+    font-size: 20px;
+}
+
+.show-msg-each {
+    border-bottom: 1px solid #dddddd;
+}
+
+.msg-each-r {
+    width: 362px;
+    height: 185px;
+    overflow: hidden;
+    position: relative;
+}
+.pages{
+    padding-top:60px;
+    padding-bottom:100px;
+}
+.pages ul{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}

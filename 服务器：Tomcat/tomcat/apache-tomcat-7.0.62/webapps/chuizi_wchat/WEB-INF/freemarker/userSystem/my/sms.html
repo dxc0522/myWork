@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+</head>
+<body>
+<div class="main animated rotateInUpLeft">
+    <!--菜单选择-->
+    <div id="menus">
+        <ul class="menus-tab clearfix">
+            <li class="active-top">
+                短信充值
+            </li>
+        </ul>
+    </div>
+    <div style="height: 12px"></div>
+    <!--主要内容-->
+    <ul class="mainS">
+        <li>
+            <div class="mainM" style="padding-right:210px">
+                <div class="msg-recharge">
+                    <span style="margin-left: 30px;">短信剩余条数：</span><i>100</i>
+                    <div class="price-list" >
+                        <span class="active">200条/<em>10</em>元</span>
+                        <span>600条/<em>30</em>元</span>
+                        <span>1000条/<em>50</em>元</span>
+                        <span>2000条/<em>100</em>元</span>
+                        <span>4000条/<em>200</em>元</span>
+                        <span>4000条/<em>200</em>元</span>
+                        <span>4000条/<em>200</em>元</span>
+                    </div>
+                    <div class="sub" style="margin:15px 0;" onclick="javascript:$('.alert-warn-box').toggle()">充值</div>
+                    <!--没有充值记录
+                    <div class="prc-history">
+                        <div class="cen">
+                            <i class="dis-inb icon-no-history"></i>
+                            <b>还没有充值记录</b>
+                        </div>
+                    </div>-->
+                    <!--有充值记录-->
+                    <div class="ha-history">
+                    <form class="form-horizontal" name="searchForm" id="searchForm">
+                     <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
+                      <button class="btnH" href="javascript:mySubmitForm('searchForm');" id="searchPage" style="display: none;">分页查询</button>
+                     
+                        <p style="text-align: left">充值记录</p>
+                        <table>
+                            <tr>
+                                <th>充值订单号</th>
+                                <th>充值条数</th>
+                                <th>充值金额</th>
+                                <th>支付方式</th>
+                                <th>支付时间</th>
+                            </tr>
+                           <#if (returnDatas.data??)&&(returnDatas.data?size>0)>
+					         <#list returnDatas.data as _data>
+					<tr>	         
+					<td>${(_data.code)!''}</td>
+                    <td>${(_data.smsNum)!''}</td>
+                    <td>${(_data.money)!''}</td>
+                     <td ><#if _data.payType??><#if _data.payType==1>支付宝
+                     <#elseif _data.payType==2>微信
+                     <#elseif _data.payType==3>余额
+                     <#elseif _data.payType==4>网银
+                     <#elseif _data.payType==4>线下汇款
+                     </#if></#if></td>
+                    <td>${(_data.createTime)!''}</td>
+                    
+               		 </tr>
+                			</#list>
+							</#if>
+             </table>
+             <div class="pages clearfix">
+                    <div id="pagination" class="pages-list">
+                    </div>
+                </div>
+                        <!--备注-->
+                        <div class="rem">
+                            <span>备注：已充值短信条数：</span><em style="color: #00a0e2">145</em><span>条，已消费短信条数：</span><em style="color: #00a0e2">784</em><span>条。</span>
+                        </div>
+                        </form>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    <div class="alert-warn-box">
+                        <div class="cue cen">
+                            <h3>提示</h3>
+                            <h4>前往页面进行充值？</h4>
+                            <div class="btn-box clearfix" style="margin:0;margin-left: 53px;">
+                                <div class="oks fl">
+                                    确定
+                                </div>
+                                <div class="cancel fl"  onclick="javascript:$('.alert-warn-box').toggle()">
+                                    取消
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+<script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/js/userSystem/lib/My97DatePicker/WdatePicker.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.pagination.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script src="${ctx}/js/userSystem/lib/jquery.tmpl.min.js"></script>
+<script>
+    $(function () {
+        $(".price-list").attr("money",$(".price-list span:first-of-type em").html());
+        $(".price-list span").click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".price-list").attr("money",$(this).find("em").html());
+        });
+        $(".btn-box .oks").click(function () {
+            $('.alert-warn-box').toggle();
+            window.sessionStorage.pay=$(".price-list").attr("money");
+            window.open("${ctx}/js/userSystem/buy.html");
+        });
+             //        页码
+    $("#pagination").pagination({
+        currentPage:${(returnDatas.page.pageIndex)!1},// 当前页数
+        totalPage:${(returnDatas.page.pageCount)!1},// 总页数
+        count: 5,// 显示个数
+        callback: function (num) {
+        	$("#pageIndex").val(num);
+        	$("#searchPage").click();
+        }
+    });
+        
+        
+        
+        
+    });//页面加载完成的小尾巴
+
+</script>
+</html>

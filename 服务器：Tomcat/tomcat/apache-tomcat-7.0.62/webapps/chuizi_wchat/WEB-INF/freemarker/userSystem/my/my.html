@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-show.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/animate.min.css">
+    <script src="${ctx}/js/userSystem/lib/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="main animated rotateInUpLeft">
+    <!--菜单选择-->
+    <div id="menus">
+        <ul class="menus-tab clearfix">
+            <li class="active-top">
+                修改个人资料
+            </li>
+        </ul>
+    </div>
+    <div style="height: 12px"></div>
+    <!--主要内容-->
+    <ul class="mainS">
+        <li>
+            <div class="mainM">
+                <div class="msg-icon">
+                    <p>头像</p>
+                    <label for="userIcon"><b><i class="dis-inb cen icon-add"></i></b></label>
+                    <input type="file" style="display: none" id="userIcon">
+                </div>
+                <div>
+                    <p>用户昵称</p>
+                    <input type="text" placeholder="张三" value="${(returnDatas.data.nickName)!''}">
+                </div>
+
+                <div>
+                    <p>真实姓名</p>
+                    <input type="text" placeholder="张三" value="${(returnDatas.data.realName)!''}">
+                </div>
+                <div>
+                    <p>邮箱</p>
+                    <input type="text" placeholder="123456789@qq.com"  value="${(returnDatas.data.email)!''}">
+                </div>
+                <div>
+                    <p>常用手机号</p>
+                    <input type="text" placeholder="请输入常用手机号" value="${(returnDatas.data.phone)!''}">
+                </div>
+                <div>
+
+                    <p>性别</p>
+                    <div class="radio-box dis-inb">
+                        <input type="radio" name="sex1"><span>男</span><input type="radio" name="sex2"> <span>女</span></div>
+                </div>
+                <div>
+                    <p>所属行业</p><input type="text" placeholder="请输入所属行业">
+                </div>
+                <div>
+                    <p>公司名称</p><input type="text" placeholder="请输入公司名称">
+                </div>
+                <div class="btn-box clearfix">
+                    <div class="oks fl">
+                        提交
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+$(function(){ 
+	if(${(returnDatas.data.sex)!''}==1){
+		$("input[name='sex1']").attr('checked','true');
+	}else if(${(returnDatas.data.sex)!''}==2){
+		$("input[name='sex2']").attr('checked','true');
+	}
+}); 
+</script>
+</body>
+</html>

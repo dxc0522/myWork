@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>企业展示</title>
+    <meta name="description" content="云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇云企汇">
+    <meta name="keywords" content="小程序,微信小程序,锤子,模版,小程序模版,小程序商城">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/base.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/js/pulic.js">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_436970_9ajas14dd0f3whfr.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/img/sprite.css">
+    <link rel="stylesheet" href="${ctx}/js/userSystem/css/server-main.css">
+
+</head>
+<body>
+
+<div class="my-top clearfix">
+    <div class="my-top-box fr">
+        <ul class="clearfix fl">
+            <a href="server-main">
+                <li>首页</li>
+            </a>
+            <#if (qmenu??)&&(qmenu?size>0)>
+					 <#list qmenu as _data>
+			            <a  href="server-show.html?miniBind=${(_data.id)!''}">
+			                <li class="active">企业展示</li>
+			            </a>
+            		</#list>
+			</#if>
+        </ul>
+        <div class="my-icon fl">
+            <img src="${ctx}/js/userSystem/img/arrow_03.png" alt="" class="dis-inb cen">
+            <ol>
+                <li>
+                    <a href=""><b><i class="iconfont icon-wodeziliao"></i></b> <span>我的账号</span></a>
+                </li>
+                <li><a href=""><b><i class="iconfont icon-shezhi"></i></b> <span> 个人设置</span></a></li>
+                <li><a href="go-server.html" target="_blank"><b><i class="iconfont icon-shezhi"></i></b> <span> 个人设置</span></a></li>
+                <li><a href=""><b><i class="iconfont icon-tuichu"></i></b> <span>退出</span></a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--左侧菜单-->
+<div class="my-l">
+    <div class="my-l-icon">
+        <a href="index.html" target="_blank">
+            <img src="${ctx}/js/userSystem/img/logo2.png" alt="" class="cen">
+        </a>
+    </div>
+    <div class="server-txt">
+        企业展示
+    </div>
+    <ul>
+    	<@shiro.hasPermission name="/userSystem/mini/look" >
+		<li name="frameUrl" class="on" src="/chuizi_wchat/userSystem/mini/look?id=">
+            <i class="dis-inb icon-2-jichushes"></i>
+            <span>基础设置</span>
+        </li>
+		</@shiro.hasPermission>
+		<@shiro.hasPermission name="/userSystem/qtmplrole/look" >
+		<li name="frameUrl" src="/chuizi_wchat/userSystem/qtmplrole/look/pre?menuId=6&miniBinId=">
+            <i class="dis-inb icon-2-lunbo"></i>
+            <span>轮播设置</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/category/list" >
+		<li name="frameUrl" src="/chuizi_wchat/userSystem/category/list?miniBinId=" >
+            <i class="dis-inb icon-2-fenlei1" ></i>
+            <span>分类设置</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/qtmplrole/look" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qtmplrole/look/pre?menuId=8&miniBinId=">
+            <i class="dis-inb icon-2-anli1"></i>
+            <span>案例管理</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/qtmplrole/look" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qtmplrole/look/pre?menuId=9&miniBinId=">
+            <i class="dis-inb icon-2-cpgl1"></i>
+            <span>产品管理</span>
+        </li>
+        </@shiro.hasPermission>
+       	<@shiro.hasPermission name="/userSystem/qwxuser/list" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qwxuser/list/pre?miniBinId=">
+            <i class="dis-inb icon-2-huiyuanguanli"></i>
+            <span>会员管理</span>
+        </li>
+		</@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/qtmplrole/look" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qtmplrole/look/pre?menuId=10&miniBinId=">
+
+            <i class="dis-inb icon-xinwen"></i>
+            <span>新闻中心</span>
+        </li>
+       </@shiro.hasPermission>
+       <@shiro.hasPermission name="/userSystem/qtmplrole/look" >
+        <li name="frameUrl"  src="/chuizi_wchat/userSystem/qtmplrole/look/pre?menuId=18&miniBinId=">
+            <i class="dis-inb icon-2-zixun-2"></i>
+            <span>咨询管理</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/qsmstmpl/list" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qsmstmpl/list/pre?miniBinId=">
+            <i class="dis-inb icon-2-xiangqing1"></i>
+            <span>短信群发</span>
+        </li>
+        </@shiro.hasPermission>
+        <@shiro.hasPermission name="/userSystem/qtmplrole/look" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qtmplrole/look/pre?menuId=21&miniBinId=">
+            <i class="dis-inb icon-2-kefu"></i>
+            <span>在线客服设置</span>
+        </li>
+        </@shiro.hasPermission>
+        <!-- <li name="frameUrl" >
+            <i class="dis-inb icon-2-guanyuwemn"></i>
+            <span>关于我们</span>
+        </li> -->
+       <!--  <li name="frameUrl" >
+            <i class="dis-inb icon-2-guanyuwemn"></i>
+            <span>到店付记录</span>
+        </li>
+        </li> -->
+        <@shiro.hasPermission name="/userSystem/qgoodcard/list" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qgoodcard/list/pre?miniBinId=">
+            <i class="dis-inb icon-2-guanyuwemn"></i>
+            <span>优惠券管理</span>
+        </li>
+        </@shiro.hasPermission>
+        
+        <@shiro.hasPermission name="/userSystem/qorder/list" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qorder/list/pre?status=0&miniBinId=">
+            <i class="dis-inb icon-2-guanyuwemn"></i>
+            <span>订单记录</span>
+        </li>
+        </@shiro.hasPermission>
+        
+        <@shiro.hasPermission name="/userSystem/mini/distribution" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/mini/distribution/pre?id=">
+            <i class="dis-inb icon-2-guanyuwemn"></i>
+            <span>分销管理</span>
+        </li>
+        </@shiro.hasPermission>
+        
+        <@shiro.hasPermission name="/userSystem/qrecharge/list" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qrecharge/list/pre?miniBinId=">
+            <i class="dis-inb icon-2-guanyuwemn"></i>
+            <span>充值管理</span>
+        </li>
+        </@shiro.hasPermission>
+        
+        <@shiro.hasPermission name="/userSystem/qenvironmentcategory/list" >
+        <li name="frameUrl" src="/chuizi_wchat/userSystem/qenvironmentcategory/list/pre?miniBinId=">
+            <i class="dis-inb icon-2-guanyuwemn"></i>
+            <span>环境相册</span>
+        </li>
+        </@shiro.hasPermission>
+        
+        
+    </ul>
+</div>
+<!--右侧帮助按钮-->
+<div class="help-box">
+    <div class="help-each mt">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=809685229&site=qq&menu=yes" target="_blank" style="color: #fff">
+        <i class="dis-b icon-help-suppor"></i>
+        <p>技术支持</p>
+        </a>
+    </div>
+
+    <div class="help-each mt">
+        <i class="dis-b icon-help-server"></i>
+        <p>帮助中心</p>
+    </div>
+
+</div>
+<!--中间显示内容-->
+<div class="show-my">
+    <iframe name="frameUrl" src="/chuizi_wchat/userSystem/mini/look?id="></iframe>
+</div>
+<div class="setting-foot">
+    <div class="set-foot-txt clearfix">
+        <ul>
+            <li><b class="dis-inb iconfont icon-dianhua01"></b> 售后咨询：<span>2114286027</span></li>
+            <li><b class="dis-inb iconfont icon-dadianhua"></b> 技术咨询：<span>2114286027</span></li>
+            <li><a href="http://wpa.qq.com/msgrd?v=3&uin=809685229&site=qq&menu=yes" target="_blank"><b class="dis-inb iconfont icon-QQ2"></b> 技术QQ</a></li>
+            <li><a href="http://wpa.qq.com/msgrd?v=3&uin=809685229&site=qq&menu=yes" target="_blank"><b class="dis-inb iconfont icon-QQ2"></b> 售后QQ</a></li>
+            <li><b class="dis-inb iconfont icon-wendang1"></b> <a href="help_deg.html" target="_blank">帮助文档</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
+<script src="${ctx}/js/userSystem/js/pulic.js"></script>
+<script>
+    //        头像登录后
+    var t;
+    $(".my-icon").hover(function () {
+        $(".my-icon ol").fadeIn();
+        clearTimeout(t)
+    },function () {
+        t=setTimeout(function () {
+            $(".my-icon ol").fadeOut()
+        },2000)
+    });
+    $(".my-l li").click(function () {
+        $(".show-my iframe").attr("src", ($(this).attr("src")));
+        $(this).addClass("on").siblings().removeClass("on")
+    });
+    $(".selec ul li").click(function () {
+        $(this).parents(".selec").find("p").html($(this).html());
+        $(this).parents(".selec").find("ul").toggle();
+    });
+    
+    var frameUrl=document.getElementsByName("frameUrl");
+    
+    for (var int = 0; int < frameUrl.length; int++) {
+		$(frameUrl[int]).attr("src",$(frameUrl[int]).attr("src")+GetQueryString("miniBinId"));
+	}
+    
+    setCookie("miniBinId", GetQueryString("miniBinId"));
+    
+	// 获取链接
+	function GetQueryString(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+	    var context = "";
+	    if (r != null)
+	        context = r[2];
+	    reg = null;
+	    r = null;
+	    return context == null || context == "" || context == "undefined" ? "" : context;
+	}
+    
+</script>
+</html>
