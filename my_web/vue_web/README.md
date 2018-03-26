@@ -1,6 +1,6 @@
 # vue_web
 
-> dxc
+> A Vue.js project
 
 ## Build Setup
 
