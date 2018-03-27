@@ -1,0 +1,27 @@
+Swiper插件
+	http://www.swiper.com.cn/
+轮播插件unslider.js
+
+	教学教程
+	http://www.jq22.com/yanshi1940
+整屏滑动效果fullPage.js
+
+	教学教程
+	http://www.dowebok.com/77.html
+动画效果move.js
+添加视频或设置背景视频vodie.js
+	教程
+	http://www.jq22.com/jquery-info404
+轮播带缩略图进度条
+	教程
+	http://www.dowebok.com/194.html
+(css框架）响应式网站bootstrap
+	http://v3.bootcss.com/getting-started/#download
+框架
+	http://nodejs.cn/api/
+angular.js
+	http://www.runoob.com/angularjs/angularjs-intro.html
+前后端交互ajax（必备）
+	通过ajax技术实现前端与后端的交互，后端
+一般提供对应的数据接口（网络地址）给前端，这个接口一般返回json格式的字符串。前端通过ajax得到对应接口的json格式的字符串，对其进行处理并展示到页面中。
+	

@@ -1,0 +1,49 @@
+mv解析地址
+	http://www.170mv.com/tool/jiexi/?id=2593926
+插件下载或引用地址
+	https://cdnjs.com/
+CSS3手册网页
+	http://www.css88.com/book/css/
+基础效果
+	http://www.superslide2.com/downLoad.html
+解析json格式内容
+	json.cn
+cdn加速	
+	http://www.bootcdn.cn/
+
+js大神
+廖雪峰
+阮一峰
+	
+豆瓣网
+http://r.ionichina.com/api/v1/topics
+百度
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=java&json=1&cb=hitory&_=1500258088356
+考核
+	https://www.nowcoder.com/；
+百度天气端口
+	http://api.map.baidu.com/telematics/v3/weather?location=郑州&output=json&ak=LRD1FlrGBupA18pjruNt44KvrtlzTETP
+
+gulp
+	http://www.ydcss.com/
+简介：gulp是基于Nodejs的自动任务运行器， 她能自动化地完成 javascript/coffee/sass/less/html/image/css 等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。在实现上，她借鉴了Unix操作系统的管道（pipe）思想，前一级的输出，直接变成后一级的输入，使得在操作上非常简单。通过本文，我们将学习何使用Gulp来改变开发流程，从而使开发更加快速高效。
+
+animate	css库
+	http://www.jq22.com/jquery-info819
+
+git教程
+https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+angular.js，先学一，后学es6和tapscript，后看二。
+	网站http://www.runoob.com/angularjs/angularjs-tutorial.html
+es6
+	阮一峰http://es6.ruanyifeng.com/
+vue是JS框架
+	https://cn.vuejs.org/v2/guide/installation.html
+node.js
+	http://nqdeng.github.io/7-days-nodejs/
+手机端app制作 React Native
+	http://reactnative.cn/
+兼容性网站
+	css88.cn中查看兼容性问题。
+	

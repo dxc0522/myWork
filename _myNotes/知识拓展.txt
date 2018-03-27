@@ -1,0 +1,14 @@
+mongodb 数据库（了解）
+nodejs 后端开发工具（了解）
+npm 	包管理工具（会使用） 在node安装时已经自动安装，无需独立安装。会使用npm install 命令从npm服务器上下载项目所需的包资源
+gulp 	前段构建工具	（会使用）
+			在使用时根据项目需要的功能来决定下载那些gulp插件包。
+			如果想使用gulp实现自动化的任务流，则需要编写gulpfile.js文件。
+			（此文件编写过程中用到的语法是node.js的语法及每个插件包特殊的方法
+				此建议是开发过程中不用，开发接近尾声时用）
+后台：
+	语言		服务器			数据库
+	java	tomcat weblogic jboss	mysql oracle db2 sysvase	
+	php	apache			mysql oracle
+	c#	iis			sql server
+	js	node			mongodb
