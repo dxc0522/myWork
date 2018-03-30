@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "gulp-imagemin": "^3.3.0",
+    "gulp.spritesmith": "^6.5.1"
+  },
+  "name": "",
+  "version": "",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
