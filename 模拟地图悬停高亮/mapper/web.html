@@ -1,0 +1,37 @@
+<!doctype html><!--声明当前文档为html文档-->  
+<html lang="en"><!--语言为英语-->  
+    <head><!--头部-->  
+        <meta charset="UTF-8"><!--字符编码：utf-8国际编码  gb2312中文编码-->  
+        <meta name="Keywords" content="关键词">  
+        <meta name="Description" content="描述">  
+        <title>Document</title>  
+        <style>/*css样式表的衣柜*/  
+            #can{  
+                background:#000;  
+            }  
+        </style>  
+    </head>  
+    <body onload="drawImg()"><!--身体-->  
+        <canvas id="can" width="500" height="500">  
+            您的浏览器不支持canvas标签，请您更换浏览器！！  
+        </canvas>  
+        <img src="http://img2.3lian.com/2014/f5/63/d/16.jpg" id="img" style="display:none" />  
+        <script>  
+            /*  
+            设置背景  
+                createPattern(img,平铺方式)  
+                平铺方式:repeat,repeat-x,repeat-y,no-repeat  
+            */  
+            var can = document.getElementById("can");     
+            var cxt = can.getContext("2d");  
+            var imgs = new Image();  
+            imgs.src = "https://api.yunqihui.net/images//0/sma152214505043325.jpg";  
+            imgs.onload = createPat;//图片加载完成再执行  
+            function createPat(){  
+                var bg = cxt.createPattern(imgs,"no-repeat");  
+                cxt.fillStyle = bg;  
+                cxt.fillRect(0,0,can.width,can.height);  
+            }  
+        </script>  
+    </body>  
+</html>  
