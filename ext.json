@@ -1,0 +1,75 @@
+{
+  "extEnable": false,
+  "extAppid": "wx89579dee9b66d500",
+  "ext": {
+    "name": "wechat",
+    "tempId": "1", 
+    "miniBinId": "3", 
+    "tempVersion": "1", 
+    "color": "red", 
+    "domain": "https://qiye.api.yunqihui.net", 
+    "attr": {
+      "host": "open.weixin.qq.com",
+      "users": [
+        "user_1",
+        "user_2"
+      ]
+    }
+  },
+  "window":{
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "white",
+    "navigationBarTitleText": "重庆锤子科技",
+    "navigationBarTextStyle": "black"
+  },
+  "extPages": {
+    "pages/index/index":{},
+    "pages/shoping/index/index": {},
+    "pages/index/view/ticket/ticket": {},
+    "pages/index/view/case/caseMsg/caseMsg": {},
+    "pages/service/index": {},
+    "pages/me/index":{},
+    "_modal/modal_news": {},
+    "pages/index/view/map/map": {},
+    "pages/index/view/about/about": {},
+    "pages/index/view/gonggao/gonggao": {},
+    "pages/index/view/case/case": {},
+    "pages/shoping/shopingMsg/shopingMsg": {}
+ },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#e74b42",
+    "borderStyle": "#efefef",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./img/home.png",
+        "selectedIconPath": "./img/homeH.png",
+        "text": "锤子科技"
+      },
+      {
+        "pagePath": "pages/shoping/index/index",
+        "iconPath": "./img/cmd.png",
+        "selectedIconPath": "./img/cmdH.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/service/index",
+        "iconPath": "./img/note.png",
+        "selectedIconPath": "./img/noteH.png",
+        "text": "在线客服"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "iconPath": "./img/me.png",
+        "selectedIconPath": "./img/meH.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}
