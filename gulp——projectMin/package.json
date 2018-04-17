@@ -1,0 +1,29 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dou",
+  "license": "ISC",
+  "devDependencies": {
+    "decent-messup": "^1.0.8",
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-obfuscate": "^0.2.9",
+    "gulp-str2hex": "^0.0.2",
+    "gulp-transform": "^3.0.5",
+    "orchestrator": "^0.3.8",
+    "uglify-js": "^3.2.1"
+  },
+  "dependencies": {
+    "gulp-clean-css": "^3.7.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "uglify-js": "^3.2.1"
+  }
+}
