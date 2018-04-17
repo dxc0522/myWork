@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+<div class="area_box">
+    <img class="mapper  iborder2814eb forcegroup  icolorff0000" usemap="#map_of_germany" src="./img/east_area.png"
+         width="100%" alt="">
+    <map name="map_of_germany" id="map_of_germany"></map>
+</div>
+<button>点击换图</button>
+</body>
+<script src="./js/jquery.js"></script>
+<!--<script src="./js/mapper.js"></script>-->
+<script>
+    $.fn.extend({
+        maps: function (getData, back) {
+            var div1 = this;
+            // 初始化map
+            function readyArea() {
+                var areaHtml = "",
+                    num = [],
+                    size = $("body").width() / 1200,
+                    areaData = getData.data;
+                for (var i in areaData) {
+                    areaData[i].coords.split(",").forEach(function (item) {
+                        num.push(item * size)
+                    });
+                    areaData[i].coords = num.toString();
+                    areaHtml += "<area  shape=\"poly\" data-num='" + areaData[i].id + "' id=\"BV\" title=\"" + areaData[i].name + "\"  coords=\"" + areaData[i].coords + "\" alt=\"" + areaData[i].name + "\" />"
+                }
+                /*                div1.html("<img class=\"mapper  iborder2814eb forcegroup  icolorff0000\" usemap=\"#map_of_germany\" src=\"" + getData.src + "\"><map name=\"map_of_germany\" id=\"map_of_germany\">" + areaHtml + "</map>").on("click","area", function () {
+                                    console.log(this)
+                                });*/
+                div1.find("map").html(areaHtml).on("click", "area", function () {
+                    back($(this).data("num"))
+                });
+            }
+            readyArea()
+            $(window).resize(function () {
+                document.location.reload();
+/*                readyArea();
+                format();
+                mapImg.css("width", div1.width())*/
+            });
+            // 初始化数据
+            var cur = {             //记录鼠标按下时的坐标
+                    x: 0,
+                    y: 0,
+                    flag: false
+                },
+                mapImg = div1.find("img"),
+                scrollType = false,
+                nx = 0, ny = 0, x = 0, y = 0,
+                maxW = parseInt(div1.width()),    //记录div当时的左偏移量
+                maxH = parseInt(div1.height());     //记录div的上偏移量
+            $("body").on("mousewheel", div1, function (e) {
+                var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+                    (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+                if (delta > 0) {
+                    scrollType = true;
+                    div1.find("img").css("transform", "scale(" + getData.size + ")")
+                } else if (delta < 0) {
+                    format()
+                }
+            }).on("mousedown", div1, function (e) {
+                down(e)
+            }).on("mousemove", div1, function (e) {
+                move(e)
+            }).on("mouseup", div1, function (e) {
+                end()
+            }).on("mouseleave", div1, function (e) {
+                end()
+            });
+
+            // 刷新状态
+            function format() {
+                scrollType = false;
+                // 向下滚
+                div1.find("img").css({"transform": "scale(1)", "left": 0, "top": 0});
+                cur = {             //记录鼠标按下时的坐标
+                    x: 0,
+                    y: 0,
+                    flag: false
+                };
+                nx = 0;
+                ny = 0;
+                x = 0;
+                y = 0;
+                maxW = div1.width(); //记录div当时的左偏移量
+                maxH = div1.height();     //记录div的上偏移量
+            }
+
+            //鼠标按下时的函数
+            function down(event) {
+                btncliek(event)
+                cur.flag = true;             //确认鼠标按下
+                cur.x = event.offsetX;   //记录当前鼠标的x坐标
+                cur.y = event.offsetY;   //记录当前鼠标的y坐标
+            }
+            //鼠标移动时的函数
+            function move(event) {
+                btncliek(event)
+                if (cur.flag && scrollType) {                      //如果是鼠标按下则继续执行
+                    nx = event.offsetX - cur.x;  //记录鼠标在x轴移动的数据
+                    ny = event.offsetY - cur.y;  //记录鼠标在y轴移动的数据
+                    x = x + nx;                   //div在x轴的偏移量加上鼠标在x轴移动的距离
+                    y = y + ny;                   //div在y轴的偏移量加上鼠标在y轴移动的距离
+                    if (x >= maxW) {
+                        x = maxW
+                    } else if (x <= -maxW) {
+                        x = -maxW;
+                    }
+                    if (y >= maxH) {
+                        y = maxH
+                    } else if (y <= -maxH) {
+                        y = -maxH
+                    }
+                    mapImg.css("left", x / getData.size + "px");
+                    mapImg.css("top", y / getData.size + "px");
+                }
+            }
+
+            //鼠标释放时候的函数
+            function end() {
+                cur.x = nx;
+                cur.y = ny;
+                cur.flag = false;                    //鼠标释放
+            }
+
+            // 屏蔽浏览器扩展功能
+            function btncliek(e) {
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+                else {
+                    e.returnvalue = false;
+                }
+            }
+        }
+    });
+    $(".area_box").maps({
+            data: [
+                {
+                    name: "白科技公司",
+                    coords: "57,135,187,126,191,162,143,170,137,177,96,177,96,158,57,142",
+                    id: 1
+                },
+                {
+                    name: "锤子科技公司",
+                    coords: "150,179,1191,177,194,206,152,208",
+                    id: 2
+                }
+            ],
+            size: 2,
+        }, function (num) {
+        console.log(num)
+        }
+    )
+</script>
+</html>

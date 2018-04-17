@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div,ul,li,p,span,p{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+        }
+        .alertBox{
+            width: 100%;
+            position: fixed;
+            height: 100%;
+            background:rgba(40,40,40,0.6);
+            top:0;
+            left: 0;
+        }
+        .box {
+            width:5.42rem;
+            height: 9.75rem;
+            margin:1.5rem  auto;
+            background:white;
+        }
+        .timeTop {
+            width: 100%;
+            background: #009788;
+            text-align: center;
+            height: 3.7rem;
+        }
+        .timeTop p:first-child{
+            font-size:.2rem;
+            background:#008c7f;
+            line-height:.6rem;
+            color: white;
+        }
+        .timeTop p:nth-of-type(2){
+            font-size: .4rem;
+            line-height: .88rem;
+            color: #b2e3ea;
+        }
+        .timeTop p:nth-of-type(3){
+            font-size: .4rem;
+            color: white;
+            line-height: normal;
+        }
+        .timeTop p:nth-of-type(4){
+            font-size: 1rem;
+            color: white;
+            margin-top:.33rem;
+            line-height: 1rem;
+        }
+        .timeBox {
+            width: 100%;
+            height: 4.9rem;
+            position: relative;
+            overflow-y: scroll;
+        }
+        .timeBox ul {
+            position: absolute;
+        }
+        .timeBox ul li {
+            width:100%;
+        }
+        .timeBox li p {
+            text-align: center;
+            line-height: .53rem;
+            font-weight: bold;
+            color: #585858;
+        }
+        .timeBox li span {
+            line-height:.6rem;
+            text-align:center;
+            width:.6rem;
+            margin:0 0.085rem;
+            display: inline-block;
+        }
+        .alertBox .week {
+            display: flex;
+            line-height:.53rem;
+            color: #585858;
+        }
+        .alertBox b {
+            font-style: normal;
+            flex: 1;
+            font-size: 10px;
+            text-align: center;
+        }
+        .foot{
+            padding-top: .4rem;
+            color: #009788;
+        }
+        .no{
+            float: right;
+            margin-right:.5rem
+        }
+        .foot .ok{
+            float: right;
+            margin-right:.3rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="alertBox">
+
+
+<div class="box">
+    <div class="timeTop">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+    <div class="timeBox">
+        <ul>
+        </ul>
+    </div>
+    <div class="foot">
+        <div class="ok">确定</div><div class="no">取消</div>
+    </div>
+</div>
+</div>
+</body>
+<script src="adaptive.js"></script>
+<script>
+    var week = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
+    var d = new Date();
+    var p = document.getElementsByClassName("timeTop")[0].getElementsByTagName("p");
+    p[0].innerHTML = week[d.getDay() - 1];
+    p[1].innerHTML = d.getFullYear();
+    p[2].innerHTML = d.getMonth() + 1 + "月";
+    p[3].innerHTML = d.getDate();
+    var years=d.getFullYear();
+    var tops = 1,bottom = 1;
+    var check;
+    for (var o = d.getFullYear() - 1; o <= d.getFullYear() + 1; o++) {
+        for (var i = 0; i <= 11; i++) {
+            var lis = document.createElement("li");
+            var divs = document.createElement("div");
+            divs.className = "week";
+            divs.innerHTML = "<b>日</b><b>一</b><b>二</b><b>三</b><b>四</b><b>五</b><b>六</b>";
+            var ps = document.createElement("p");
+            ps.innerHTML = o + "年" + (i + 1) + "月";
+            lis.appendChild(ps);
+            lis.appendChild(divs);
+            for(var dd=0;dd<getWeek(o,i);dd++){
+                lis.appendChild(document.createElement("span"));
+            }
+            for (var q = 1; q < days(o, i); q++) {
+                var spans = document.createElement("span");
+                if(q==d.getDate()&&o==d.getFullYear()&&i==d.getMonth()){
+                    spans.style.borderRadius="50%";
+                    spans.style.background="rgba(0,151,136,0.5)"
+                }
+                spans.innerHTML = q;
+                lis.appendChild(spans);
+            }
+            document.getElementsByTagName("ul")[0].appendChild(lis);
+        }
+    }
+//    向上增加
+    function timeTop() {
+        tops++;
+            for (var w = 11; w >=0;w--) {
+                var lis = document.createElement("li");
+                var divs = document.createElement("div");
+                divs.className = "week";
+                divs.innerHTML = "<b>日</b><b>一</b><b>二</b><b>三</b><b>四</b><b>五</b><b>六</b>";
+                var ps = document.createElement("p");
+                ps.innerHTML = (years-tops) + "年" + (w + 1) + "月";
+                lis.appendChild(ps);
+                lis.appendChild(divs);
+                for(var dd=0;dd<getWeek(years-tops,w);dd++){
+                    lis.appendChild(document.createElement("span"));
+                }
+                for (var d = 1; d < days((years-tops), w); d++) {
+                    var spans = document.createElement("span");
+                    spans.innerHTML = d;
+                    lis.appendChild(spans);
+                }
+                document.getElementsByTagName("ul")[0].appendChild(lis);
+                var last=document.getElementsByTagName("ul")[0].lastChild;
+                document.getElementsByTagName("ul")[0].insertBefore(last,document.getElementsByTagName("ul")[0].firstChild)
+
+            }
+    }
+    //        向下增加
+    function timeBottom() {
+        bottom++;
+        for (var w = 0; w <=11; w++) {
+            var lis = document.createElement("li");
+            var divs = document.createElement("div");
+            divs.className = "week";
+            divs.innerHTML = "<b>日</b><b>一</b><b>二</b><b>三</b><b>四</b><b>五</b><b>六</b>";
+            var ps = document.createElement("p");
+            ps.innerHTML = (years+bottom) + "年" + (w + 1) + "月";
+            lis.appendChild(ps);
+            lis.appendChild(divs);
+            for(var dd=0;dd<getWeek(years+bottom,w);dd++){
+                lis.appendChild(document.createElement("span"));
+            }
+            for (var d = 1; d < days((years + bottom),w);d++) {
+                var spans = document.createElement("span");
+                spans.innerHTML = d;
+                lis.appendChild(spans);
+            }
+            document.getElementsByTagName("ul")[0].appendChild(lis);
+        }
+    }
+    function clickSpan(span) {
+        span.onclick=function () {
+        }
+    }
+    //获取月的天数
+    function days(year, month) {
+        var dayCount;
+        var now = new Date(year, month, 0);
+        dayCount = now.getDate();
+        return dayCount;
+    }
+//    获取周几
+    function getWeek(year,month) {
+        var week;
+        var get=new Date(year,month,0);
+        return get.getDay();
+    }
+    //    初始化位置
+    for (var index = 0; index < document.getElementsByTagName("li").length; index++) {
+        var mode = document.getElementsByTagName("li")[index].getElementsByTagName("p")[0].innerHTML;
+        if (parseInt(mode) == d.getFullYear() && parseInt(mode.split("年")[1]) == d.getMonth() + 1) {
+            document.getElementsByClassName("timeBox")[0].scrollTop =document.getElementsByTagName("li")[index].offsetTop;
+        }
+    }
+    document.getElementsByClassName("timeBox")[0].onscroll = function () {
+        var shut = this.getElementsByTagName("li")[0].getElementsByTagName("p")[0].innerHTML;
+        if (parseInt(shut) >= 2100 || parseInt(shut) < 1900) {
+            return
+        }
+        if (this.scrollTop > this.getElementsByTagName("ul")[0].offsetHeight - 500) {
+            timeBottom()
+        } else if (this.scrollTop < 500) {
+            timeTop();
+        }
+    }
+</script>
+</html>
