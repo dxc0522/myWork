@@ -1,0 +1,366 @@
+@charset "utf-8";
+html,
+body {
+	background: #f0f0f0;
+	color: #505050;
+	font-size: 62.5%;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-touch-callout: none;
+}
+
+a {
+	color: #505050;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	font: 14px \5b8b\4f53, 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, 'Hiragino Sans GB', sans-serif\"Microsoft YaHei"\"微软雅黑";
+	line-height: 20px;
+	box-sizing: border-box;
+}
+
+@media only screen and (min-width:360px) {
+	h1 {
+		font-size: 28px;
+	}
+	h2 {
+		font-size: 26px;
+	}
+	h3 {
+		font-size: 22px;
+	}
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-size: 18px;
+		line-height: 26px;
+	}
+}
+
+body {
+	padding-bottom: 1.1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+}
+
+html,
+body,
+form,
+fieldset,
+p,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	-webkit-text-size-adjust: none;
+}
+
+
+/*阻止旋转屏幕时自动调整字体大小*/
+
+textarea {
+	resize: none;
+}
+
+
+/*取消按钮在inphone上的默认样式*/
+
+input[type=button] {
+	-webkit-appearance: none;
+	outline: none
+}
+
+input::-webkit-input-placeholder {
+	color: #F0F0F0;
+}
+
+textarea::-webkit-input-placeholder {
+	color: #F0F0F0;
+}
+
+input::-webkit-input-speech-button {
+	display: none
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+th {
+	text-align: inherit;
+}
+
+fieldset,
+img {
+	border: none;
+}
+
+abbr,
+acronym {
+	border: none;
+	font-variant: normal;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+caption,
+th {
+	text-align: left;
+}
+
+ins,
+a,
+a:hover {
+	text-decoration: none;
+}
+
+a:focus,
+*:focus {
+	outline: none;
+}
+
+.clearfix:before, .clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+	overflow: hidden;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.clear {
+	clear: both;
+	display: block;
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+	overflow: hidden;
+}
+
+.hide {
+	display: none;
+}
+
+.block {
+	display: block;
+}
+
+/*布局*/
+
+.fl {
+	float: left;
+	display: inline;
+}
+
+.fr {
+	float: right;
+	display: inline;
+}
+
+.cb {
+	clear: both;
+}
+
+.rel {
+	position: relative;
+}
+
+.abs {
+	position: absolute;
+}
+
+
+.cen {
+	position: absolute;
+	left: 50%;
+	top:50%;
+	transform: translate(-50%,-50%);
+	
+}
+.tac {
+	text-align: center;
+}
+
+.tal {
+	text-align: left;
+}
+
+.tar {
+	text-align: right;
+}
+
+.dib {
+	display: inline-block;
+}
+
+.vab {
+	vertical-align: bottom;
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.vat {
+	vertical-align: top;
+}
+
+.txo {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	/*不换行*/
+}
+
+
+
+/*flex*/
+
+.dis_f {
+	display: flex;
+	display: flex -webkit-flex;
+}
+
+.jus_bt {
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+}
+
+.jus_ct {
+	justify-content: center;
+	-webkit-justify-content: center;
+}
+
+.jus_rt {
+	justify-content: flex-end;
+	-webkit-justify-content: flex-end;
+}
+
+.ali_ct {
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+.ali_end {
+	align-items: flex-end;
+	-webkit-align-items: flex-end;
+}
+
+.ali_top {
+	align-items: flex-start;
+	-webkit-align-items: flex-start;
+}
+
+.flex_w {
+	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+}
+
+.flex_col {
+	flex-direction: column;
+	-webkit-flex-direction: column;
+}
+
+.flex_cen {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+}
+
+.fl1 {
+	flex: 1;
+}
+
+
+/*从下向上*/
+
+.flex_end {
+	flex-direction: column-reverse;
+}
+
+
+/*宽度*/
+
+.w100 {
+	width: 100%
+}
+.wh100{
+	width: 100%;
+	height: 100%;
+}
