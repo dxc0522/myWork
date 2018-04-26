@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    /*const userData = JSON.parse("{\"statusCode\":\"200\",\"status\":\"success\",\"message\":\"数据查询成功!\",\"data\":{\"id\":139,\"header\":\"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIFRtr8qPUNQSDyKr3a1ibLWLqpJZ2asO9CaVwHyPWECA6OhAPtJkSEPcIXEiacGnT41M613LeEgPbQ/0\",\"sex\":1,\"nickName\":\"梦想\",\"wxOpenId\":\"undefined\",\"balance\":0.0,\"createTime\":\"2018-04-24 11:07\",\"cityName\":\"漯河\",\"provinceName\":\"河南\",\"miniBinId\":216,\"withdrawBalance\":0.0,\"frozenBalance\":0.0,\"integral\":0.0,\"distributionBalance\":0.0,\"isBlack\":0},\"page\":{\"pageIndex\":1,\"pageSize\":20,\"totalCount\":1,\"pageCount\":1,\"sort\":\"desc\",\"order\":\"id\",\"firstPage\":true,\"hasPrev\":false,\"hasNext\":false,\"lastPage\":true,\"selectpagecount\":true,\"firstResult\":0,\"empty\":false},\"queryBean\":{\"wxOpenId\":\"undefined\",\"miniBinId\":216}}").data,
+        UserBox = e => <div><img src={e.user.header} alt={e.user.nickName}/><span>{e.user.nickName}</span></div>,
+        App = e => <div><UserBox user={userData}/><span>{e.data.provinceName}</span>省<span>{e.data.cityName}</span>市</div>;
+    ReactDOM.render(
+        <App data={userData}/>,
+        document.getElementById('root')
+    );*/
+    // state状态与周期函数
+    class Clock extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {date: new Date()}
+        }
+
+        // 挂载
+        componentDidMount() {
+            this.dateTime = setInterval(() => this.tick(), 1000)
+        }
+
+        // 卸载
+        componentWillUnmount() {
+            clearInterval(this.dateTime)
+        }
+
+        // 修改数据
+        tick() {
+            this.setState({
+                date:new Date()
+            })
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>这个是继承的方法</h1>
+                    <h2>北京时间{this.state.date.toLocaleTimeString()}</h2>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Clock/>,
+        document.getElementById("root")
+    )
+</script>
+<!--
+  Note: this page is a great way to try React but it's not suitable for production.
+  It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+  To set up a production-ready React build environment, follow these instructions:
+  * https://reactjs.org/docs/add-react-to-a-new-app.html
+  * https://reactjs.org/docs/add-react-to-an-existing-app.html
+
+  You can also use React without JSX, in which case you can remove Babel:
+  * https://reactjs.org/docs/react-without-jsx.html
+  * https://reactjs.org/docs/cdn-links.html
+-->
+</body>
+</html>
