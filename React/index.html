@@ -18,10 +18,12 @@
         document.getElementById('root')
     );*/
     // state状态与周期函数
-    class Clock extends React.Component {
+    /*class Clock extends React.Component {
         constructor(props) {
             super(props);
-            this.state = {date: new Date()}
+            this.state = {date: new Date()};
+            // 这个绑定是必要的，使`this`在回调中起作用
+            this.handleClick = this.handleClick.bind(this);
         }
 
         // 挂载
@@ -50,9 +52,114 @@
             )
         }
     }
+    const App=()=><div><Clock/><Clock/><Clock/></div>
 
     ReactDOM.render(
-        <Clock/>,
+        <App/>,
+        document.getElementById("root")
+    )*/
+    // 处理事件
+    /*class Toggle extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state={isToggleOn:true};
+            // 这个绑定是必要的，使this在回调中起作用
+        }
+        handleClick(e){
+            console.log(e)
+            this.setState(prevState=>({
+                isToggleOn:!prevState.isToggleOn
+            }))
+        }
+        render(){
+            return (<button onClick={this.handleClick.bind(this,{id:10,name:"dxc"})}>{this.state.isToggleOn?'ON':'OFF'}</button>)
+        }
+    }
+    ReactDOM.render(
+        <Toggle/>,
+        document.getElementById("root")
+    )*/
+    // 条件渲染
+    /*    const UserGo=(props)=>{
+            if(props.showType){
+                return <h1>我来了</h1>
+            }
+            return <h1>我走了</h1>
+        };*/
+    /*    const ShowBox=e=><h1>{e.showType?"我来了":"我走了"}</h1>;
+        class UserGo extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {showType: true}
+                this.btnShow=this.btnShow.bind(this)
+            }
+
+            btnShow() {
+                this.setState(prevState => ({
+                    showType: !prevState.showType
+                }))
+            }
+            render(){
+                return (<div>{this.state.showType&&<ShowBox showType={this.state.showType}/>}<button onClick={this.btnShow}>点击</button></div>)
+            }
+        }
+
+        ReactDOM.render(
+            <UserGo/>,
+            document.getElementById("root")
+        )*/
+    // 列表循环
+    /*const peopleList=[{name:"豆豆",age:23},{name:"龙龙",age:"22"},{name:"灰灰",age:19},{name:"胖胖",age:28}];
+        ReactDOM.render(
+            <ul>{peopleList.map((item,num)=>(<li key={num}>我叫{item.name},我今年{item.age}岁了，我可聪明了</li>))}</ul>,
+            document.getElementById("root")
+        )*/
+    // 表单
+    class Form extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {names: "name", ages: 0};
+            this.changes = this.changes.bind(this);
+            this.submits = this.submits.bind(this)
+        }
+
+        changes(e) {
+            const target = e.target,
+                val = target.name;
+            console.log(val)
+            this.setState({
+                [val]: e.target.value
+            })
+        }
+
+        submits(e) {
+            e.preventDefault()
+            console.log(this.files.files);
+        }
+
+        render() {
+            return (<form onSubmit={this.submits}>
+                <input onChange={this.changes} name="names" value={this.state.names} type="text"/><br/>
+                <input type="text" name="ages" onChange={this.changes} value={this.state.ages}/><br/>
+                <textarea onChange={this.changes} value={this.state.names}></textarea><br/>
+                <select multiple={true} value={[this.state.names, "two"]} onChange={this.changes} name="city">
+                    <option value="one">one</option>
+                    <option value="two">two</option>
+                    <option value="three">three</option>
+                </select>
+                <input type="submit" name="ages" onClick={this.submits} value="提交"/>
+                <input type="file" ref={input => {
+                    this.files = input
+                }}></input>
+                <div>{this.state.names}</div>
+                <div>{this.state.ages}</div>
+            </form>)
+        }
+    }
+
+    ReactDOM.render(
+        <Form/>
+        ,
         document.getElementById("root")
     )
 </script>
