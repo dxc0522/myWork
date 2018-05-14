@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>详情页</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body style="background: #F4F4F4;">
+		<div class="warp bg_green">
+			<div class="logo_content">
+				<div class="logo_box">
+					<a href="index.html">
+						<img src="img/logo.png" alt="" />
+						<div class="title">
+							<p class="logo_name">宁波保税区(出口加工区)空间资源管理信息系统</p>
+							<p class="yy_name">Ningbo Free Trade Zone（ Export Processing Zone）spatial resource management information system</p>
+						</div>
+					</a>
+				</div>
+			</div>
+			<!-- <div class="detail_box" style="max-width:1200px;width:100%;margin:0 auto;padding:30px;box-sizing: border-box;">
+				<div>
+					<p class="qy_name">宁波技嘉科技有限公司<span>(2016年A类)</span></p>
+					<p><span class="f_weight" style="margin-right: 10px;">地块号</span>:0206</p>
+				</div>
+				<div>
+					<p><span class="f_weight">自有产权  </span>：占地面积12345平方米<span style="margin-left: 40px;"class="f_weight">建筑面积</span>：4567平方米</p>
+					<p><span class="f_weight">出租情况：</span>宁波金仑国际物流有限公司 租用15103.03平方米</p>
+				</div>
+				<div>
+					<p><span class="f_weight">成立时间</span>：2018年10月12日 <span style="margin-left: 40px;" class="f_weight">注册资金</span>：10000万元</p>
+					<p><span class="f_weight">主要业务活动</span>：<span>啊实打实了打死了看得见阿勒斯柯达家里看时间段拉四季度拉四季度了阿卡急死了看得见阿勒斯柯达家里是看得见啦是可敬的阿拉山口降到了看到拉四季度了卡死建档立卡急死了贷款啊聚少离多加速离开的家里看时间段垃圾</span></p>
+				</div>
+				<div>
+					<p><span class="f_weight">017年营业收入</span>：56874万元</p>
+					<p><span class="f_weight">2017年进出口</span>：   54778万美元</p>
+					<p><span class="f_weight">2017年税收</span>：     1574万元</p>
+				</div>
+			</div> -->
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			var id = GetQueryString("id");
+            $.ajax({
+                url: "http://bsq.swds8.com/api/index/getdetail",
+                data: {'id':id},
+                type : "POST",
+                dataType : 'jsonp',
+                success: function (info) {
+                    var html = '<div class="detail_box" style="max-width:1200px;width:100%;margin:0 auto;padding:30px;box-sizing: border-box;">';
+                    if(info.status === 1){
+                    	html += '<div><p class="qy_name">'+info.data.company+'</p>';
+                    	html += '<p><span class="f_weight" style="margin-right: 10px;">地块号</span>:&nbsp;&nbsp;'+info.data.area_sn+'</p></div>';
+                    	html += '<div><p><span class="f_weight">自有产权</span>：占地面积'+info.data.area_covered+'<span style="margin-left: 40px;"class="f_weight">建筑面积</span>：'+info.data.area_build+'</p>';
+                    	html += '<p><span class="f_weight">出租/承租情况</span>：&nbsp;'+info.data.leasehold_area+'</p></div>';
+                    	html += '<div><p><span class="f_weight">成立时间</span>： '+info.data.establish_date+' <span style="margin-left: 40px;" class="f_weight">注册资金</span>：'+info.data.register_money+'</p>';
+                    	html += '<p><span class="f_weight">主要业务活动</span>：<span>'+info.data.business+'</span></p></div>';
+                    	html += '<div><p><span class="f_weight">2017年营业收入</span>：'+info.data.income+'</p>';
+                    	html += '<p><span class="f_weight">2017年进出口</span>：'+info.data.exports+'</p>';
+                    	html += '<p><span class="f_weight">2017年税收</span>：'+info.data.tax+'</p></div>';
+                    }else{
+                    	html += '<div><p class="qy_name">'+info.msg+'</p></div>'
+                    }	
+					html += '</div>';
+					$(".warp").append(html);
+                }
+            });
+
+			var screen_h=$(window).height();
+			var logo_box=$(".logo_box").height();
+			$(".detail_box").css("height",screen_h-logo_box+"px");
+		});
+
+		function GetQueryString(name) {
+		     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		     var r = window.location.search.substr(1).match(reg);
+		     if(r!=null)return unescape(r[2]); 
+		     return null;
+		}
+	</script>
+</html>

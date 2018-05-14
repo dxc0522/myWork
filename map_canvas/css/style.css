@@ -1,0 +1,382 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei", "tahoma,arial", "Hiragino Sans GB", "\\5b8b\4f53", "sans-serif";
+}
+
+li {
+    list-style-type: none;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+a {
+    text-decoration: none;
+    color: #404041;
+}
+
+img {
+    border: none;
+}
+
+.f_weight {
+    font-weight: bold;
+}
+
+.wrap {
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.bg_red {
+    background: #F13333;
+}
+
+.bg_blue {
+    background: #3359E8;
+}
+
+.bg_green {
+    background: #F4F4F4;
+}
+
+.bg_lan {
+    background: #0286CD;
+}
+
+.bg_greey {
+    background: #13AD4B;
+}
+
+.content_top {
+    background: url(../img/index_bg.jpg) no-repeat center;
+    padding-top: 100px;
+    height: 429px;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.logo_content {
+    width: 100%;
+    height: 116px;
+    background: rgba(255, 255, 255, 0.6);
+
+}
+
+.logo_box {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    height: 116px;
+    background: rgba(255, 255, 255, 0.0);
+    opacity: 0.85;
+    padding: 27px 0 27px 20px;
+    box-sizing: border-box;
+}
+
+.logo_box a {
+    display: inline-block;
+}
+
+.logo_box img {
+    width: 200px;
+    float: left;
+    vertical-align: middle;
+}
+
+.logo_box a div {
+    float: left;
+    padding-top: 7px;
+}
+
+.login_text {
+    font-size: 18px;
+}
+
+.title .logo_name {
+    font-size: 27px;
+    margin-top: 6px;
+}
+
+.title .yy_name {
+    font-size: 10px;
+}
+
+.login_box {
+    margin-top: 10px;
+}
+
+.login_box img {
+    width: 30px;
+    height: 30px;
+}
+
+.login_box span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.tab_box {
+    width: 1200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.tab_box1 {
+    margin: 0 auto;
+    background: url(../img/tab_bg.png) no-repeat center top;
+    min-width: 1200px
+
+}
+
+.tab_box ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.tab_box ul li {
+    float: left;
+    width: 32%;
+}
+
+.tab_box ul li:last-child {
+    margin-left: 2%;
+}
+
+.tab_box ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.tab_box ul li a img {
+    width: 10%;
+    padding-top: 50px;
+    margin-right: 30px;
+    padding-left: 27%;
+}
+
+.tab_box ul li a > div {
+    padding-top: 45px;
+}
+
+.tab_box ul li p {
+    color: #fff;
+    font-size: 22px;
+}
+
+.tab_box ul li p + p {
+    color: #fff;
+    font-size: 12px;
+}
+
+.footer {
+    background: #fff;
+    border-top: 6px solid #0FA58D;
+    padding: 40px 0;
+}
+
+.footer p {
+    text-align: center;
+    font-size: 12px;
+    color: #808284;
+}
+
+/*地图页面*/
+.map_box {
+    position: relative;
+}
+
+.map_box .search_box {
+    position: absolute;
+    top: 45px;
+    left: 35px;
+    background: #fff;
+    line-height: 38px;
+    z-index: 999;
+    width: 424px;
+}
+
+.map_box .search_box input {
+    border: none;
+    line-height: 34px;
+    text-indent: 32px;
+    width: 380px;
+}
+
+.map_box .search_box span {
+    display: block;
+    float: right;
+    width: 44px;
+    height: 38px;
+    background: #3385FF;
+    text-align: center;
+}
+
+.map_box .search_box span img {
+    width: 20px;
+    height: 20px;
+}
+
+.map_box .btn_box {
+    position: absolute;
+    height: 34px;
+    top: 45px;
+    right: 35px;
+    background: #fff;
+    line-height: 34px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.map_box .btn_box ul li {
+    float: left;
+    font-size: 12px;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.map_box .btn_box ul li:first-child {
+    padding-left: 0;
+}
+
+.map_box .btn_box ul li:first-child span {
+    padding-left: 20px;
+}
+
+.map_box .btn_box ul li a {
+    color: #333;
+}
+
+.map_box .btn_box ul li > div {
+    background: #fff;
+    display: none;
+    text-align: center;
+}
+
+.map_box .btn_box ul li span {
+    border-right: 1px solid #ccc;
+    padding-right: 13px;
+}
+
+.map_box .btn_box ul li.guoyou span:before {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #F13333;
+    margin-right: 6px;
+}
+
+.map_box .btn_box ul li.other span:before {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #3359E8;
+    margin-right: 6px;
+}
+
+.map_box .btn_box ul li.none_gy span:before {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #30CE3C;
+    margin-right: 6px;
+}
+
+.area_box {
+    position: relative;
+    overflow: hidden;
+/*    width: 1200px;
+    height: 600px;
+    margin: 0 auto;*/
+}
+
+.area_box img {
+    width: 100%;
+    position: relative;
+    cursor: all-scroll;
+}
+
+.area_box1 img {
+    height: 100%;
+    position: relative;
+    cursor: all-scroll;
+}
+
+/*详情页*/
+.detail_box {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    box-sizing: border-box;
+}
+
+.detail_box p {
+    color: #404041;
+}
+
+.detail_box > div {
+    padding: 25px 30px;
+    border-bottom: 1px dotted #ccc;
+}
+
+.detail_box > div p.qy_name {
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.detail_box > div p {
+    font-size: 18px;
+    line-height: 34px;
+}
+
+.model {
+    position: absolute;
+    display: none;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    line-height: 28px;
+    max-height: 100px;
+    overflow: auto;
+    font-size: 14px;
+    z-index: 100;
+}
+#map_box {
+    height: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+}
+
+#map_box canvas {
+    transition: all .2s;
+    padding: 0;
+    border: none;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: move;; 
+    z-index: 1
+}

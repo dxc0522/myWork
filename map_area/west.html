@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>地图展示</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- 
+ <script src="js/mapper.js" type="text/javascript" charset="utf-8"></script>
+ -->
+
+	</head>
+	<body>
+		<div class="warp">
+			<div class="logo_box">
+				<a href="index.html">
+					<img src="img/logo.png" alt="" />
+					<div class="title">
+						<p class="logo_name">宁波保税区(出口加工区)空间资源管理信息系统</p>
+						<p class="yy_name">Ningbo Free Trade Zone（ Export Processing Zone）spatial resource management information system</p>
+					</div>
+				</a>
+			</div>
+			<div class="map_box" style="width:100%;position: relative;">
+				<div class="btn_box">
+					<ul>
+						<li class="resource">
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∨</span>
+							<div>
+								<p><a href="east.html">东区</a></p>
+								<p><a href="south.html">南区和出口加工区</a></p>
+							</div>
+						</li>
+						<li class="guoyou"><span>直管企业</span></li>
+						<li class="none_gy"><span>未供地</span></li>
+						<li class="other"><span>其他</span></li>
+						<li class="huifu">&nbsp;&nbsp;<img src="img/icon1.png" alt="" />&nbsp;&nbsp;&nbsp;</li>
+					</ul>
+				</div>
+                <div id="map_box">
+                    <canvas id="map">
+                        <p>你的浏览器不支持convas</p>
+                    </canvas>
+                </div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			var screen_h=$(window).height();
+			var logo_box=$(".logo_box").outerHeight();
+			$(".map_box").css("height",screen_h-logo_box+"px");
+			$(".area_box").css("height",screen_h-logo_box+"px");
+			$(".guoyou").click(function(){
+				$(".area_box").find("img").attr("src","img/west_red.jpg");
+				$(this).siblings("li").find("div").hide();
+			})
+			$(".none_gy").click(function(){
+				$(".area_box").find("img").attr("src","img/west.jpg");
+				$(this).siblings("li").find("div").hide();
+			})
+			$(".other").click(function(){
+				$(".area_box").find("img").attr("src","img/west_blue.jpg");
+				$(this).siblings("li").find("div").hide();
+			})
+			$(".huifu").click(function(){
+				$(".area_box").find("img").attr("src","img/west.jpg");
+				$(this).siblings("li").find("div").hide();
+			})
+			$(".btn_box .resource>span").click(function(){
+				$(this).next().show();
+			});
+			$("area").mouseover(function(){
+				$(".model").remove();
+			})
+		})
+	</script>
+<script src="./js/map.js"></script>
+<script>
+    var maps = document.getElementById("map");
+    var aa = document.getElementById("map_box");
+    var imgs = new Image();
+    imgs.src = "./img/west_all.jpg";
+    var mapBox = new mapFn({
+        content: aa,
+        boxs: maps,//dom对象
+        imgs: imgs,//图片
+        color: "rgba(0,0,0,0.2)",//颜色
+        mapScal: 0.2,//放大或缩小的范围
+        mapData: [
+            
+            {
+                coords: "169,124,132,153,126,116",
+                id: 69,
+                content_id:1
+            },
+            {
+                coords: "159,141,217,156,225,163,225,195,131,202,148,146,153,139",
+                id: 70,
+                content_id:1
+            },
+            {
+                coords: "131,204,110,279,231,264,227,197",
+                id: 71,
+                content_id:1
+            }
+            ,
+            {
+                coords: "111,281,101,315,119,313,124,334,230,313,235,304,231,266",
+                id: 72,
+                content_id:1
+            },
+             {
+                
+                coords: "98,308,86,352,94,345,121,340,124,335,119,318,102,317",
+                id: 73,
+                content_id:1
+            },
+            {
+                coords: "92,349,61,460,61,467,69,470,237,441,244,437,244,416,237,328,230,323,130,339,108,344",
+                id: 74,
+                content_id:1
+            },
+            {
+                coords: "53,456,47,479,68,476,58,467",
+                id: 75,
+                content_id:1
+            },
+            {
+                coords: "237,158,342,150,348,226,235,234,229,166",
+                id: 76,
+                content_id:1
+            },
+             {
+                
+                coords: "235,236,235,259,349,250,348,229",
+                id: 77,
+                content_id:1
+            },
+            {
+                coords: "237,262,241,305,246,311,336,296,336,280,345,278,344,254",
+                id: 78,
+                content_id:1
+            },
+            {
+                coords: "339,282,338,297,347,295,348,286,347,280",
+                id: 79,
+                content_id:1
+            },
+            {
+                coords: "248,320,340,304,348,306,356,412,352,418,258,436,249,432,242,325",
+                id: 80,
+                content_id:1
+            },
+             {
+                
+                coords: "344,149,453,141,458,147,466,248,351,267",
+                id: 81,
+                content_id:1
+            },
+            {
+                coords: "350,269,352,287,358,292,460,275,468,271,466,250",
+                id: 82,
+                content_id:1
+            },
+            {
+                coords: "410,293,412,321,418,325,437,320,436,289",
+                id: 84,
+                content_id:1
+            },
+             {
+                
+                coords: "439,288,462,283,470,290,472,315,438,321",
+                id: 85,
+                content_id:1
+            },
+            {
+                coords: "441,323,454,399,477,394,471,316",
+                id: 86,
+                content_id:1
+            },
+            {
+                coords: "422,376,421,405,453,400,447,370",
+                id: 87,
+                content_id:1
+            },
+            {
+                coords: "359,383,362,411,365,417,420,406,419,376,404,376",
+                id: 88,
+                content_id:1
+            },
+             {
+                
+                coords: "519,137,476,139,471,144,476,205,525,201",
+                id: 89,
+                content_id:1
+            },
+            {
+                coords: "476,208,481,264,486,270,531,264,524,203",
+                id: 90,
+                content_id:1
+            },
+            {
+                coords: "521,136,593,130,589,136,598,245,601,251,533,263",
+                id: 91,
+                content_id:1
+            },
+            {
+                coords: "527,273,489,278,482,284,486,337,532,328",
+                id: 92,
+                content_id:1
+            },
+            {
+                coords: "487,339,490,384,494,391,535,384,530,330",
+                id: 93,
+                content_id:1
+            },
+             {
+                
+                coords: "530,273,561,266,563,324,533,329",
+                id: 94,
+                content_id:1
+            },
+//               {
+//                    coords: "533,331,536,383,598,372,600,365,593,268,586,263,563,266,565,324",
+//                   id: 95,
+//                    content_id:1
+//                },
+            {
+                coords: "595,130,697,122,702,125,710,229,705,235,603,252,600,246,592,145,592,136",
+                id: 96,
+                content_id:1
+            },
+            {
+                coords: "613,257,614,266,597,269,597,258",
+                id: 97,
+                content_id:1
+            },
+            {
+                coords: "600,271,608,363,614,369,694,354,677,249,615,258,615,268",
+                id: 98,
+                content_id:1
+            },
+            {
+                coords: "679,248,704,243,712,249,716,308,689,313",
+                id: 99,
+                content_id:1
+            },
+             {
+                
+                coords: "691,315,695,353,715,349,719,343,716,311",
+                id: 100,
+                content_id:1
+            },
+            {
+                coords: "712,124,820,115,828,118,835,205,833,213,723,232,716,228,712,190,707,128",
+                id: 101,
+                content_id:1
+            },
+            {
+                coords: "779,231,832,222,838,228,843,322,841,327,788,335",
+                id: 103,
+                content_id:1
+            },
+//                {
+//                    coords: "840,111,834,117,841,206,846,211,923,198,940,196,941,187,935,109,933,104",
+//                    id: 104,
+//                    content_id:1
+//                },
+//                 {
+                
+//                    coords: "849,220,937,205,943,211,950,286,946,293,938,294,926,310,855,323,849,319,843,225",
+//                    id: 105,
+//                    content_id:1
+//                },
+            {
+                coords: "933,100,951,99,951,109,957,110,956,122,952,123,952,128,939,128,938,110",
+                id: 106,
+                content_id:1
+            },
+//               {
+//                    coords: "952,104,966,100,1072,93,1077,97,1080,132,1070,214,1035,243,990,231,1003,207,1002,182,992,165,976,153,957,149,953,144,953,129,954,124,959,119,963,112,955,107",
+//                    id: 107,
+//                    content_id:1
+//                },
+             {
+                
+                coords: "958,159,968,157,991,175,998,199,991,220,972,236,961,233",
+                id: 108,
+                content_id:1
+            },
+            {
+                coords: "989,232,976,242,965,245,964,258,982,258,985,264,994,262,1017,239",
+                id: 109,
+                content_id:1
+            },
+            {
+                coords: "1018,241,995,265,988,266,1002,278,998,295,1026,292,1030,285,1036,244",
+                id: 110,
+                content_id:1
+            }
+            ,
+            {
+                coords: "964,260,966,281,970,288,986,286,996,294,1000,279,985,266,979,259",
+                id: 111,
+                content_id:1
+            }
+            ,
+            {
+                coords: "942,297,984,290,999,300,970,306,967,311,949,314,950,309,930,314",
+                id: 112,
+                content_id:1
+            },
+            {
+                coords: "400,309,398,297,368,303,357,316,360,344,373,343,369,323,376,312",
+                id: 198,
+                content_id:1
+            },
+              {
+                coords: "378,377,373,349,361,352,366,381,375,378",
+                id: 199,
+                content_id:1
+            },
+              {
+                coords: "376,329,403,324,405,338,378,342",
+                id: 200,
+                content_id:1
+            },
+              {
+                coords: "380,346,406,342,407,353,380,359",
+                id: 201,
+                content_id:1
+            },
+              {
+                coords: "381,362,408,357,411,369,383,374",
+                id: 202,
+                content_id:1
+            },
+              {
+                coords: "411,327,439,323,440,333,412,334",
+                id: 203,
+                content_id:1
+            },
+              {
+                coords: "413,343,441,338,441,345,415,351",
+                id: 204,
+                content_id:1
+            },
+              {
+                coords: "416,358,443,353,445,364,417,369",
+                id: 205,
+                content_id:1
+            },
+            {
+                coords: "559,268,589,263,593,268,595,307,561,309",
+                id: 206,
+                content_id:1
+            },
+            {
+                coords: "531,328,535,385,560,379,561,324",
+                id: 207,
+                content_id:1
+            },
+            {
+                coords: "563,309,577,310,577,343,568,343,563,328,559,325",
+                id: 208,
+                content_id:1
+            },
+            {
+                coords: "596,307,582,307,584,344,598,343",
+                id: 209,
+                content_id:1
+            },
+            {
+                coords: "599,359,569,358,568,378,596,373,600,369,601,363",
+                id: 210,
+                content_id:1
+            },
+            {
+                coords: "776,232,778,282,721,289,716,245,722,239",
+                id: 211,
+                content_id:1
+            },
+            {
+                coords: "720,292,724,343,730,348,783,337,779,284",
+                id: 212,
+                content_id:1
+            },
+            {
+                coords: "839,124,877,121,876,110,836,112",
+                id: 213,
+                content_id:1
+            },
+            {
+                coords: "838,131,841,187,848,185,847,130",
+                id: 214,
+                content_id:1
+            },
+            {
+                coords: "860,151,862,166,873,166,871,149",
+                id: 215,
+                content_id:1
+            },
+            {
+                coords: "842,193,886,187,886,202,841,210",
+                id: 216,
+                content_id:1
+            },
+            {
+                coords: "894,145,926,144,929,133,932,132,932,116,927,107,889,107,889,142",
+                id: 217,
+                content_id:1
+            },
+            {
+                coords: "889,162,891,204,938,194,936,159",
+                id: 218,
+                content_id:1
+            },{
+                coords: "844,235,904,230,904,218,843,224",
+                id: 219,
+                content_id:1
+            },
+            {
+                coords: "863,255,874,253,875,242,852,243,846,247,845,273,855,288,876,288,878,275,860,275,860,270,863,268,864,262,859,261",
+                id: 220,
+                content_id:1
+            },{
+                coords: "884,253,906,250,905,239,882,240",
+                id: 221,
+                content_id:1
+            },
+            {
+                coords: "882,272,907,270,909,285,883,288",
+                id: 222,
+                content_id:1
+            },
+            {
+                coords: "851,295,852,311,912,304,910,291",
+                id: 223,
+                content_id:1
+            },
+            {
+                coords: "909,217,911,250,913,254,929,253,932,248,940,242,938,227,924,227,924,219",
+                id: 224,
+                content_id:1
+            },
+            {
+                coords: "914,267,919,305,929,304,930,293,944,290,943,276,934,271,930,264",
+                id: 225,
+                content_id:1
+            },
+            {
+                coords: "975,103,975,120,1072,112,1071,94",
+                id: 226,
+                content_id:1
+            },
+            {
+                coords: "977,127,978,146,1075,137,1073,121",
+                id: 227,
+                content_id:1
+            },
+            {
+                coords: "1027,164,1073,162,1070,145,1024,148",
+                id: 228,
+                content_id:1
+            },
+            {
+                coords: "997,159,999,171,1004,194,1003,214,1002,227,1022,225,1017,157",
+                id: 229,
+                content_id:1
+            },
+            {
+                coords: "1026,177,1028,191,1069,190,1067,174",
+                id: 230,
+                content_id:1
+            },{
+                coords: "1027,200,1027,221,1062,218,1063,201",
+                id: 231,
+                content_id:1
+            },
+            {
+                coords: "872,140,878,138,877,132,861,133,862,139,860,149,870,148",
+                id: 232,
+                content_id:1
+            },
+            {
+                coords: "863,167,866,176,867,181,881,180,881,172,872,168",
+                id: 233,
+                content_id:1
+            },
+            {
+                coords: "850,316,850,323,870,321,866,313",
+                id: 234,
+                content_id:1
+            },
+        ],
+        back: function (num, event) {
+            $(".model").remove()
+            var tt = event.clientY - $("#map_box").offset().top - 1 + "px";   //记录当前鼠标的x坐标
+            var ll = event.clientX - $("#map_box").offset().left - 1 + "px";
+            if (num) {
+                $.ajax({
+                    url: "http://bsq.swds8.com/api/index/getcompany",
+                    data: { 'areaid': num },
+                    type: "POST",
+                    dataType: 'jsonp',
+                    success: function (info) {
+                        //info =JSON.parse(info);
+                        var html = '<div class="model" style="position:absolute;display:none;background:#fff;padding:10px">';
+                        if (info.status === 1) {
+                            var companys = info.data;
+                            for (i in companys) {
+                                html += '<p><a href="detail.html?id=' + companys[i]['id'] + '" target="_blank">' + companys[i]['company'] + '</a></p>';
+                            }
+                        } else {
+                            html += '<p><a>' + info.msg + '</a></p>';
+                        }
+                        html += '</div>';
+                        $("#map_box").append(html);
+                        $(".model").css({ "top": tt, "left": ll }).show();
+                    }
+                });
+            }
+
+        }
+    });
+    $(".guoyou").click(function () {
+        var img2 = new Image();
+        img2.src = "./img/west_red.jpg";
+        img2.onload = function () {
+            mapBox.imgs = img2;
+            mapBox.readyMap()
+        }
+    })
+    $(".other").click(function () {
+        var img2 = new Image();
+        img2.src = "./img/west_blue.jpg";
+        img2.onload = function () {
+            mapBox.imgs = img2;
+            mapBox.readyMap()
+        }
+    })
+    $(".huifu").click(function () {
+        var img2 = new Image();
+        img2.src = "./img/west.jpg";
+        img2.onload = function () {
+            mapBox.imgs = img2;
+            mapBox.readyMap()
+        }
+    })
+
+</script>
+</html>

@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+header .address {
+  font-size: 20px;
+  line-height: 20px;
+}
+header .iniput {
+  width: 200px;
+  height: 20px;
+}
+header .iniput input:-moz-placeholder,
+header .iniput input::-webkit-input-placeholder {
+  color: #333333;
+}
