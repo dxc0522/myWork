@@ -1,1 +1,0 @@
-document.getElementById("box").innerHTML="哈哈"

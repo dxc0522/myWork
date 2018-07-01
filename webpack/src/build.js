@@ -1,0 +1,1 @@
+document.getElementById("box").innerHTML="更改了内容"
