@@ -11,30 +11,43 @@ module.exports = {
     },
     module: {
         rules: [{
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.(png|jpg|gif)$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 5000,
+                    outputPath: "./img/"
+                },
+            }]
+        },
+        {
+            test: /\.(html|htm)$/,
+            use: ["html-withimg-loader"]
+        },
+        {
+            test: /\.less$/,
+            use: ["style-loader", "css-loader", "less-loader"]
+        },
+        {
+            test: /\.scss$/,
+            use: ["style-loader", "css-loader", "sass-loader"]
+        },
+        {
+            test: /\.css$/,
+            use: [{
+                loader: "style-loader"
             }, {
-                test: /\.(png|jpg|gif)$/,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        limit: 5000,
-                        outputPath: "./img/"
-                    },
-                }]
-            },
-            {
-                test: /\.(html|htm)$/,
-                use: ["html-withimg-loader"]
-            },
-            {
-                test:/\.less$/,
-                use:["style-loader","css-loader","less-loader"]
-            },
-            {
-                test:/\.sass$/,
-                use:["style-loader","css-loader","sass-loader"]
-            }
+                loader: "css-loader",
+                options: {
+                    module: true
+                }
+            }, {
+                loader: "postcss-loader"
+            }]
+        }
         ]
     },
     devServer: {
