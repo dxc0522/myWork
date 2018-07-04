@@ -1,5 +1,8 @@
 const path = require("path"),
     htmlPlugin = require('html-webpack-plugin');
+const glob = require('glob');
+const PurifyCSSPlugin = require("purifycss-webpack");
+
 module.exports = {
     entry: {
         build: "./src/build.js",
@@ -12,7 +15,19 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            use: ['style-loader', 'css-loader']
+            exclude: /node_modules/,
+            use: [
+                {
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader",
+                    options: {
+                        modules: true,
+                    }
+                }, {
+                    loader: "postcss-loader",
+                }
+            ]
         }, {
             test: /\.(png|jpg|gif)$/,
             use: [{
@@ -29,24 +44,18 @@ module.exports = {
         },
         {
             test: /\.less$/,
-            use: ["style-loader", "css-loader", "less-loader"]
+            use: ["style-loader", "css-loader", "less-loader", "postcss-loader"]
         },
         {
             test: /\.scss$/,
-            use: ["style-loader", "css-loader", "sass-loader"]
+            use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"]
         },
         {
-            test: /\.css$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader",
-                options: {
-                    module: true
-                }
-            }, {
-                loader: "postcss-loader"
-            }]
+            test: /\.(js|jsx)$/,
+            use: {
+                loader: 'babel-loader',
+            },
+            exclude: /node_modules/
         }
         ]
     },
@@ -67,7 +76,12 @@ module.exports = {
             },
             hash: true,
             template: './src/index.html'
+        }),
+        new PurifyCSSPlugin({
+            // Give paths to parse for rules. These should be absolute!
+            paths: glob.sync(path.join(__dirname, 'src/*.html')),
         })
     ],
-    mode: "development"
+    devtool: 'eval-source-map',
+    mode: "production"
 }

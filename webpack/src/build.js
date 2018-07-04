@@ -1,1 +1,3 @@
-document.getElementById("box").innerHTML="更改了内容"
+
+import box from './index'
+document.getElementById("box").innerHTML = box.getTxt("更改了内容")

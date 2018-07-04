@@ -2,7 +2,9 @@ $base:#fff;
 body {
   $width:100%;
   width:$width;
-  height:30px;
   background-color:$base;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
   
