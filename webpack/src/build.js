@@ -1,3 +1,11 @@
 
 import box from './index'
-document.getElementById("box").innerHTML = box.getTxt("更改了内容")
+import Vue from '../node_modules/vue';
+$("#box").html(box.getTxt("新增内容"))
+$("img").css({
+    height:"200px",
+    width:"100px"
+})
+new Vue()
+var json=require("../config.json");
+$("#json").html(JSON.stringify(json.data))
