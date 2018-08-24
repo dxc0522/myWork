@@ -6,6 +6,7 @@
     <title>Hello World</title>
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 
@@ -246,11 +247,91 @@
     //     <Calculator />,
     //     document.getElementById("root")
     // )
-    let aa=[<div key='1'>这个是第一个<div>,<div key='2'>这个是第er个<div>]；
-    ReactDOM.render(
-            <div>{aa}</div>,
-            document.getElementById('root')
+    // let arr=[
+    // <h1 key="1">Hello world!</h1>,
+    // <h2 key="2"> React is awesome</h2>];
+    // ReactDOM.render(<div>{arr}</div>, document.getElementById('root') )
+// let arr=[
+//     <div key="1">你好</div>,
+//     <div key="2">世界</div>
+// ],
+// aa={
+//     width:100,
+// }
+// ReactDOM.render(
+//     <div>{arr}</div>,
+//     document.getElementById("root")
+// )
+console.log(PropTypes)
+class TextBox extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={enable:false}
+        this.bindChange=this.bindChange.bind(this)
+
+    }
+    bindChange(event){
+        console.log(this)
+        this.refs.TextBox.style.height="100px"
+        this.setState({enable:!this.state.enable})
+    }
+    
+    componentWillMount() {
+        console.log("即将被挂载")
+    }
+    componentDidMount = () => {
+        console.log("完成挂载")
+    }
+    componentWillUpdate = (nextProps, nextState) => {
+        console.log("即将更新")
+    }
+    componentDidUpdate(){
+        console.log("更新完成")
+    }
+    componentWillUnmount(){
+        console.log("组件卸载")
+    }
+    render(){
+        return(
+            <div>
+            <input ref="TextBox" type="text" disabled={this.state.enable}/>
+            <button onClick={this.bindChange}>{this.props.btnTxt}</button>
+            </div>
         )
+    }
+}
+TextBox.defaultProps={
+            btnTxt:"哈哈"
+        }
+        TextBox.propTypes={
+            btnTxt:PropTypes.string.isRequired
+        }
+class BtnBox extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={type:true}
+    }
+    changeType(){
+        this.setState({type:!this.state.type})
+    }
+    render(){
+        return(
+            <div>
+            {this.state.type?<TextBox  btnTxt={123}/>:''}
+            <button onClick={this.changeType.bind(this)}>点击切换内容</button>
+            </div>
+        )
+    }
+}
+ReactDOM.render(
+    <BtnBox>
+    <div>123</div>
+    <div>123</div>
+    <div>123</div>
+    </BtnBox>,
+    document.getElementById("root")
+)
+
 </script>
     <!--
   Note: this page is a great way to try React but it's not suitable for production.
