@@ -1,0 +1,107 @@
+<!DOCTYPE doctype html>
+<html>
+    <head>
+        <title>
+            axios - file upload example
+        </title>
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        </link>
+    </head>
+    <body class="container">
+        <h1>
+            file upload
+        </h1>
+        <form class="form" onsubmit="return false;" role="form">
+            <div class="form-group">
+                <label for="file">
+                    File
+                </label>
+                <input class="form-control" id="file" type="file"/>
+            </div>
+            <button class="btn btn-primary" id="upload" type="button">
+                Upload/axios
+            </button>
+            <button class="btn btn-primary" id="upload2" type="button">Upload/jQ</button>
+    		<button class="btn btn-primary" id="upload3" type="button">Upload/js</button>
+        </form>
+        <div class="container" id="output">
+        </div>
+
+
+      <form action="http://192.168.1.134:8080/brawLive/app/article/upload/json" method="post" enctype="multipart/form-data">
+        <input name="file" type="file">
+        <button type="submit">提交</button>
+      </form>
+
+        <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js">
+        </script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js">
+        </script>
+        <script>
+            (function () {
+			        var output = document.getElementById('output');
+			        document.getElementById('upload').onclick = function () {
+		          var data = new FormData();
+		          data.append('foo', 'bar');
+		          data.append('file', document.getElementById('file').files[0]);
+		          var config = {
+		          	withCredentials: true,
+		            onUploadProgress: function(progressEvent) {
+		              var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+		            }
+		          };
+		          axios.post('http://192.168.1.134:8080/brawLive/app/article/upload/json', data, config)
+		            .then(function (res) {
+		            	debugger
+		              output.className = 'container';
+		              output.innerHTML = res.data;
+		            })
+		            .catch(function (err) {
+		              output.className = 'container text-danger';
+		              output.innerHTML = err.message;
+		            });
+		        };
+      		})();
+        </script>
+        <script type="text/javascript">
+            $("#upload2").click(function(){
+	    	   var formData=new FormData();
+			    formData.append("csrfmiddlewaretoken","file");
+			    formData.append('file', $("#file")[0].files[0]);  /*获取上传的图片对象*/
+			    $.ajax({
+			      url: 'http://192.168.1.134:8080/brawLive/app/article/upload/json',
+		          type: 'POST',
+		          data: formData,
+		          contentType: false,
+		          processData: false,
+		          success: function (args) {
+		        		console.log(args);  /*服务器端的图片地址*/
+			     }
+		      	})
+    		})
+        </script>
+        <script type="text/javascript">
+            $("#upload3").click(function(){
+            var file = document.getElementById("file").files[0];
+
+            //原生ajax实现文件上传
+            var formData = new FormData();
+                formData.append("file", file);
+            //得到xhr对象
+            var xhr = null;
+            if (XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xhr.open("post", "http://192.168.1.134:8080/brawLive/app/article/upload/json", true);//设置提交方式，url，异步提交
+            xhr.onload = function () {
+                var data = xhr.responseText;    //得到返回值
+                alert(data);
+            }
+            xhr.send(formData);
+    		})
+        </script>
+    </body>
+</html>
