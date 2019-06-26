@@ -6,7 +6,7 @@ import os
 import sys
 import tinify
 
-tinify.key = "your own key" # AppKey
+tinify.key = "8zztpnx2g5mvlRVvhK1CFm54dhBTQ4wD" # AppKey
 
 def get_file_dir(file):
     """获取文件目录通用函数"""
@@ -27,20 +27,23 @@ def compress_by_tinypng(input_file):
         return
 
     file_name = os.path.basename(input_file)
-    output_path = os.path.join(get_file_dir(input_file), 'tinypng')
+    output_path = get_file_dir(input_file)
     output_file = os.path.join(output_path, file_name)
     if not os.path.isdir(output_path):
         os.makedirs(output_path)
 
     try:
+        
+        old_size = os.path.getsize(input_file)/1024
+        print(u'压缩前文件大小：%d kb' % old_size)
+
         source = tinify.from_file(input_file)
         source.to_file(output_file)
         print(u'文件压缩成功：' + input_file)
-        old_size = os.path.getsize(input_file)
-        print(u'压缩前文件大小：%d 字节' % old_size)
-        new_size = os.path.getsize(output_file)
+
+        new_size = os.path.getsize(output_file)/1024
         print(u'文件保存地址：%s' % output_file)
-        print(u'压缩后文件大小：%d 字节' % new_size)
+        print(u'压缩后文件大小：%d kb' % new_size)
         print(u'压缩比： %d%%' % ((old_size - new_size) * 100 / old_size))
     except tinify.errors.AccountError:
         print(u'Key 使用量已超，请更新 Key，并使用命令[Usage] %s [filepath] [key]运行'
